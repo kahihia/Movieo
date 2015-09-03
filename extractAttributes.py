@@ -21,7 +21,7 @@ with conn:
     b="\'verified\':"
     c="\'text\':"
     d="\'name\':"
-    e="\'retweet_count\':"
+    #e="\'retweet_count\':"
     count=1
     for line in f:
         p=""
@@ -47,12 +47,12 @@ with conn:
             xx=line.split(':')[1]
             xx=xx.strip('\n')
             xx=xx.strip(',')
-        if e in line:
-            yy=line.split(':')[1]
-            yy=yy.strip('\n')
-            yy=yy.strip(',')
+        #if e in line:
+        #    yy=line.split(':')[1]
+        #    yy=yy.strip('\n')
+        #   yy=yy.strip(',')
         if flag1==1 and flag2!=0:
-            cur.execute("INSERT INTO twitter VALUES(%s,%s,%s,%s,%s);",(count,xx,text,int(yy),y))
+            cur.execute("INSERT INTO twitter VALUES(%s,%s,%s,%s,%s);",(count,xx,text,x,y))
             flag1=0
             flag2=0
             count+=1
