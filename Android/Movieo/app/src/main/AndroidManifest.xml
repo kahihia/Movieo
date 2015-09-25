@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.troller.movieo" >
+
+    <uses-permission
+        android:name="android.permission.INTERNET"/>
+
+    <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="@string/facebook_app_id"/>
 
     <application
         android:allowBackup="true"
@@ -24,6 +32,11 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name"
             />
+
+        <provider
+            android:authorities="com.facebook.app.FacebookContentProvider1491503211150612"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
 
     </application>
 
