@@ -1,0 +1,52 @@
+<h3>
+    Dashboard
+    <small>{{ 'Welcome to ' + app.description}}!</small>
+</h3>
+<!-- START widgets box-->
+<div class="row">
+    <div class="col-lg-4 col-sm-6">
+        <!-- START widget-->
+        <div class="panel widget bg-primary">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                    <em class="fa fa-car fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">{{stats.rides}}</div>
+                    <div class="text-uppercase">Total Rides</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-6">
+        <!-- START widget-->
+        <div class="panel widget bg-purple">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-purple-dark pv-lg">
+                    <em class="icon-users fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">{{stats.users}}
+                    </div>
+                    <div class="text-uppercase">Total Registrations</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <!-- START widget-->
+        <div class="panel widget bg-green">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-green-dark pv-lg">
+                    <em class="fa fa-dollar fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">{{stats.revenue}}</div>
+                    <div class="text-uppercase">Total Revenue</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- END widgets box-->
