@@ -1,52 +1,137 @@
-<h3>
-    Dashboard
-    <small>{{ 'Welcome to ' + app.description}}!</small>
-</h3>
-<!-- START widgets box-->
-<div class="row">
-    <div class="col-lg-4 col-sm-6">
-        <!-- START widget-->
-        <div class="panel widget bg-primary">
-            <div class="row row-table">
-                <div class="col-xs-4 text-center bg-primary-dark pv-lg">
-                    <em class="fa fa-car fa-3x"></em>
-                </div>
-                <div class="col-xs-8 pv-lg">
-                    <div class="h2 mt0">{{stats.rides}}</div>
-                    <div class="text-uppercase">Total Rides</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-sm-6">
-        <!-- START widget-->
-        <div class="panel widget bg-purple">
-            <div class="row row-table">
-                <div class="col-xs-4 text-center bg-purple-dark pv-lg">
-                    <em class="icon-users fa-3x"></em>
-                </div>
-                <div class="col-xs-8 pv-lg">
-                    <div class="h2 mt0">{{stats.users}}
-                    </div>
-                    <div class="text-uppercase">Total Registrations</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-12">
-        <!-- START widget-->
-        <div class="panel widget bg-green">
-            <div class="row row-table">
-                <div class="col-xs-4 text-center bg-green-dark pv-lg">
-                    <em class="fa fa-dollar fa-3x"></em>
-                </div>
-                <div class="col-xs-8 pv-lg">
-                    <div class="h2 mt0">{{stats.revenue}}</div>
-                    <div class="text-uppercase">Total Revenue</div>
-                </div>
-            </div>
-        </div>
-    </div>
 
+<!-- Trending -->
+<div style="width: 100%;background-color: #d4a621;margin-top: 7px">
+    <div class="jumbotron">
+        <ul class="inline" style="padding-left: 3%" >
+            <li><h5><strong>&nbsp;Trending on Twitter:</strong></h5></li>
+            <li><em class="fa fa-expand"></em>Item 1 Item 1 Item 1</li>
+            <li>Item 2 Item 2 Item 2</li>
+            <li>Item 3 Item 3 Item 3</li>
+        </ul>
+    </div>
 </div>
-<!-- END widgets box-->
+
+<!-- Masthead -->
+<div class="jumbotron" id="overview" style="padding-left: 3%;padding-right: 3%">
+    <div class="subnav scrollnav">
+        <ul class="nav nav-pills">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </li>
+            <li class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="container" ng-controller="slideShowController">
+    <div class="btn-group" style="display: block; text-align: center; margin-bottom: 10px;margin-top: 10px">
+        <button ng-click="article = '1';" ng-show="article !== '1'" class="btn btn-primary">1</button>
+        <button ng-click="article = '2';" class="btn btn-primary">2</button>
+        <button ng-click="article = '3';" class="btn btn-primary">3</button>
+        <button ng-click="article = '4';" class="btn btn-primary">4</button>
+    </div>
+    <div class="switch"   ng-switch on="article" ng-animate="'animate'">
+        <!-- ngSwitchWhen: 1 -->
+        <div ng-switch-when="1" class="ng-scope animate-enter animate-enter-active">
+            <table style="height: 170px;">
+                <tbody><tr>
+                    <td style="width: 470px;">
+                        <h2>1 singla</h2>
+                        <blockquote>
+                            <p style="font-size: 13px">
+                                AngularJS </p>
+                            <small><cite title="AngularJS"><a href="http://zachariahmoreno.com/portfolio/Angular-Slides/#/step-10">
+                                Zach Moreno</a></cite></small>
+                        </blockquote>
+
+                    </td>
+                </tr>
+                </tbody></table>
+        </div>
+        <!-- ngSwitchWhen: 2 -->
+        <div ng-switch-when="2" class="ng-scope animate-leave animate-leave-active">
+            <table style="height: 170px;">
+                <tbody><tr>
+                    <td style="width: 470px;">
+                        <h2>2 Why AngularJS?</h2>
+                        <blockquote>
+                            <p style="font-size: 13px">kumar</p>
+                            <small><cite title="AngularJS"><a href="http://angularjs.org/">AngularJS</a></cite></small>
+                        </blockquote>
+                    </td>
+                </tr>
+                </tbody></table>
+        </div>
+        <!-- ngSwitchWhen: 3 -->
+        <div ng-switch-when="3" class="ng-scope animate-enter animate-enter-active">
+            <table style="height: 170px;">
+                <tbody><tr>
+                    <td style="width: 470px;">
+                        <h2>3 Model</h2>
+                        <blockquote>
+                            <p style="font-size: 13px">
+                                puni</p>
+                            <small><cite title="AngularJS"><a href="http://zachariahmoreno.com/portfolio/Angular-Slides/#/step-10">
+                                Zach Moreno</a></cite></small>
+                        </blockquote>
+
+                    </td>
+                </tr>
+                </tbody></table>
+        </div>
+        <div ng-switch-when="4" class="ng-scope animate-enter animate-enter-active">
+            <table style="height: 170px;">
+                <tbody><tr>
+                    <td style="width: 470px;">
+                        <h2>4 umesh</h2>
+                        <blockquote>
+                            <p style="font-size: 13px">
+                                shallen</p>
+                            <small><cite title="AngularJS"><a href="http://zachariahmoreno.com/portfolio/Angular-Slides/#/step-10">
+                                Zach Moreno</a></cite></small>
+                        </blockquote>
+
+                    </td>
+                </tr>
+                </tbody></table>
+        </div>
+        <!-- ngSwitchWhen: 4 -->
+    </div>
+</div>

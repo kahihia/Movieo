@@ -1,28 +1,46 @@
 /**
- * Created by sanjay on 3/28/15.
+ * Created by umeshksingla on sep 27, 2015.
  */
+App.controller('slideShowController',['$scope','$timeout',function ($scope, $timeout) {
+    'use strict';
 
-App.controller('DashboardController', function ($scope, $http, $cookies, $cookieStore, MY_CONSTANT, $state, responseCode) {
-    $scope.stats={};
-    $scope.stats.rides = 0;
-    $scope.stats.users = 0;
-    $scope.stats.revenue = 0;
-    console.log("inside controller");
-    var now = new Date();
-    var yesterday = now.setDate(now.getDate() - 1);
-    $.post(MY_CONSTANT.url + '/dashboard_report', {
-        access_token: $cookieStore.get('obj').accesstoken,
-        start_time: yesterday,
-        end_time: now
-    }, function (response) {
-        response = JSON.parse(response);
-        if (response.status = responseCode.SUCCESS) {
-            var data=response.data;
-            console.log(data);
-            $scope.stats.revenue = data.total_data.earnings;
-            $scope.stats.rides = data.total_data.rides;
-            $scope.stats.users = data.total_users;
-            $scope.$apply();
+    $scope.article = '1';
+    $scope.autoChanges = true;
+
+    function getRandomInt(max){
+        return Math.floor(Math.random() * max);
+    }
+    function TryParseInt(str, defaultValue){
+        var retValue = defaultValue;
+        if(str!=null){
+            if(str.length>0){
+                if (!isNaN(str)){
+                    retValue = parseInt(str);
+                }
+            }
         }
-    })
-});
+        return retValue;
+    }
+
+    function doSomething() {
+        if($scope.autoChanges){
+            switch($scope.article){
+                case "1":
+                    $scope.article = "2";
+                    break;
+                case "2":
+                    $scope.article = "3";
+                    break;
+                case "3":
+                    $scope.article = "4";
+                    break;
+                default:
+                    $scope.article = "1";
+            }
+        }
+        $timeout(doSomething, 1800 + getRandomInt(1000) + TryParseInt($scope.time, 1000));
+    }
+    $timeout(doSomething, 1800 + getRandomInt(1000) + TryParseInt($scope.time, 1000));
+
+
+}]);

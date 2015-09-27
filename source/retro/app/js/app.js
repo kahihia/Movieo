@@ -1,13 +1,4 @@
-/*!
- * 
- * Angle - Bootstrap Admin App + AngularJS
- * 
- * Author: @themicon_co
- * Website: http://themicon.co
- * License: http://support.wrapbootstrap.com/knowledge_base/topics/usage-licenses
- * 
- */
-
+// if not jquery
 if (typeof $ === 'undefined') {
     throw new Error('This application\'s JavaScript requires jQuery');
 }
@@ -16,7 +7,7 @@ if (typeof $ === 'undefined') {
 // APP START
 // ----------------------------------- 
 
-var App = angular.module('angle', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCookies', 'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'ngSanitize', 'ngResource', 'ui.utils'])
+var App = angular.module('movieo', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCookies', 'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'ngSanitize', 'ngResource', 'ui.utils'])
     .run(["$rootScope", "$state", "$stateParams", '$window', '$templateCache', function ($rootScope, $state, $stateParams, $window, $templateCache) {
         // Set reference to access them from any scope
         $rootScope.$state = $state;
@@ -29,7 +20,7 @@ var App = angular.module('angle', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCooki
          $templateCache.remove(toState.templateUrl);
          }
          });*/
-        console.log("log from angle app");
+        console.log("log from movieo app");
         // Scope Globals
         // -----------------------------------
         $rootScope.app = {
@@ -38,7 +29,7 @@ var App = angular.module('angle', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCooki
             year: ((new Date()).getFullYear())
         };
         $rootScope.user = {
-            name: 'John',
+            name: 'Umesh',
             job: 'ng-Dev'
         };
 
@@ -58,7 +49,6 @@ App
             'modernizr': ['vendor/modernizr/modernizr.js'],
             'icons': ['vendor/fontawesome/css/font-awesome.min.css',
                 'vendor/simple-line-icons/css/simple-line-icons.css'],
-            'screenfull': ['vendor/screenfull/dist/screenfull.js'],
             'parsley': ['vendor/parsleyjs/dist/parsley.min.js'],
             'datatables': ['vendor/datatables/media/js/jquery.dataTables.min.js',
                 'vendor/datatable-bootstrap/css/dataTables.bootstrap.css'],
@@ -97,8 +87,7 @@ App.provider('RouteHelpers', ['APP_REQUIRES', function (appRequires) {
         return 'app/views/' + uri;
     };
 
-    // Generates a resolve object by passing script names
-    // previously configured in constant.APP_REQUIRES
+    // Generates a resolve object by passing script names previously configured in constant.APP_REQUIRES
     this.resolveFor = function () {
         var _args = arguments;
         return {
@@ -176,4 +165,3 @@ App.directive('validateForm', function() {
         }
     };
 });
-
