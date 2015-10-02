@@ -1,7 +1,8 @@
 /**
  * Created by umeshksingla on sep 27, 2015.
  */
-App.controller('slideShowController',['$scope','$timeout',function ($scope, $timeout) {
+
+App.controller('slideShowController',['$scope','$timeout','$http','$rootScope',function ($scope, $timeout, $http, $rootScope) {
     'use strict';
 
     $scope.article = '1';
@@ -40,7 +41,24 @@ App.controller('slideShowController',['$scope','$timeout',function ($scope, $tim
         }
         $timeout(doSomething, 1800 + getRandomInt(1000) + TryParseInt($scope.time, 1000));
     }
+
     $timeout(doSomething, 1800 + getRandomInt(1000) + TryParseInt($scope.time, 1000));
 
+    $http.post('http://127.0.0.1:8000/snippets/', {
+        "code":"a = umesh"
+    })
+        .success(function(response){
+            console.log(response);
+        })
+        .error(function(err){
+            console.log(err);
+        });
 
+    $http.get('http://127.0.0.1:8000/snippets/3')
+        .success(function(response){
+            console.log(response);
+        })
+        .error(function(err){
+            console.log(err);
+        })
 }]);
