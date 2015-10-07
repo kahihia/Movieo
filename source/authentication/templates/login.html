@@ -1,0 +1,16 @@
+<form id="form" method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!--{{form.email}}-->
+    <!--{% if userDetails %}-->
+        <!--{{userDetails}}-->
+    <!--{% endif %}-->
+    <!--<br/><br/>-->
+    <!--{{form.password}}-->
+    <!--{% if wrong %}-->
+        <!--{{wrong}}-->
+    <!--{% endif %}-->
+    <!--<br/><br/>-->
+    <input type="submit" value="Login"/>
+</form>
+<a href="/register/">Register</a>

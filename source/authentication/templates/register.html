@@ -1,0 +1,16 @@
+{% if registered %}
+    <p>Thank You for registering in movieo</p>
+{% else %}
+    <form id="user_form" method="post" action="">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <!--{{user_form.username}} {{user_form.username.errors}}-->
+        <!--{{user_form.email}}-->
+        <!--{{user_form.password}} {{user_form.password.errors}}-->
+        <!--{{profile_form.language}}-->
+        <input type="submit" name="submit" value="register" />
+    </form>
+{% endif %}
+<a href="/login">Login</a>
+
