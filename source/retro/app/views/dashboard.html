@@ -1,9 +1,8 @@
-
 <!-- Trending -->
 <div style="width: 100%;background-color: #d4a621;margin-top: 7px">
-    <div class="jumbotron">
+    <div>
         <ul class="inline" style="padding-left: 3%" >
-            <li><h5><strong>&nbsp;Trending on Twitter:</strong></h5></li>
+            <li><h5><strong><i class="icon-circle-arrow-up"></i>&nbsp;Trending on Twitter:</strong></h5></li>
             <li><em class="fa fa-expand"></em>Item 1 Item 1 Item 1</li>
             <li>Item 2 Item 2 Item 2</li>
             <li>Item 3 Item 3 Item 3</li>
@@ -12,7 +11,7 @@
 </div>
 
 <!-- Masthead -->
-<div class="jumbotron" id="overview" style="padding-left: 3%;padding-right: 3%">
+<div id="overview" style="padding-left: 3%;padding-right: 3%">
     <div class="subnav scrollnav">
         <ul class="nav nav-pills">
             <li class="dropdown">
@@ -58,80 +57,217 @@
         </ul>
     </div>
 </div>
+<br/>
+<div class="container" >
+    <div class="row">
 
+        <div class="container span6" ng-controller="slideShowController" style="text-align: center" >
+            <h3>Recent Movies</h3>
+            <div class="switch "   ng-switch on="article" ng-animate="'animate'">
+                <!-- ngSwitchWhen: 1 -->
+                <div ng-switch-when="1" class="ng-scope animate-enter animate-enter-active  ">
 
-<div class="container" ng-controller="slideShowController">
-    <div class="btn-group" style="display: block; text-align: center; margin-bottom: 10px;margin-top: 10px">
-        <button ng-click="article = '1';" ng-show="article !== '1'" class="btn btn-primary">1</button>
-        <button ng-click="article = '2';" class="btn btn-primary">2</button>
-        <button ng-click="article = '3';" class="btn btn-primary">3</button>
-        <button ng-click="article = '4';" class="btn btn-primary">4</button>
+                    <!--<h2>{{recentTenMovies[0]}}</h2>-->
+                    <img src="{{recentTenMovies[0].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{recentTenMovies[0].id}}})" style="text-decoration: none" >
+                        <h3>{{recentTenMovies[0].name}}</h3>
+                    </a><br>
+                    <span><i>Date:</i> {{recentTenMovies[0].date_of_release | date}}</span>
+                </div>
+                <!-- ngSwitchWhen: 2 -->
+                <div ng-switch-when="2" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{recentTenMovies[0]}}</h2>-->
+                    <img src="{{recentTenMovies[1].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{recentTenMovies[1].id}}})" style="text-decoration: none" >
+                        <h3>{{recentTenMovies[1].name}}</h3>
+                    </a><br>
+                    <span><i>Date:</i> {{recentTenMovies[1].date_of_release | date}}</span>
+                </div>
+                <!-- ngSwitchWhen: 3 -->
+                <div ng-switch-when="3" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{recentTenMovies[0]}}</h2>-->
+                    <img src="{{recentTenMovies[2].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{recentTenMovies[2].id}}})" style="text-decoration: none" >
+                        <h3>{{recentTenMovies[2].name}}</h3>
+                    </a><br>
+                    <span><i>Date:</i> {{recentTenMovies[2].date_of_release | date}}</span>
+                </div>
+                <div ng-switch-when="4" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{recentTenMovies[0]}}</h2>-->
+                    <img src="{{recentTenMovies[3].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{recentTenMovies[3].id}}})" style="text-decoration: none" >
+                        <h3>{{recentTenMovies[3].name}}</h3>
+                    </a><br>
+                    <span><i>Date:</i> {{recentTenMovies[3].date_of_release | date}}</span>
+                </div>
+                <!-- ngSwitchWhen: 4 -->
+                <div ng-switch-when="5" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{recentTenMovies[0]}}</h2>-->
+                    <img src="{{recentTenMovies[4].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{recentTenMovies[4].id}}})" style="text-decoration: none" >
+                        <h3>{{recentTenMovies[4].name}}</h3>
+                    </a><br>
+                    <span><i>Date:</i> {{recentTenMovies[4].date_of_release | date}}</span>
+                </div>
+            </div>
+            <div style="display: block; text-align: center; margin-bottom: 10px;margin-top: 10px">
+                <button ng-click="article = '1';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '2';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '3';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '4';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '5';" class="btn btn-primary"><i class="icon-cog"></i></button>
+            </div>
+        </div>
+
+        <div class="container span6" ng-controller="slideShowController1" style="text-align: center">
+            <h3>Top Rated Movies</h3>
+            <div class="switch "   ng-switch on="article" ng-animate="'animate'">
+                <!-- ngSwitchWhen: 1 -->
+                <div ng-switch-when="1" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{topTenMovies[0]}}</h2>-->
+                    <img src="{{topTenMovies[0].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topTenMovies[0].id}}})" style="text-decoration: none" >
+                        <h3>{{topTenMovies[0].name}}</h3>
+                    </a><br>
+                    <span><i>Rating:</i> {{topTenMovies[0].rating}}</span>
+                </div>
+                <!-- ngSwitchWhen: 2 -->
+                <div ng-switch-when="2" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{topTenMovies[0]}}</h2>-->
+                    <img src="{{topTenMovies[1].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topTenMovies[1].id}}})" style="text-decoration: none" >
+                        <h3>{{topTenMovies[1].name}}</h3>
+                    </a><br>
+                    <span><i>Rating:</i> {{topTenMovies[1].rating}}</span>
+                </div>
+                <!-- ngSwitchWhen: 3 -->
+                <div ng-switch-when="3" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{topTenMovies[0]}}</h2>-->
+                    <img src="{{topTenMovies[2].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topTenMovies[2].id}}})" style="text-decoration: none" >
+                        <h3>{{topTenMovies[2].name}}</h3>
+                    </a><br>
+                    <span><i>Rating:</i> {{topTenMovies[2].rating}}</span>
+                </div>
+                <div ng-switch-when="4" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{topTenMovies[0]}}</h2>-->
+                    <img src="{{topTenMovies[3].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topTenMovies[3].id}}})" style="text-decoration: none" >
+                        <h3>{{topTenMovies[3].name}}</h3>
+                    </a><br>
+                    <span><i>Rating:</i> {{topTenMovies[3].rating}}</span>
+                </div>
+                <!-- ngSwitchWhen: 4 -->
+                <div ng-switch-when="5" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{topTenMovies[0]}}</h2>-->
+                    <img src="{{topTenMovies[4].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topTenMovies[4].id}}})" style="text-decoration: none" >
+                        <h3>{{topTenMovies[4].name}}</h3>
+                    </a><br>
+                    <span><i>Rating:</i> {{topTenMovies[4].rating}}</span>
+                </div>
+            </div>
+            <div style="display: block; text-align: center; margin-bottom: 10px;margin-top: 10px">
+                <button ng-click="article = '1';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '2';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '3';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '4';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '5';" class="btn btn-primary"><i class="icon-cog"></i></button>
+            </div>
+        </div>
     </div>
-    <div class="switch"   ng-switch on="article" ng-animate="'animate'">
-        <!-- ngSwitchWhen: 1 -->
-        <div ng-switch-when="1" class="ng-scope animate-enter animate-enter-active">
-            <table style="height: 170px;">
-                <tbody><tr>
-                    <td style="width: 470px;">
-                        <h2>1 singla</h2>
-                        <blockquote>
-                            <p style="font-size: 13px">
-                                AngularJS </p>
-                            <small><cite title="AngularJS"><a href="http://zachariahmoreno.com/portfolio/Angular-Slides/#/step-10">
-                                Zach Moreno</a></cite></small>
-                        </blockquote>
+    <hr>
+    <div class="row">
+        <h3>Top Box Office Movies</h3>
+        <div class="container span6" ng-controller="slideShowController2" style="text-align: center">
 
-                    </td>
-                </tr>
-                </tbody></table>
-        </div>
-        <!-- ngSwitchWhen: 2 -->
-        <div ng-switch-when="2" class="ng-scope animate-leave animate-leave-active">
-            <table style="height: 170px;">
-                <tbody><tr>
-                    <td style="width: 470px;">
-                        <h2>2 Why AngularJS?</h2>
-                        <blockquote>
-                            <p style="font-size: 13px">kumar</p>
-                            <small><cite title="AngularJS"><a href="http://angularjs.org/">AngularJS</a></cite></small>
-                        </blockquote>
-                    </td>
-                </tr>
-                </tbody></table>
-        </div>
-        <!-- ngSwitchWhen: 3 -->
-        <div ng-switch-when="3" class="ng-scope animate-enter animate-enter-active">
-            <table style="height: 170px;">
-                <tbody><tr>
-                    <td style="width: 470px;">
-                        <h2>3 Model</h2>
-                        <blockquote>
-                            <p style="font-size: 13px">
-                                puni</p>
-                            <small><cite title="AngularJS"><a href="http://zachariahmoreno.com/portfolio/Angular-Slides/#/step-10">
-                                 Moreno</a></cite></small>
-                        </blockquote>
+            <div class="switch "   ng-switch on="article" ng-animate="'animate'">
+                <!-- ngSwitchWhen: 1 -->
+                <div ng-switch-when="1" class="ng-scope animate-enter animate-enter-active  ">
 
-                    </td>
-                </tr>
-                </tbody></table>
-        </div>
-        <div ng-switch-when="4" class="ng-scope animate-enter animate-enter-active">
-            <table style="height: 170px;">
-                <tbody><tr>
-                    <td style="width: 470px;">
-                        <h2>4 umesh</h2>
-                        <blockquote>
-                            <p style="font-size: 13px">
-                                shallen</p>
-                            <small><cite title="AngularJS"><a href="http://zachariahmoreno.com/portfolio/Angular-Slides/#/step-10">
-                                Zach </a></cite></small>
-                        </blockquote>
+                    <!--<h2>{{topBoxMovies[0]}}</h2>-->
+                    <img src="{{topBoxMovies[0].poster}}" style="width: auto;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topBoxMovies[0].id}}})" style="text-decoration: none" >
+                        <h3>{{topBoxMovies[0].name}}</h3>
+                    </a><br>
+                    <span><i>Box Office:</i> {{topBoxMovies[0].box_office| currency}}</span>
+                </div>
+                <!-- ngSwitchWhen: 2 -->
+                <div ng-switch-when="2" class="ng-scope animate-enter animate-enter-active  ">
 
-                    </td>
-                </tr>
-                </tbody></table>
+                    <!--<h2>{{topBoxMovies[0]}}</h2>-->
+                    <img src="{{topBoxMovies[1].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topBoxMovies[1].id}}})" style="text-decoration: none" >
+                        <h3>{{topBoxMovies[1].name}}</h3>
+                    </a><br>
+                    <span><i>Box Office:</i> {{topBoxMovies[1].box_office| currency}}</span>
+                </div>
+                <!-- ngSwitchWhen: 3 -->
+                <div ng-switch-when="3" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{topBoxMovies[0]}}</h2>-->
+                    <img src="{{topBoxMovies[2].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topBoxMovies[2].id}}})" style="text-decoration: none" >
+                        <h3>{{topBoxMovies[2].name}}</h3>
+                    </a><br>
+                    <span><i>Box Office:</i> {{topBoxMovies[2].box_office| currency}}</span>
+                </div>
+                <div ng-switch-when="4" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{topBoxMovies[0]}}</h2>-->
+                    <img src="{{topBoxMovies[3].poster}}" style="width: 100%;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topBoxMovies[3].id}}})" style="text-decoration: none" >
+                        <h3>{{topBoxMovies[3].name}}</h3>
+                    </a><br>
+                    <span><i>Box Office:</i> {{topBoxMovies[3].box_office| currency}}</span>
+                </div>
+                <!-- ngSwitchWhen: 4 -->
+                <div ng-switch-when="5" class="ng-scope animate-enter animate-enter-active  ">
+
+                    <!--<h2>{{topBoxMovies[0]}}</h2>-->
+                    <img src="{{topBoxMovies[4].poster}}" style="width: auto;height: 400px" >
+                    <br>
+                    <a ui-sref="movies({movie_id:{{topBoxMovies[4].id}}})" style="text-decoration: none" >
+                        <h3>{{topBoxMovies[4].name}}</h3>
+                    </a><br>
+                    <span><i>Box Office:</i> {{topBoxMovies[4].box_office | currency}}</span>
+                </div>
+            </div>
+            <div class="btn-group" style="display: block; text-align: center; margin-bottom: 10px;margin-top: 10px">
+                <button ng-click="article = '1';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '2';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '3';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '4';" class="btn btn-primary"><i class="icon-cog"></i></button>
+                <button ng-click="article = '5';" class="btn btn-primary"><i class="icon-cog"></i></button>
+            </div>
         </div>
-        <!-- ngSwitchWhen: 4 -->
+        <div class="container span6">
+            <a class="twitter-timeline" href="https://twitter.com/hashtag/themartian" data-widget-id="651827562990034944">#themartian Tweets</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
     </div>
 </div>
+

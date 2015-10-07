@@ -1,3 +1,4 @@
+
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container" style="width: auto;padding-top: 6px;padding-bottom: 2px">
@@ -6,32 +7,53 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">
+            <a class="brand" href="#/">
                 Movieo
             </a>
-            <div class="nav-collapse">
+            <div class="nav-collapse" ng-controller="instantSearchCtrl">
                 <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Link</a></li>
+                    <li class="active"><a href="#/">Home</a></li>
+                    <li><a href="">Facebook</a></li>
                 </ul>
-                <form class="navbar-search pull-left" action="">
-                    <input type="text" class="search-query span2" placeholder="Search" style="width: 120%" >
+                <form class="navbar-search pull-left" action="" >
+                    <input type="text" class="search-query span2" ng-model="searchString" ng-keyup="searchMovie() ; searchActor()" placeholder="Search" style="width: 150%" >
+                    <ul class="data-ctrl" style="padding-top: 10px">
+                        <!--<li ng-if="movies != []" ><p style="color: #ffffff; font-size: 16px;font-weight: bold">MOVIES</p></li>-->
+                        <li ng-repeat="i in movies | searchFor: searchString">
+                            <a ng-click="searchString = ''" ui-sref="movies({movie_id:{{i.id}}})" style="text-decoration: none">
+                                <p style="color: #ffffff; font-size: 14px">{{i.name}}
+                                    <i style="padding-left: 100px;color: #27c24c !important;">movie</i>
+                                </p>
+                            </a>
+                        </li>
+                        <!--<li ng-if="actors" ><p style="color: #ffffff; font-size: 16px;font-weight: bold">CELEBRITIES</p></li>-->
+                        <li ng-repeat="i in actors | searchFor: searchString">
+                            <a ng-click="empty()" ui-sref="actors({actor_id:{{i.id}}})" style="text-decoration: none">
+                                <p style="color: #ffffff; font-size: 14px">{{i.name}}
+                                    <i style="padding-left: 100px;color: lightsteelblue !important;">celebrity</i>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
                 </form>
                 <ul class="nav pull-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">More<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">Movies</a></li>
+                            <li><a href="#">TV Series</a></li>
+                            <li><a href="#">Comedies</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">Celebrities</a></li>
                         </ul>
                     </li>
                    <!-- <li class="divider-vertical"></li>-->
-                    <li><a href="#">Log In</a></li>
+                    <li><a href="#">
+                        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
+                    </a></li>
                     <li><a href="#">Sign Up</a></li>
                 </ul>
+
             </div>
             <!-- /.nav-collapse -->
         </div>

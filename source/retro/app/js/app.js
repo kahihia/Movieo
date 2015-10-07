@@ -165,3 +165,43 @@ App.directive('validateForm', function() {
         }
     };
 });
+
+App.directive('starRating', function () {
+    return {
+        restrict: 'A',
+        template: '<ul class="rating">' +
+        '<li ng-repeat="star in stars" ng-class="star">' +
+        '\u2605' +
+        '</li>' +
+        '</ul>',
+        scope: {
+            ratingValue: '=',
+            max: '='
+        },
+        link: function (scope, elem, attrs) {
+            scope.stars = [];
+            for (var i = 0; i < scope.max; i++) {
+                scope.stars.push({
+                    filled: i < scope.ratingValue
+                });
+            }
+        }
+    }
+});
+
+App.filter('searchFor', function(){
+    return function(arr, searchString){
+        if(!searchString){
+            return arr;
+        }
+        var result = [];
+        searchString = searchString.toLowerCase();
+
+        angular.forEach(arr, function(item){
+            if(item.name.toLowerCase().indexOf(searchString) !== -1){
+                result.push(item);
+            }
+        });
+        return result;
+    };
+});

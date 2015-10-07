@@ -3,8 +3,7 @@
  */
 // Application Routes
 
-var myApp = angular.module('myAppName', ['movieo']);
-myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'RouteHelpersProvider',
+App.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'RouteHelpersProvider',
     function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
         'use strict';
 
@@ -19,6 +18,16 @@ myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'Rout
                 url: '/dashboard',
                 title: 'Dashboard',
                 templateUrl: helper.basepath('dashboard.html')
+            })
+            .state('movies', {
+                url: '/movies/{movie_id}',
+                title: 'Movie',
+                templateUrl: helper.basepath('movie.html')
+            })
+            .state('actors', {
+                url: '/actors/{actor_id}',
+                title: 'Actor',
+                templateUrl: helper.basepath('actor.html')
             });
 
 
