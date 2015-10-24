@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.troller.movieo" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.project.movieo" >
 
-    <uses-permission
-        android:name="android.permission.INTERNET"/>
-
-    <meta-data
-        android:name="com.facebook.sdk.ApplicationId"
-        android:value="@string/facebook_app_id"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name="net.project.movieo.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
         <activity
-            android:name=".MainActivity"
+            android:name="net.project.movieo.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,19 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name"
-            />
-
-        <provider
-            android:authorities="com.facebook.app.FacebookContentProvider1491503211150612"
-            android:name="com.facebook.FacebookContentProvider"
-            android:exported="true"/>
-
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
