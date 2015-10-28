@@ -1,4 +1,5 @@
-Repository for IIITSERC/ssad_2015_team10
+Repository for IIITSERC/ssad_2015_team10.
+Consists work done until **Release 1**
 
 **Project**: Movieo (A Social Community for Lovers)
 **Team** : FiniteLoop
