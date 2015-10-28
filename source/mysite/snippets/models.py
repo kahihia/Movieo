@@ -2,6 +2,10 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
+#from django.contrib.auth.models import User
+from django.utils import timezone
+import datetime
+
 
 LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
@@ -18,6 +22,25 @@ class Snippet(models.Model):
 
     class Meta:
         ordering = ('created',)
+
+""" User Custom Login Table """
+"""class UserProfile(models.Model):
+    User._meta.get_field('username').max_length = 75
+    User._meta.get_field('email')._unique = True
+    user = models.OneToOneField(User)
+    name = models.CharField(max_length=200, blank=False)
+    gender = models.CharField(max_length=200, default='Not Specified')
+    birthday = models.DateField()
+    hometown = models.CharField(default='Not Available', max_length=200)
+    about_me = models.TextField(max_length=5000, blank=True)
+    no_of_reviews = models.IntegerField(default=0)
+    no_of_quotes = models.IntegerField(default=0)
+    badge = models.IntegerField(default=0)
+    #email = models.CharField(max_length=200, null=False)
+    
+    # def __unicode__(self):
+    #     return self.user.username
+"""
 
 """ User Table """
 class User(models.Model):
@@ -39,9 +62,14 @@ class Actor(models.Model):
     birth_place = models.CharField(default='Not Available', max_length=200)
     description = models.TextField(max_length=5000, blank=True)
     wiki_link = models.CharField(default='Not Available', max_length=200)
-    poster = models.ImageField(upload_to='photos/actors/posters', default='photos/no_image.jpg')  
+    poster = models.ImageField(upload_to='snippets/static/photos/actors/posters', default='snippets/static/no_image.jpg')  
     rating = models.FloatField( validators = [MinValueValidator(1.0), MaxValueValidator(10.0)] )
 
+    def __unicode__(self):
+        return "%s" % (self.name)
+       
+    def __str__(self):
+        return "%s" % (self.name)
 
 """Movie Tables"""
 class Movie(models.Model):
@@ -59,12 +87,18 @@ class Movie(models.Model):
     rating = models.FloatField( validators = [MinValueValidator(1.0), MaxValueValidator(10.0)] )
     budget = models.IntegerField(default=0)
     box_office = models.IntegerField(default=0)
-    poster = models.ImageField(upload_to='photos/movies/posters', default='photos/no_image.jpg')
+    poster = models.ImageField(upload_to='snippets/static/photos/movies/posters', default='snippets/static/photos/no_image.jpg')
+    
+    def __unicode__(self):
+        return "%s" % (self.name)
+       
+    def __str__(self):
+        return "%s" % (self.name)
 
 class MoviePhotos(models.Model):
     movie_id = models.ForeignKey(Movie)
     description = models.TextField(max_length=5000, blank=True)
-    photo = models.ImageField(upload_to='photos/movies', default='photos/no_image.jpg')
+    photo = models.ImageField(upload_to='snippets/static/photos/movies', default='snippets/static/photos/no_image.jpg')
 
 
 class MovieVideos(models.Model):
@@ -83,6 +117,7 @@ class MovieReviews(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     movie_id = models.ForeignKey(Movie)
     user_id = models.ForeignKey(User)
+    rating = models.IntegerField(validators = [MinValueValidator(1), MaxValueValidator(10)],  default=0)
     description = models.TextField(max_length=5000, blank=True)
 
 class ReviewComments(models.Model):
@@ -99,7 +134,7 @@ class ReviewComments(models.Model):
 class ActorPhotos(models.Model):
     actor_id = models.ForeignKey(Actor)
     description = models.TextField(max_length=5000, blank=True)
-    photo = models.ImageField(upload_to='photos/actors', default='photos/no_image.jpg')
+    photo = models.ImageField(upload_to='snippets/static/photos/actors', default='snippets/static/photos/no_image.jpg')
 
 
 class ActorVideos(models.Model):
@@ -115,6 +150,7 @@ class ActorQuotes(models.Model):
     description = models.TextField(max_length=5000, blank=True)
 
 
+
 """ Join of tables Movie and Actors"""
 class CastDetails(models.Model):
     actor_id = models.ForeignKey(Actor)
@@ -127,3 +163,5 @@ class CastDetails(models.Model):
 class ToWatchList(models.Model):
     user_id = models.ForeignKey(User)
     movie_id = models.ForeignKey(Movie)
+
+
