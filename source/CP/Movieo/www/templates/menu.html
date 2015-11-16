@@ -20,16 +20,16 @@
     </ion-header-bar>
     <ion-content class="menuContent">
       <ion-list class="sidemenu-list">
-        <ion-item class="menuItem" menu-close ng-click="" href="#/app/search">
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/browse">
           Browse Movies
         </ion-item>
         <ion-item class="hrefButton" ng-hide="isAuthenticated" menu-close ng-click="login()">
           Login
         </ion-item>
-        <ion-item class="menuItem" menu-close ng-click="" href="#/app/browse">
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/categories">
           Categories
         </ion-item>
-        <ion-item class="menuItem" menu-close ng-click="" href="#/app/playlists">
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/trending">
           Trending
         </ion-item>
         <ion-item class="hrefButton" ng-show="isAuthenticated" menu-close ng-click="" ng-click="logout()">
