@@ -1,9 +1,3 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
 angular.module('movieo', ['ionic', 'movieo.controllers'])
 
 .run(function($ionicPlatform) {
@@ -20,9 +14,18 @@ angular.module('movieo', ['ionic', 'movieo.controllers'])
       StatusBar.styleDefault();
     }
   });
-})
+}).run(['$rootScope', 'AuthFactory',
+    function($rootScope, AuthFactory) {
 
-.config(function($stateProvider, $urlRouterProvider) {
+        $rootScope.isAuthenticated = AuthFactory.isLoggedIn();
+
+        // utility method to convert number to an array of elements
+        $rootScope.getNumber = function(num) {
+            return new Array(num);
+        }
+
+    }
+]).config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
     .state('app', {
