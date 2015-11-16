@@ -1,0 +1,41 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+        <a class="button button-icon button-clear ion-android-cart" href="#/app/browse">
+        </a>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-stable bar-header bar-dark">
+      <h1 class="title">Menu</h1>
+    </ion-header-bar>
+    <ion-content class="menuContent">
+      <ion-list class="sidemenu-list">
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/search">
+          Browse Movies
+        </ion-item>
+        <ion-item class="hrefButton" ng-hide="isAuthenticated" menu-close ng-click="login()">
+          Login
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/browse">
+          Categories
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/playlists">
+          Trending
+        </ion-item>
+        <ion-item class="hrefButton" ng-show="isAuthenticated" menu-close ng-click="" ng-click="logout()">
+          Logout
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

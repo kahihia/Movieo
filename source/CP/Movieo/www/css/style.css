@@ -1,0 +1,22 @@
+/* Empty. Add your own CSS if you like */
+.menuContent{
+	background: url(http://i.imgur.com/hgzVvzN.jpg);
+    background-attachment:fixed;
+    background-position: center;
+}
+
+.menuItem{
+	background: transparent;
+}
+
+.sidemenu-list .item-complex .item-content { 
+  background-color: #000;
+  opacity: 0.4;
+  color: white;
+}
+
+.hrefButton{
+  background-color: #000;
+  opacity: 0.4;
+  color: white;
+}
