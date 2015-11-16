@@ -1,4 +1,4 @@
-angular.module('movieo', ['ionic', 'movieo.controllers'])
+angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -14,18 +14,8 @@ angular.module('movieo', ['ionic', 'movieo.controllers'])
       StatusBar.styleDefault();
     }
   });
-}).run(['$rootScope', 'AuthFactory',
-    function($rootScope, AuthFactory) {
-
-        $rootScope.isAuthenticated = AuthFactory.isLoggedIn();
-
-        // utility method to convert number to an array of elements
-        $rootScope.getNumber = function(num) {
-            return new Array(num);
-        }
-
-    }
-]).config(function($stateProvider, $urlRouterProvider) {
+})
+.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
     .state('app', {
