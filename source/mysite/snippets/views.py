@@ -5,7 +5,7 @@ from snippets.models import *
 from snippets.serializers import *
 import datetime
 from datetime import timedelta
-import urllib.request
+#import urllib.request
 
 
 """from django.shortcuts import render

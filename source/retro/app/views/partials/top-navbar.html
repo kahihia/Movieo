@@ -20,7 +20,7 @@
                     <ul class="data-ctrl" style="padding-top: 10px">
                         <!--<li ng-if="movies != []" ><p style="color: #ffffff; font-size: 16px;font-weight: bold">MOVIES</p></li>-->
                         <li ng-repeat="i in movies | searchFor: searchString">
-                            <a ng-click="searchString = ''" ui-sref="movies({movie_id:{{i.id}}})" style="text-decoration: none">
+                            <a ng-click="empty()" ui-sref="movies({movie_id:{{i.id}}})" style="text-decoration: none">
                                 <p style="color: #ffffff; font-size: 14px">{{i.name}}
                                     <i style="padding-left: 100px;color: #27c24c !important;">movie</i>
                                 </p>
