@@ -1,5 +1,27 @@
-<ion-view view-title="Trending">
-  <ion-content>
-    <h1>Random Giberish</h1>
-  </ion-content>
+<ion-view view-title="Browse Latest" hide-back-button="true">
+    <ion-content>
+        <ion-list>
+            <div ng-repeat="book in books track by $index" class="row responsive-sm" ng-if="$index % 2 == 0">
+                <ion-item class="col-50" ng-repeat="i in [$index, $index + 1]" ng-if="books[i] != null" ng-href="#/app/book/{{::books[i].id}}">
+                        <div class="list card">
+                            <div class="item item-avatar">
+                                <img src="{{::books[i].poster}}">
+                                <h2>{{::books[i].name}}</h2>
+                                <p>{{::books[i].description}}</p>
+                            </div>
+                            
+                            <div class="item item-image">
+                                <img src="http://cdn0.theawl.com/wp-content/uploads/2015/09/CN_YqmzWEAEExOx.jpg-large.jpeg">
+                            </div>
+                            
+                            <a class="item item-icon-left assertive" href="#">
+                                <i class="icon ion-music-note"></i>
+                                {{::books[i].poster}}
+                            </a>                           
+                        </div>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
 </ion-view>

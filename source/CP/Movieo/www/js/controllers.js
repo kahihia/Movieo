@@ -53,4 +53,47 @@ angular.module('movieo.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+})
+
+.controller('BrowseCtrl', ['$scope', 'BooksFactory', 'LSFactory', 'Loader',
+    function($scope, BooksFactory, LSFactory, Loader) {
+
+        Loader.showLoading();
+
+        // support for pagination
+        var page = 1;
+        $scope.books = [];
+        var books = LSFactory.getAll();
+
+        // if books exists in localStorage, use that instead of making a call
+        if (books.length > 0) {
+            $scope.books = books;
+            Loader.hideLoading();
+        } else {
+            BooksFactory.get(page).success(function(data) {
+
+                // process books and store them 
+                // in localStorage so we can work with them later on, 
+                // when the user is offline
+                processBooks(data);
+
+                $scope.books = data;
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                Loader.hideLoading();
+            }).error(function(err, statusCode) {
+                Loader.hideLoading();
+                Loader.toggleLoadingWithMessage(err.message);
+            });
+        }
+
+        function processBooks(books) {
+            LSFactory.clear();
+            // we want to save each book individually
+            // this way we can access each book info. by it's _id
+            for (var i = 0; i < books.length; i++) {
+                LSFactory.set(books[i].id, books[i]);
+            };
+        }
+
+    }
+])
