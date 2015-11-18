@@ -48,6 +48,7 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory'])
       views: {
         'menuContent': {
           templateUrl: 'templates/trending.html',
+          controller: 'BrowseCtrl'
         }
       }
     })

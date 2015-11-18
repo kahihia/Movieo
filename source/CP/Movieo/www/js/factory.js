@@ -3,6 +3,8 @@ var base = 'http://umeshksingla.pythonanywhere.com';
 
 angular.module('movieo.factory', [])
 
+// Loader module takes care of loading shown when fetching data
+// One module I hope never actually runs for too long
 .factory('Loader', ['$ionicLoading', '$timeout', function($ionicLoading, $timeout) {
 
     var LOADERAPI = {
@@ -32,6 +34,7 @@ angular.module('movieo.factory', [])
     return LOADERAPI;
 }])
 
+// Local Storage Factory to handle all cached data
 .factory('LSFactory', [function() {
 
     var LSAPI = {
@@ -71,7 +74,7 @@ angular.module('movieo.factory', [])
 
 }])
 
-
+// To handle user authentication once we introduce it 
 .factory('AuthFactory', ['LSFactory', function(LSFactory) {
 
     var userKey = 'user';
@@ -111,9 +114,8 @@ angular.module('movieo.factory', [])
 }])
 
 .factory('MoviesFactory', ['$http', function($http) {
-    var moviesNum = 30;
     var topTen = {
-        get: function(page) {
+        get: function() {
             return $http.get(base + '/movies/top-ten');
         }
     };
@@ -123,7 +125,7 @@ angular.module('movieo.factory', [])
 .factory('MovieIndividual', ['$http', function($http){
     var movieID = 2
     var movieData = {
-        get: function(page) {
+        get: function() {
             return $http.get(base + '/movies/' + movieID )
         }
     };
