@@ -111,14 +111,11 @@ angular.module('movieo.factory', [])
 }])
 
 .factory('MoviesFactory', ['$http', function($http) {
-
-    var perPage = 30;
-
-    var API = {
+    var moviesNum = 30;
+    var topTen = {
         get: function(page) {
-            return $http.get(base + '/api/v1/books/' + page + '/' + perPage);
+            return $http.get(base + '/movies/top-ten');
         }
     };
-
-    return API;
+    return topTen;
 }])
