@@ -43,12 +43,23 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory'])
         }
       }
     })
+    
     .state('app.trending', {
       url: '/trending',
       views: {
         'menuContent': {
           templateUrl: 'templates/trending.html',
           controller: 'BrowseCtrl'
+        }
+      }
+    })
+    
+    .state('app.movie',{
+      url: "/movie/:movieId",
+      views:{
+        'menuContent': {
+          templateUrl: 'templates/movie.html',
+          controller: 'movieCtrl'
         }
       }
     })

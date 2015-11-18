@@ -71,7 +71,6 @@ angular.module('movieo.controllers', [])
             Loader.hideLoading();
         } else {
             MoviesFactory.get(page).success(function(data) {
-
                 // process movies and store them 
                 // in localStorage so we can work with them later on, 
                 // when the user is offline
@@ -100,3 +99,19 @@ angular.module('movieo.controllers', [])
 
     }
 ])
+
+.controller('movieCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader',
+        function($scope, $state, MovieIndividual, $rootScope, Loader) {
+          
+          // movieId hold the ID of the current movie being referred to
+          var movieId = $state.params.movieId;
+          
+          MovieIndividual.get(movieId).success(function(data){
+            $scope.movie = data;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+            Loader.hideLoading();
+          }).error(function(err, statusCode) {
+            Loader.hideLoading();
+            Loader.toggleLoadingWithMessage(err.message);
+          })
+}])
