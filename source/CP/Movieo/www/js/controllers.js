@@ -107,7 +107,12 @@ angular.module('movieo.controllers', [])
           var movieId = $state.params.movieId;
           
           MovieIndividual.get(movieId).success(function(data){
-            $scope.movie = data;
+            $scope.movie = data[0];
+            
+            var tempStr = $scope.movie.poster
+            var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
+            $scope.movie.poster = newStr
+            
             $scope.$broadcast('scroll.infiniteScrollComplete');
             Loader.hideLoading();
           }).error(function(err, statusCode) {
