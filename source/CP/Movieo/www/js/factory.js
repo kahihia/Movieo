@@ -119,3 +119,13 @@ angular.module('movieo.factory', [])
     };
     return topTen;
 }])
+
+.factory('MovieIndividual', ['$http', function($http){
+    var movieID = 2
+    var movieData = {
+        get: function(page) {
+            return $http.get(base + '/movies/' + movieID )
+        }
+    };
+    return movieData;
+}])
