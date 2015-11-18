@@ -55,29 +55,29 @@ angular.module('movieo.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
-.controller('BrowseCtrl', ['$scope', 'BooksFactory', 'LSFactory', 'Loader',
-    function($scope, BooksFactory, LSFactory, Loader) {
+.controller('BrowseCtrl', ['$scope', 'MoviesFactory', 'LSFactory', 'Loader',
+    function($scope, MoviesFactory, LSFactory, Loader) {
 
         Loader.showLoading();
 
         // support for pagination
         var page = 1;
-        $scope.books = [];
-        var books = LSFactory.getAll();
+        $scope.movies = [];
+        var movies = LSFactory.getAll();
 
-        // if books exists in localStorage, use that instead of making a call
-        if (books.length > 0) {
-            $scope.books = books;
+        // if movies exists in localStorage, use that instead of making a call
+        if (movies.length > 0) {
+            $scope.movies = movies;
             Loader.hideLoading();
         } else {
-            BooksFactory.get(page).success(function(data) {
+            MoviesFactory.get(page).success(function(data) {
 
-                // process books and store them 
+                // process movies and store them 
                 // in localStorage so we can work with them later on, 
                 // when the user is offline
-                processBooks(data);
+                processMovies(data);
 
-                $scope.books = data;
+                $scope.movies = data;
                 $scope.$broadcast('scroll.infiniteScrollComplete');
                 Loader.hideLoading();
             }).error(function(err, statusCode) {
@@ -86,12 +86,12 @@ angular.module('movieo.controllers', [])
             });
         }
 
-        function processBooks(books) {
+        function processMovies(movies) {
             LSFactory.clear();
-            // we want to save each book individually
-            // this way we can access each book info. by it's _id
-            for (var i = 0; i < books.length; i++) {
-                LSFactory.set(books[i].id, books[i]);
+            // we want to save each movie individually
+            // this way we can access each movie info. by it's _id
+            for (var i = 0; i < movies.length; i++) {
+                LSFactory.set(movies[i].id, movies[i]);
             };
         }
 
