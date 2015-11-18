@@ -4,36 +4,38 @@
             <div class="item item-avatar">
                 <img ng-src="{{::movie.poster}}">
                 <h2>{{::movie.name}}</h2>
-                <p>{{::movie.date_of_release | date:'yyyy-MM-dd'}}</p>
-                <p>{{::movie.genre}}</p>
+                <p>Released :{{::movie.date_of_release | date:'yyyy-MM-dd'}}</p>
+                <p>Genre :{{::movie.genre}}</p>
             </div>
             <div class="item item-body">
                 <img class="full-image" ng-src="{{::movie.poster}}">
                 <p>
                     {{::movie.description}}
                 </p>
-                <p class="row">
-                    <label class="col.col.50">
-                        Rating : <i class="icon ion-star" ng-repeat="4"></i> 
-						<!-- Hard coded rating change it later -->
-                    </label>
-                    <label class="col.col.50">
-                        Budget :
-                        <label class="subdued">{{::movie.budget | currency}}</label>
-                    </label>
-                </p>
-                <p class="row">
-					<label class="col.col.50">
-							Runtime : {{::movie.runtime}} minutes
-					</label>
-					<label class="col.col.50">
-						Rating : {{::movie.rating}}
-					</label>
-                </p>
+            </div>
+                <div class="item item-divider">
+                    <p class="row">
+                        <label class="col">
+                            Rating : <i class="icon ion-star" ng-repeat="4"></i> 
+                            <!-- Hard coded rating change it later -->
+                        </label>
+                        <label class="col">
+                            Budget :
+                            <label class="subdued">{{::movie.budget | currency}}</label>
+                        </label>
+                    </p>
+                    <p class="row">
+                        <label class="col">
+                                Runtime : {{::movie.runtime}} minutes
+                        </label>
+                        <label class="col">
+                            Rating : {{::movie.rating}}
+                        </label>
+                    </p>
+                </div>
                 <button class="button button-assertive button-block" ng-click="addToCart()"> 
                 	<i class="icon ion-checkmark"></i> Write Review
                 </button>
             </div>
-        </div>
     </ion-content>
 </ion-view>
