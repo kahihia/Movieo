@@ -25,3 +25,10 @@
   background: url('http://ioniconf.com/img/bg.jpg') no-repeat center center fixed;
   background-size: cover;
 }
+
+.mainMenuImage{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
