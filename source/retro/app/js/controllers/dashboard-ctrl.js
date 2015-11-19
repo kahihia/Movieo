@@ -202,7 +202,7 @@ App.controller('instantSearchCtrl',['$scope','$http',function($scope, $http){
     };
 
     $scope.empty = function () {
-        $scope.searchString = null;
+        $scope.searchString = '';
         $scope.movies = [];
         $scope.actors = [];
     }

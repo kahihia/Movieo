@@ -1,0 +1,48 @@
+[
+  {
+    "text": "Main Navigation",
+    "heading": "true"
+  },
+  {
+    "text": "Dashboard",
+    "sref": "app.dashboard",
+    "icon": "icon-speedometer"
+  },
+  {
+    "text": "List View",
+    "sref": "app.listview",
+    "icon": "icon-list"
+  },
+  {
+    "text": "Pending Drivers",
+    "sref": "app.pendingdrivers",
+    "icon": "icon-list"
+  },
+  {
+    "text": "Map View",
+    "sref": "app.mapview",
+    "icon": "icon-map"
+  },
+  {
+    "text": "Chart",
+    "sref": "app.chart",
+    "icon": "icon-graph"
+  },
+  {
+    "text": "Form",
+    "sref": "app.form",
+    "icon": "icon-note"
+  },
+  {
+    "text": "Maps",
+    "sref": "#",
+    "icon": "icon-map",
+    "submenu":[
+      {
+        "text": "Map Circle",
+        "sref": "app.mapcircle"
+
+      }
+    ]
+  }
+]

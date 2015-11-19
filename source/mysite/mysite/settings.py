@@ -1,5 +1,11 @@
 #import MySQLdb
-#Con = MySQLdb.Connect(host="localhost", port=8000, user="root", passwd="password", db="movieo_DB")
+"""Con = MySQLdb.Connect(
+host="localhost",
+port=8000,
+user="root",
+passwd="password",
+db="movieo_DB"
+)"""
 #Cursor = Con.cursor()
 #sql = "SELECT * FROM test.testing"
 #Cursor.execute(sql)
@@ -38,6 +44,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -87,12 +94,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'movieo_DB',
-        'USER': 'punya',
-        'PASSWORD': 'punya',
-        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'movieoDB',
+        'USER': 'root',
+        'PASSWORD': 'umesh420',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '8000',
     }
 }
 

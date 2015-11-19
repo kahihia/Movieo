@@ -1,0 +1,72 @@
+<style>
+    .pdesc {
+        text-align: center;
+        width: 100%;
+        color: #000000;
+        max-width: 100%;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    .detailhead {
+        color: #ffffff;
+        text-align: center;
+    }
+    .detailp {
+        font-size: 25px;
+        text-align: justify;
+    }
+</style>
+<div class="container-fluid"
+        style="margin-top: -17px;
+        margin-left: -11.3%;
+        margin-right: -11.3%;
+        background:-webkit-radial-gradient(top center, ellipse cover, rgba(255,255,255,0.2) 0%,#0075b0 100%), url('app/img/ff.jpg');
+        background-repeat: no-repeat;
+        background-size: cover">
+
+    <div class="pdesc col-lg-12" style='font-size: 100px;padding-top: 12%;font-weight: bolder;color: #ffffff'>
+        movieo
+    </div>
+    <div class="pdesc col-lg-12" style='font-size: 33px;padding-top: 3%;'>
+        A Social Community for Movie Lovers
+    </div>
+    <div class="pdesc col-lg-12" style='font-size: 65px;font-weight: bolder;color: #fff;padding-top: 5%'>
+        Find a movie to watch.
+    </div>
+    <div class="pdesc col-lg-12" style='font-size: 30px;font-weight: lighter;color: #fff;'>
+        Discover, Organize and Share.
+    </div>
+</div>
+<div ng-controller="AngularCarouselController" class="container-fluid" style="margin-left: -11.3%;margin-right: -11.3%; background:-webkit-radial-gradient(left center, ellipse cover, rgba(255,255,255,0.2) 0%,#DBDB60 100%), url('app/img/ff2.jpg');background-repeat: no-repeat;background-size: cover" >
+    <div class="carousel-demo carousel-demo-3d" style="padding-top: 15%;padding-bottom: 15%" >
+        <ul
+                rn-carousel=""
+                rn-carousel-index="carouselIndex3"
+                rn-carousel-auto-slide=""
+                rn-carousel-transition="hexagon"
+                rn-carousel-buffered=""
+                class="list-unstyled carousel3">
+            <li ng-repeat="slide in slides3 track by slide.id">
+                <div
+                        style="border: solid 15px #355089;height: 125%;width: auto"
+                        ng-style="{'background-image': 'url(' + slide.img + ')'}"
+                        class="bgimage">
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container-fluid" style="padding-top: 15%" >
+    <div class="col-lg-3"><h2 class="detailhead">Zero Commercialisation</h2><p class="detailp" >You decide the movie to watch. Neither critique nor top rated movies force you to watch a movie and then disappoint you.</p></div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4"><h2 class="detailhead">Discover, comment, vote</h2><p class="detailp" >Check out what others created and upvote where upvote is due. Each day we’ll feature the best and most creative content.</p></div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-3"><h2 class="detailhead">User generated content</h2><p class="detailp" >Check out the content as uploaded on social websites right on the movie page and decide. Tweets, FB Posts and the score.</p></div>
+</div>
+
+<div class="container-fluid" style="padding-top: 6%" >
+    <div class="col-lg-3"><h2 class="detailhead">Friends, along</h2><p class="detailp" >Check how many of your friends like the movie, plan accordingly and discuss. Your review means a lot to them.</p></div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4"><h2 class="detailhead">Search movies & celebrities</h2><p class="detailp" >Find movies and celebrities by title or find all movies someone appeared in, directed, or produced.</p></div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-3"><h2 class="detailhead">Organize your movies</h2><p class="detailp" >Add any movie to your Watchlist, Seenlist, or Blacklist. Then decide if movies from a certain list should be visible while browsing.</p></div>
+</div>

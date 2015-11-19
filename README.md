@@ -13,9 +13,9 @@ Repository for IIITSERC/ssad_2015_team10
 
 **Technologies**:
 
-* Backend : Python Django with MongoDB as database.
+* Backend : Python Django with MySQL as database.
           : Will be managed by Punyaslok, Varshit, RamKumar
 * Frontend : AngularJS, jQuery, HMTL, CSS, Twitter Bootstrap for web application
           : Umesh
-* Android : Java
+* Android : Ionic Framework
           : Whole android in hands of Jaipal as of now.
