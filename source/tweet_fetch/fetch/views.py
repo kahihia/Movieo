@@ -15,6 +15,39 @@ def getTweets(request):
     context = {'tweets': req}
     return render_to_response('test.html', context)
 
+def gethashes(request, hashtag):
+    lis = []
+    var = ''
+    context = {}
+    count = hashtag.count('#')
+    x = hashtag
+    temp = x.split(',')
+    for i in range(count):
+        lis.append(temp[i])
+    keys = TwitterAPI('CfhP1QIjLmTkvwQ1pPXOqIWbU', 'sEldJOF2YsCBNELrZyKKZOVai9XTSW5eCKGPSRhGXXoD1x7n9Y',
+                      '353421720-51hwAbUX52YvkRz22wkmDQyYxgeZbDlac6DxGJkB',
+                      'BGIXratzyuqeCpdtlB9VIWSdXfc3CoQvwX0AXCCpVZDGK')
+    if count == 1:
+        var = lis[0]
+    else:
+        for i in range(count):
+            var += str(lis[i]) + " OR "
+    req = keys.request('search/tweets', {'q': var, 'count': 6, 'lang': 'en'})
+    list = []
+    z = []
+    for j in req:
+        list.append(j)
+    for k in range(len(list)):
+        t = str(list[k]).split(':')
+        for i in range(len(t)):
+            if str(t[i]).find("u'description'") != -1:
+                z.append(t[i + 1])
+        print z[1].strip('u\'friends_count')
+        z = []
+    context.update({'list': list})
+    return render_to_response('index.html', context)
+
+
 
 def tweets(request):
     # username = request.POST['username']
