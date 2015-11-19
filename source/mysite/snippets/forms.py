@@ -22,6 +22,11 @@ class MoviePhotosForm(forms.ModelForm):
         model = MoviePhotos
         exclude = []
 
+class MovieReviewsForm(forms.ModelForm):
+    class Meta:
+        model = MovieReviews
+        exclude = []
+
 class MovieVideosForm(forms.ModelForm):
     class Meta:
         model = MovieVideos
@@ -38,3 +43,7 @@ class ActorVideosForm(forms.ModelForm):
         exclude = []
 
 
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        exclude = []

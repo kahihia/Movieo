@@ -26,6 +26,10 @@ urlpatterns = [
     url(r'^movies/top-ten$',views.top_ten),
     url(r'^movies/opening$',views.this_week),
     url(r'^movies/(?P<pk>[0-9]+)$',views.single_movie),
+
+
+    url(r'^users/add-movie-review$', views.add_movie_review),
+
     url(r'^snippets/$', views.snippet_list),
     url(r'^snippets/(?P<pk>[0-9]+)$', views.snippet_detail),
 ]
