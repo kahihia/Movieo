@@ -20,124 +20,54 @@
    <!-- END navbar header-->
    <!-- START Nav wrapper-->
    <div collapse="navCollapsed" class="collapse navbar-collapse">
-      <!-- Navbar Menu -->
-      <ul ng-controller="SidebarController" class="nav navbar-nav">
-         <li ng-repeat="item in menuItems | limitTo: 3 " ng-class="{'dropdown': item.submenu}" dropdown="!!item.submenu">
-            <a ng-if="!item.heading &amp;&amp; !item.submenu" ng-href="{{$state.href(item.sref)}}" title="{{item.text}}">
-               <span>{{(item.translate | translate) || item.text}}</span>
-            </a>
-            <a dropdown-toggle="" ng-if="item.submenu">
-               <span>{{(item.translate | translate) || item.text}}</span>
-            </a>
-            <!-- START Dropdown menu-->
-            <ul class="dropdown-menu animated fadeInUp">
-               <li ng-repeat="subitem in item.submenu">
-                  <a ng-href="{{$state.href(subitem.sref)}}" title="{{subitem.text}}">
-                     <span>{{(subitem.translate | translate) || subitem.text}}</span>
-                  </a>
-               </li>
-            </ul>
-         </li>
-      </ul>
-      <!-- End Navbar Menu-->
-      <!-- START Right Navbar-->
       <ul class="nav navbar-nav navbar-right">
-         <!-- START lock screen-->
-<!--         <li>
-            <a ui-sref="page.lock" title="Lock screen">
-               <em class="icon-lock"></em>
-            </a>
-         </li>-->
-         <!-- END lock screen-->
-         <!-- Search icon-->
+
          <li>
             <a href="#" search-open="search-open"><span style="font-size: large" >
                <em class="icon-magnifier"></em></span>
             </a>
          </li>
-         <!-- Fullscreen (only desktops)-->
-         <li class="visible-lg">
-            <a href="#" toggle-fullscreen="toggle-fullscreen">
-               <em class="fa fa-expand"></em>
-            </a>
-         </li>
-         <!-- START Alert menu-->
-         <!--<li dropdown="" class="dropdown dropdown-list">
-            <a dropdown-toggle="">
-               <em class="icon-bell"></em>
-               <div class="label label-danger">11</div>
-            </a>
-            &lt;!&ndash; START Dropdown menu&ndash;&gt;
-            <ul class="dropdown-menu animated flipInX">
-               <li>
-                  &lt;!&ndash; START list group&ndash;&gt;
-                  <div class="list-group">
-                     &lt;!&ndash; list item&ndash;&gt;
-                     <a href="#" class="list-group-item">
-                        <div class="media-box">
-                           <div class="pull-left">
-                              <em class="fa fa-twitter fa-2x text-info"></em>
-                           </div>
-                           <div class="media-box-body clearfix">
-                              <p class="m0">New followers</p>
-                              <p class="m0 text-muted">
-                                 <small>1 new follower</small>
-                              </p>
-                           </div>
-                        </div>
-                     </a>
-                     &lt;!&ndash; list item&ndash;&gt;
-                     <a href="#" class="list-group-item">
-                        <div class="media-box">
-                           <div class="pull-left">
-                              <em class="fa fa-envelope fa-2x text-warning"></em>
-                           </div>
-                           <div class="media-box-body clearfix">
-                              <p class="m0">New e-mails</p>
-                              <p class="m0 text-muted">
-                                 <small>You have 10 new emails</small>
-                              </p>
-                           </div>
-                        </div>
-                     </a>
-                     &lt;!&ndash; list item&ndash;&gt;
-                     <a href="#" class="list-group-item">
-                        <div class="media-box">
-                           <div class="pull-left">
-                              <em class="fa fa-tasks fa-2x text-success"></em>
-                           </div>
-                           <div class="media-box-body clearfix">
-                              <p class="m0">Pending Tasks</p>
-                              <p class="m0 text-muted">
-                                 <small>11 pending task</small>
-                              </p>
-                           </div>
-                        </div>
-                     </a>
-                     &lt;!&ndash; last list item &ndash;&gt;
-                     <a href="#" class="list-group-item">
-                        <small translate="topbar.notification.MORE">More notifications</small>
-                        <span class="label label-danger pull-right">14</span>
-                     </a>
-                  </div>
-                  &lt;!&ndash; END list group&ndash;&gt;
-               </li>
-            </ul>
-            &lt;!&ndash; END Dropdown menu&ndash;&gt;
-         </li>-->
-         <!-- END Alert menu-->
+          <li>
+              <a href="#">
+                  <em class="icon-login"></em>
+              </a>
+          </li>
+          <li class="visible-lg">
+              <a href="#" toggle-fullscreen="toggle-fullscreen">
+                  <em class="fa fa-expand"></em>
+              </a>
+          </li>
       </ul>
-      <!-- END Right Navbar-->
    </div>
    <!-- END Nav wrapper-->
    <!-- START Search form-->
-   <form role="search" action="search.html" class="navbar-form">
-      <div class="form-group has-feedback">
-         <input type="text" placeholder="{{ 'topbar.search.PLACEHOLDER' | translate }}" class="form-control" />
-         <div search-dismiss="search-dismiss" class="fa fa-times form-control-feedback"></div>
-      </div>
-      <button type="submit" class="hidden btn btn-default">Submit</button>
-   </form>
+    <div ng-controller="SearchController" style="margin-bottom: -12px" >
+        <form role="search" ng-submit="search()" class="navbar-form">
+            <div class="form-group has-feedback">
+                <input type="text" id="inputSearch" placeholder="Search for movies or celebrities.." ng-model="searchString" ng-keyup="searchMovie() ; searchActor()" class="form-control" />
+                <div search-dismiss="search-dismiss" class="fa fa-times form-control-feedback"></div>
+            </div>
+            <button type="submit" class="hidden btn btn-default">Submit</button>
+        </form>
+        <div id="sea">
+        <ul class="data-ctrl list-unstyled" style="padding-left: 25%;padding-right: 10%">
+            <!--<li ng-if="movies != []" ><p style="color: #ffffff; font-size: 16px;font-weight: bold">MOVIES</p></li>-->
+            <li ng-repeat="i in movies | searchFor: searchString" style="padding-top: 2px" >
+                <a ng-click="empty()" ui-sref="app.movies({movie_id:{{i.id}}})" style="text-decoration: none">
+                    <em class="icon-camcorder searchIcon"></em>
+                    <span class="searchResult">{{i.name}} ({{i.date_of_release | date : 'yyyy'}})</span>
+                </a>
+            </li>
+            <!--<li ng-if="actors" ><p style="color: #ffffff; font-size: 16px;font-weight: bold">CELEBRITIES</p></li>-->
+            <li ng-repeat="i in actors | searchFor: searchString" style="padding-top: 2px">
+                <a ng-click="empty()" ui-sref="app.actors({actor_id:{{i.id}}})" style="text-decoration: none">
+                    <em class="icon-users searchIcon"></em>
+                    <span class="searchResult">{{i.name}} </span>
+                </a>
+            </li>
+        </ul>
+        </div>
+    </div>
    <!-- END Search form-->
 </nav>
 <!-- END Top Navbar-->

@@ -1,52 +1,73 @@
 <!-- START Top Navbar-->
 <nav role="navigation" class="navbar topnavbar">
-         <!-- START navbar header-->
-   <div class="navbar-header">
-      <a href="#/" class="navbar-brand">
-         <div class="brand-logo">
-            <img src="app/img/logo.png" alt="App Logo" class="img-responsive img-logo" />
-         </div>
-         <div class="brand-logo-collapsed">
-            <img src="app/img/logo-small.png" alt="App Logo" class="img-responsive" />
-         </div>
-      </a>
-   </div>
-   <!-- END navbar header-->
-   <!-- START Nav wrapper-->
-   <div class="nav-wrapper">
-      <!-- START Left navbar-->
-      <ul class="nav navbar-nav">
-         <li>
-            <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
-            <a href="#" ng-click="app.layout.isCollapsed = !app.layout.isCollapsed" class="hidden-xs">
-               <em class="fa fa-navicon"></em>
-            </a>
-            <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
-            <a href="#" toggle-state="aside-toggled" no-persist="no-persist" class="visible-xs sidebar-toggle">
-               <em class="fa fa-navicon"></em>
-            </a>
-         </li>
-      </ul>
-      <!-- END Left navbar-->
-      <!-- START Right Navbar-->
-      <ul class="nav navbar-nav navbar-right">
-          <!-- Fullscreen (only desktops)-->
-          <li class="visible-lg">
-              <a href="#" toggle-fullscreen="toggle-fullscreen" title="Full Screen">
-                  <em class="fa fa-expand"></em>
-              </a>
-          </li>
-          <!-- START Logout function-->
-          <li>
-              <a title="Logout" ng-controller="LoginController" ng-click="logout()">
-                  <em class="icon-logout"></em>
-              </a>
-          </li>
-          <!-- END Logout function-->
-      </ul>
-      <!-- END Right Navbar-->
-   </div>
-   <!-- END Nav wrapper-->
+    <!-- START navbar header-->
+    <div class="navbar-header">
+        <button type="button" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" class="navbar-toggle collapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="" class="navbar-brand">
+            <div class="brand-logo">
+                <img ng-src="app/img/logo1.png" alt="App Logo" class="img-responsive" />
+            </div>
+            <div class="brand-logo-collapsed">
+                <img ng-src="app/img/logo-small.jpg" alt="App Logo" class="img-responsive" />
+            </div>
+        </a>
+    </div>
+    <!-- END navbar header-->
+    <!-- START Nav wrapper-->
+    <div collapse="navCollapsed" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
 
+            <li>
+                <a href="#" search-open="search-open"><span style="font-size: large" >
+               <em class="icon-magnifier"></em></span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <em class="icon-login"></em>
+                </a>
+            </li>
+            <li class="visible-lg">
+                <a href="#" toggle-fullscreen="toggle-fullscreen">
+                    <em class="fa fa-expand"></em>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- END Nav wrapper-->
+    <!-- START Search form-->
+    <div ng-controller="SearchController" style="margin-bottom: -12px" >
+        <form role="search" ng-submit="search()" class="navbar-form">
+            <div class="form-group has-feedback">
+                <input type="text" id="inputSearch" placeholder="Search for movies or celebrities.." ng-model="searchString" ng-keyup="searchMovie() ; searchActor()" class="form-control" />
+                <div search-dismiss="search-dismiss" class="fa fa-times form-control-feedback"></div>
+            </div>
+            <button type="submit" class="hidden btn btn-default">Submit</button>
+        </form>
+        <div id="sea" >
+            <ul class="data-ctrl list-unstyled" style="padding-left: 25%;padding-right: 10%">
+                <!--<li ng-if="movies != []" ><p style="color: #ffffff; font-size: 16px;font-weight: bold">MOVIES</p></li>-->
+                <li ng-repeat="i in movies | searchFor: searchString" style="padding-top: 2px" >
+                    <a ng-click="empty()" ui-sref="movies({movie_id:{{i.id}}})" style="text-decoration: none">
+                        <em class="icon-camcorder searchIcon"></em>
+                        <span class="searchResult">{{i.name}} ({{i.date_of_release | date : 'yyyy'}})</span>
+                    </a>
+                </li>
+                <!--<li ng-if="actors" ><p style="color: #ffffff; font-size: 16px;font-weight: bold">CELEBRITIES</p></li>-->
+                <li ng-repeat="i in actors | searchFor: searchString" style="padding-top: 2px">
+                    <a ng-click="empty()" ui-sref="actors({actor_id:{{i.id}}})" style="text-decoration: none">
+                        <em class="icon-users searchIcon"></em>
+                        <span class="searchResult">{{i.name}} </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- END Search form-->
 </nav>
 <!-- END Top Navbar-->

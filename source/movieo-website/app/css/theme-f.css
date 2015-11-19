@@ -178,3 +178,13 @@ body,
     text-transform: uppercase;
     display: inline-block;
 }
+
+.searchIcon {
+    font-size: 30px;
+}
+
+.searchResult {
+    font-size: 35px;
+    color: #ffffff;
+    padding-left: 20px;
+}

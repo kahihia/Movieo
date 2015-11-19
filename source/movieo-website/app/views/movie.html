@@ -1,0 +1,165 @@
+<!--<style>
+    .poster{
+        width: 80%;
+        height: 430px !important;
+        /* min-width: 250px !important;*/
+    }
+    .rating {
+        color: #a9a9a9;
+        margin: 0;
+        padding: 0;
+    }
+    ul.rating {
+        display: inline-block;
+    }
+    .rating li {
+        list-style-type: none;
+        display: inline-block;
+        padding: 1px;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .rating .filled {
+        color: red;
+    }
+</style>-->
+<style>
+    .movieName {
+        color: #ffffff;
+        font-weight: bolder;
+        font-size: 60px;
+    }
+    h4 {
+        color: #ffffff;
+    }
+    h4 strong{
+        color: #656566;
+    }
+</style>
+<div ng-controller="movieController" class="container-fluid">
+
+    <div class="container-fluid"
+         style="text-align: center;
+             margin-right: -11.3%;
+             margin-left: -11.3%;
+             margin-top: -17px;
+             background:url('app/img/a.jpg');
+             background-size: auto;
+             background-repeat: no-repeat;">
+        <div class="row" style="padding-top: 20%" >
+            <div class="col-lg-12">
+                <span class="movieName">{{movie.name}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="movieName" style="font-size: 30px">({{movie.date_of_release | date :'yyyy'}})</span>
+            </div>
+            <div class="col-lg-12" style="padding-top: 10px" >
+                <span class="movieName" style="font-size: 35px">{{movie.tagline | uppercase}}</span>
+            </div>
+        </div>
+        <div class="container" style="
+        padding-top: 25px;
+        background-color: #21262E;
+        border: solid #dbdbdb 5px;
+        border-radius: 1%;
+        padding: 25px">
+            <div class="row">
+                <div class="col-lg-4" style="text-align: center !important;" >
+                    <img src="{{poster}}" class="poster thumbnail" style="max-width: 240px;max-height: 360px;height: 360px;width: 240px" >
+                </div>
+                <div class="col-lg-4">
+                    <h3><strong>User Rating:</strong> {{movie.rating}}/10<br/>
+                        <span style="color: yellow" >
+                        <span ng-repeat="a in range(movie.full) track by $index"><i class="fa fa-star">&nbsp;</i></span>
+                        <span ng-repeat="a in range(movie.half) track by $index"><i class="fa fa-star-half-full">&nbsp;</i></span>
+                        <span ng-repeat="a in range(movie.empty) track by $index"><i class="fa fa-star-o">&nbsp;</i></span>
+                        </span>
+                    </h3>
+                    <h4><strong>Reviews Counted:</strong> {{movie.no_of_reviews}}</h4>
+
+                    <h4><strong>Box Office:</strong> {{movie.box_office | currency}}</h4>
+                    <h4><strong>Budget:</strong> {{movie.budget | currency}}</h4>
+                    <h4><strong>Country:</strong> {{movie.country}}</h4>
+                    <h4><strong>Directed By:</strong> {{movie.director}}</h4>
+                </div>
+                <div class="col-lg-4" >
+                    TWEETS
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-lg-8" style="padding-top: 5%" >
+                    <span style="width: 70%;color: #b6c5da;font-size: 20px">{{movie.description}}..</span>
+                </div>
+                <div class="col-lg-4" style="padding-top: 5%" >
+                    <h4><strong>Directed By:</strong> {{movie.director}}</h4>
+                    <h4><strong>Written By:</strong> {{movie.writer}}</h4>
+                    <hr style="text-align: center;width: 80%;color: #b6c5da;background-color: #b6c5da" >
+                    <h4><strong>Genre:</strong> {{movie.genre | space}}</h4>
+                    <h4><strong>Language:</strong> {{movie.language}}</h4>
+                    <h4><strong>Run Time:</strong> {{movie.runtime}} minutes</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="container">
+    <h2>Cast & Crew</h2>
+    <div class="row">
+
+        <div ng-repeat="cast in movieCast" class="span2" >
+            <img src="{{cast.image_link}}" style="width: 100px;height: 120px" >
+            <a ui-sref="actors({actor_id:{{cast.actor_id}}})" style="text-decoration: none" ><h4>{{cast.actor_name}}</h4></a>
+            <h5><small>Role: </small>{{cast.role}}</h5>
+            <div ng-if="cast.appears_as"><small>- appears as: </small>{{cast.appears_as}}</div>
+        </div>
+
+    </div>
+</div>
+<hr>
+<div class="container">
+    <h2>Photos</h2>
+    <div class="row">
+
+        <div ng-repeat="photo in moviePhotos" class="span2" >
+            <img src="{{photo.photo}}" style="width: 320px;height: 180px" class="thumbnail" >
+        </div>
+
+    </div>
+</div>
+<hr>
+<!--<div class="container">
+    <h2>Videos</h2>
+    <div class="row">
+
+        <div ng-repeat="video in movieVideos" class="span2" >
+            <img ng-src="app/img/actor.jpg" style="width: 160px;height: 180px" class="thumbnail" >
+        </div>
+
+    </div>
+</div>-->
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="span3"></div>
+        <div class="span9">
+            <h2>Reviews</h2>
+            <div class="row">
+
+                <div ng-repeat="review in movieReviews" class="span2" >
+                    <div ng-repeat="comment in movieReviewComments[]| orderBy:'-created_at':reverse">
+                        <hr>
+                        <h3 style="color: #27c24c" >@{{comment.creator_id}} </h3>
+                        <span style="font-size: 16px;font-style: normal;padding-left: 40px" >{{comment.description}}</span><br/>
+                            <span class="text-muted pull-right" >
+                            <b>{{ comment.created | date:'medium' }}</b>
+                            </span>
+                        <br/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -45,11 +45,7 @@ App.controller('AngularCarouselController', ["$scope", function($scope) {
         target.push(getSlide(target, style));
     }
 
-    $scope.carouselIndex = 3;
-    $scope.carouselIndex2 = 0;
-    $scope.carouselIndex2 = 1;
     $scope.carouselIndex3 = 5;
-    $scope.carouselIndex4 = 5;
 
     function addSlides(target, style, qty) {
         for (var i=0; i < qty; i++) {
@@ -57,33 +53,53 @@ App.controller('AngularCarouselController', ["$scope", function($scope) {
         }
     }
 
-    // 1st ngRepeat demo
-    $scope.slides = [];
-    addSlides($scope.slides, 'sports', 50);
-
-    // 2nd ngRepeat demo
-    $scope.slides2 = [];
-    addSlides($scope.slides2, 'sports', 10);
-
-    // 3rd ngRepeat demo
     $scope.slides3 = [];
+
     addSlides($scope.slides3, 'people', 50);
 
-    // 4th ngRepeat demo
-    $scope.slides4 = [];
-    addSlides($scope.slides4, 'city', 50);
+}]);
 
+App.controller('SearchController',['$scope','$http',function($scope, $http){
 
-    // 5th ngRepeat demo
-    $scope.slides6 = [];
-    $scope.carouselIndex6 = 0;
-    addSlides($scope.slides6, 'sports', 10);
-    $scope.addSlide = function(at) {
-        if(at==='head') {
-            $scope.slides6.unshift(getSlide($scope.slides6, 'people'));
-        } else {
-            $scope.slides6.push(getSlide($scope.slides6, 'people'));
-        }
+    $scope.searchString = '';
+
+    $scope.search = function(){
+        console.log($scope.searchString);
     };
+
+    $scope.searchMovie = function () {
+        if(!$scope.searchString) {
+            $scope.movies = [];
+            $scope.actors = [];
+        }
+        $http.get(baseURL + '/search-movies/?query=' + $scope.searchString)
+            .then(function (data) {
+                console.log(data);
+                $scope.movies = data.data;
+            });
+    };
+
+    $scope.searchActor= function () {
+        if(!$scope.searchString) {
+            $scope.movies = [];
+            $scope.actors = [];
+        }
+        $http.get(baseURL + '/search-actors/?query=' + $scope.searchString)
+            .then(function (data) {
+                console.log(data);
+                $scope.actors = data.data;
+            });
+    };
+
+    $scope.empty = function () {
+        $scope.searchString = '';
+        $scope.movies = [];
+        $scope.actors = [];
+    };
+
+    $(document).click(function() {
+        $scope.empty();
+        console.log("emptying");
+    });
 
 }]);

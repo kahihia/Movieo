@@ -98,23 +98,57 @@ myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'Rout
                 templateUrl: helper.basepath('dashboard.html'),
                 resolve: helper.resolveFor('angular-carousel')
             })
-            //
-            // CUSTOM RESOLVES
-            //   Add your own resolves properties
-            //   following this object extend
-            //   method
-            // -----------------------------------
-            // .state('app.someroute', {
-            //   url: '/some_url',
-            //   templateUrl: 'path_to_template.html',
-            //   controller: 'someController',
-            //   resolve: angular.extend(
-            //     helper.resolveFor(), {
-            //     // YOUR RESOLVES GO HERE
-            //     }
-            //   )
-            // })
-        ;
-
-
+            .state('app.movies', {
+                url: '/movies/{movie_id}',
+                title: 'Movie',
+                templateUrl: helper.basepath('movie.html')
+            });
     }]);
+
+App.filter('searchFor', function(){
+    return function(arr, searchString){
+        if(!searchString){
+            return arr;
+        }
+        var result = [];
+        searchString = searchString.toLowerCase();
+
+        angular.forEach(arr, function(item){
+            if(item.name.toLowerCase().indexOf(searchString) !== -1){
+                result.push(item);
+            }
+        });
+        return result;
+    };
+});
+
+App.filter('space', function () {
+
+    return function (value) {
+        console.log(value);
+        return (!value) ? '' : value.replace(/,/g, ' ');
+    };
+});
+
+App.directive('starRating', function () {
+    return {
+        restrict: 'A',
+        template: '<ul class="rating">' +
+        '<li ng-repeat="star in stars" ng-class="star">' +
+        '\u2605' +
+        '</li>' +
+        '</ul>',
+        scope: {
+            ratingValue: '=',
+            max: '='
+        },
+        link: function (scope, elem, attrs) {
+            scope.stars = [];
+            for (var i = 0; i < scope.max; i++) {
+                scope.stars.push({
+                    filled: i < scope.ratingValue
+                });
+            }
+        }
+    }
+});
