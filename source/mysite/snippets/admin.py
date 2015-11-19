@@ -25,6 +25,11 @@ class MoviePhotosAdmin(admin.ModelAdmin):
     exclude = ()
     form = MoviePhotosForm
 
+class MovieReviewsAdmin(admin.ModelAdmin):
+    list_display = ['created', 'user_id', 'movie_id','description', 'rating']
+    exclude = ()
+    form = MovieReviewsForm
+
 class MovieVideosAdmin(admin.ModelAdmin):
     list_display = ['movie_id','description','video_link']
     exclude = ()
@@ -41,6 +46,10 @@ class ActorVideosAdmin(admin.ModelAdmin):
     exclude = ()
     form = ActorVideosForm
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['name', 'gender', 'birthday', 'hometown', 'about_me', 'no_of_reviews', 'no_of_quotes', 'badge', 'email']
+    exclude = ()
+    form = UserForm
 
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(CastDetails, CastDetailsAdmin)
@@ -48,3 +57,5 @@ admin.site.register(ActorPhotos, ActorPhotosAdmin)
 admin.site.register(ActorVideos, ActorVideosAdmin)
 admin.site.register(MoviePhotos, MoviePhotosAdmin)
 admin.site.register(MovieVideos, MovieVideosAdmin)
+admin.site.register(MovieReviews, MovieReviewsAdmin)
+admin.site.register(User, UserAdmin)

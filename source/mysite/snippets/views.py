@@ -1,11 +1,14 @@
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from snippets.models import *
 from snippets.serializers import *
 import datetime
+import json
 from datetime import timedelta
-#import urllib.request
+"""import urllib.request"""
 
 
 """from django.shortcuts import render
@@ -27,7 +30,7 @@ from django.utils import timezone
 
 
 
-@api_view(['GET', 'POST'])
+@csrf_exempt
 def snippet_list(request):
     """
     List all snippets, or create a new snippet.
@@ -95,6 +98,7 @@ def single_movie(request, pk):
     except Movie.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
+    #print (request.data)
     if request.method == 'GET':
         serializer = MovieSerializer(single_movie)
         try:
@@ -196,9 +200,10 @@ def movie_search(request):
     if request.method == 'GET':
         query_string = request.GET.urlencode()
         query_string = query_string.split('=')[1]
-       # print (query_string)
-       # query_string = urllib.request.unquote(query_string)
-       # print (query_string)
+        query_string = query_string.replace('+',' ')
+        print (query_string)
+        """query_string = urllib.request.unquote(query_string)
+        print (query_string)"""
         if len(query_string) == 0:
             return Response()
         movies = Movie.objects.filter(name__icontains=query_string)
@@ -395,3 +400,15 @@ def actorquotes(request , actor_id):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['POST'])
+def add_movie_review(request):
+    """
+    Add a review for a movie by a user
+    
+    """
+    print (json.loads(request.body))
+    serializer = MovieReviewsSerializer(data=json.loads(request.body))
+    if serializer.is_valid():
+        serializer.save()
+        return HttpResponse("done")
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -5,7 +5,8 @@ from pygments.styles import get_all_styles
 #from django.contrib.auth.models import User
 from django.utils import timezone
 import datetime
-
+import hashlib
+import os
 
 LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
@@ -42,6 +43,22 @@ class Snippet(models.Model):
     #     return self.user.username
 """
 
+
+""" Image rename function """
+def path_and_rename(instance, filename):
+    upload_to = 'mysite/snippets/static/photos/'
+    ext = filename.split('.')[-1]
+    x = str(datetime.datetime.now()).encode('utf-8')
+    hash_object = hashlib.sha256(x)
+    hex_dig = hash_object.hexdigest()
+    hex_dig = hex_dig + '.' + ext
+    print(hex_dig)
+    print (os.path.join(upload_to, hex_dig))
+    return os.path.join(upload_to, hex_dig)
+
+
+
+
 """ User Table """
 class User(models.Model):
     name = models.CharField(max_length=200, blank=False)
@@ -54,6 +71,11 @@ class User(models.Model):
     badge = models.IntegerField(default=0)
     email = models.CharField(max_length=200, null=False)
 
+    def __unicode__(self):
+        return "%s" % (self.name)
+       
+    def __str__(self):
+        return "%s" % (self.name)
 
 """ Actor Table """
 class Actor(models.Model):
@@ -62,7 +84,7 @@ class Actor(models.Model):
     birth_place = models.CharField(default='Not Available', max_length=200)
     description = models.TextField(max_length=5000, blank=True)
     wiki_link = models.CharField(default='Not Available', max_length=200)
-    poster = models.ImageField(upload_to='snippets/static/photos/actors/posters', default='snippets/static/no_image.jpg')  
+    poster = models.ImageField(upload_to=path_and_rename, default='snippets/static/no_image.jpg')
     rating = models.FloatField( validators = [MinValueValidator(1.0), MaxValueValidator(10.0)] )
 
     def __unicode__(self):
@@ -75,6 +97,7 @@ class Actor(models.Model):
 class Movie(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=200, blank=False)
+    tagline = models.CharField(max_length=200, blank=False, default="Tagline")
     language = models.CharField(max_length=100, blank=False)
     country = models.CharField(max_length=100, blank=False)
     runtime = models.IntegerField(validators=[MinValueValidator(0)], default=0)
@@ -87,7 +110,8 @@ class Movie(models.Model):
     rating = models.FloatField( validators = [MinValueValidator(1.0), MaxValueValidator(10.0)] )
     budget = models.IntegerField(default=0)
     box_office = models.IntegerField(default=0)
-    poster = models.ImageField(upload_to='snippets/static/photos/movies/posters', default='snippets/static/photos/no_image.jpg')
+    poster = models.ImageField(upload_to=path_and_rename, default='mysite/snippets/static/photos/no_image.jpg')
+    cover = models.ImageField(upload_to=path_and_rename, default='mysite/snippets/static/photos/no_image.jpg')
     
     def __unicode__(self):
         return "%s" % (self.name)
@@ -98,7 +122,7 @@ class Movie(models.Model):
 class MoviePhotos(models.Model):
     movie_id = models.ForeignKey(Movie)
     description = models.TextField(max_length=5000, blank=True)
-    photo = models.ImageField(upload_to='snippets/static/photos/movies', default='snippets/static/photos/no_image.jpg')
+    photo = models.ImageField(upload_to=path_and_rename, default='snippets/static/photos/no_image.jpg')
 
 
 class MovieVideos(models.Model):
@@ -134,7 +158,7 @@ class ReviewComments(models.Model):
 class ActorPhotos(models.Model):
     actor_id = models.ForeignKey(Actor)
     description = models.TextField(max_length=5000, blank=True)
-    photo = models.ImageField(upload_to='snippets/static/photos/actors', default='snippets/static/photos/no_image.jpg')
+    photo = models.ImageField(upload_to=path_and_rename, default='snippets/static/photos/no_image.jpg')
 
 
 class ActorVideos(models.Model):
@@ -165,3 +189,8 @@ class ToWatchList(models.Model):
     movie_id = models.ForeignKey(Movie)
 
 
+"""class Tweets(models.Model):
+    movie_id = models.ForeignKey(Movie)
+    hashtags = 
+    popular_tweets = 
+    verified_tweets = """

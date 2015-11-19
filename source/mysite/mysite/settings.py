@@ -95,9 +95,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'movieoDB',
+        'NAME': 'movieo_DB',
         'USER': 'root',
-        'PASSWORD': 'umesh420',
+        'PASSWORD': 'password',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '8000',
     }
