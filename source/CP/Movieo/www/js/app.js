@@ -74,5 +74,5 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/trending');
+  $urlRouterProvider.otherwise('/app/browse');
 });

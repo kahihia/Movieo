@@ -1,24 +1,25 @@
 /* Empty. Add your own CSS if you like */
 .menuContent{
-	background: url(http://i.imgur.com/hgzVvzN.jpg);
+	  background:#484848;
     background-attachment:fixed;
     background-position: center;
 }
 
 .menuItem{
 	background: transparent;
+  border-color: #484848;
 }
 
 .sidemenu-list .item-complex .item-content { 
-  background-color: #000;
-  opacity: 0.4;
+  background: transparent;
   color: white;
+  border-color: #484848;
 }
 
 .hrefButton{
-  background-color: #000;
-  opacity: 0.4;
+  background: transparent;
   color: white;
+  border-color: #484848;
 }
 
 .scroll-bg {
@@ -31,4 +32,18 @@
   padding-right: 10px;
   padding-bottom: 7px;
   padding-top: 7px;
+}
+
+.headerItem{
+  padding: 10%; 
+  background: #303030  ;
+}
+
+.menuText{
+  margin-left: 5%;
+  font-size: 120%
+}
+
+.menuItem.menuIcon.ion-android-home{
+  font-size: 120%;
 }
