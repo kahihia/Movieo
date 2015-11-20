@@ -43,12 +43,23 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory'])
         }
       }
     })
+    
     .state('app.trending', {
       url: '/trending',
       views: {
         'menuContent': {
           templateUrl: 'templates/trending.html',
           controller: 'BrowseCtrl'
+        }
+      }
+    })
+    
+    .state('app.movie',{
+      url: "/movie/:movieId",
+      views:{
+        'menuContent': {
+          templateUrl: 'templates/movie.html',
+          controller: 'movieCtrl'
         }
       }
     })
@@ -63,5 +74,5 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/trending');
+  $urlRouterProvider.otherwise('/app/browse');
 });
