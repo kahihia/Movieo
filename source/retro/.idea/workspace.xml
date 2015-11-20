@@ -2,29 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3fb420e-eab5-4202-87a2-840550249f43" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/js/config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/movie-ctrl.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/views/movie.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/chart-ctrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/datatable-ctrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/form-ctrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/map-circle-ctrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/map-ctrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/pending-driver-ctrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/views/app.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/views/chart.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/views/form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/views/listview.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/views/map-circle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/views/mapview.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../movieo-website/app/views/pending-drivers.html" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/fb-login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/app.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/config.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/config.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/dashboard-ctrl.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/dashboard-ctrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/index.html" afterPath="$PROJECT_DIR$/../movieo-website/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/myApp.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/myApp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/server/sidebar-menu.json" afterPath="$PROJECT_DIR$/../movieo-website/server/sidebar-menu.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/movie-ctrl.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/movie-ctrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/views/movie.html" afterPath="$PROJECT_DIR$/../movieo-website/app/views/movie.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/css/theme-f.css" afterPath="$PROJECT_DIR$/../movieo-website/app/css/theme-f.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/views/partials/top-navbar-h.html" afterPath="$PROJECT_DIR$/../movieo-website/app/views/partials/top-navbar-h.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/views/partials/top-navbar.html" afterPath="$PROJECT_DIR$/../movieo-website/app/views/partials/top-navbar.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="retro.iws" />
@@ -50,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/app/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="185" column="19" selection-start-line="185" selection-start-column="19" selection-end-line="185" selection-end-column="19" />
+              <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -66,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="myApp.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="myApp.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/js/myApp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63182527">
-              <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -88,11 +74,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="movie.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.5">
+              <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="movie.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/movie.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-29.375">
-              <caret line="77" column="64" selection-start-line="77" selection-start-column="64" selection-end-line="77" selection-end-column="64" />
+            <state vertical-scroll-proportion="1.2188007">
+              <caret line="103" column="18" selection-start-line="103" selection-start-column="18" selection-end-line="103" selection-end-column="18" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
@@ -505,6 +501,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="62" selection-start-line="52" selection-start-column="62" selection-end-line="52" selection-end-column="62" />
+          <folding>
+            <element signature="n#!!doc;n#statusChangeCallback#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -808,6 +807,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="62" selection-start-line="52" selection-start-column="62" selection-end-line="52" selection-end-column="62" />
+          <folding>
+            <element signature="n#!!doc;n#statusChangeCallback#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -816,16 +818,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.625">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#body#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -847,6 +839,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/controllers/login-ctrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/partials/top-navbar.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.208334">
@@ -855,11 +855,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/controllers/login-ctrl.js">
+    <entry file="file://$PROJECT_DIR$/app/js/myApp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -871,10 +873,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.5">
+          <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/movie.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-29.375">
-          <caret line="77" column="64" selection-start-line="77" selection-start-column="64" selection-end-line="77" selection-end-column="64" />
+        <state vertical-scroll-proportion="1.2188007">
+          <caret line="103" column="18" selection-start-line="103" selection-start-column="18" selection-end-line="103" selection-end-column="18" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
@@ -884,24 +902,6 @@
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#4;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#5;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#5;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="185" column="19" selection-start-line="185" selection-start-column="19" selection-end-line="185" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/myApp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63182527">
-          <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>

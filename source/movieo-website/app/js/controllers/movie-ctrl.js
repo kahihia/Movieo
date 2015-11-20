@@ -49,6 +49,7 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
             console.log(data);
             if(data.status == 200){
                 $scope.movie = data.data[0];
+                $scope.movie.rating /= 2;
                 $scope.poster = $scope.movie.poster.replace(strToReplace, baseURL);
                 //$scope.cover = $scope.movie.cover.replace(strToReplace, baseURL);
                 console.log( $scope.poster);
@@ -57,7 +58,7 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
                 $scope.movie.writer = data.data[1].writer;
                 console.log(data.data[0].rating);
                 console.log($scope.movie);
-                ratings($scope.movie.rating);
+                ratings($scope.movie.rating * 2);
             }
         });
 
@@ -114,15 +115,6 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
                 $scope.movieReviews = data.data;
                 $scope.movieReviewsComments = [];
 
-                for(var i = 0;i < data.data.length; i++) {
-                    $http.get(baseURL + '/movies/reviews/comments' + data.data[i].id)
-                        .then(function (response) {
-                            console.log(response);
-                            if (data.status == 200) {
-                                $scope.movieReviewsComments[data.data[i].id]=(response.data);
-                            }
-                        });
-                }
             }
         });*/
 }]);
