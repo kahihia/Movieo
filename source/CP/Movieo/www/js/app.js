@@ -1,4 +1,4 @@
-angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory'])
+angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory', 'ngStorage', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
