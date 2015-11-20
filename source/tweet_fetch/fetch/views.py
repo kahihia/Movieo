@@ -15,6 +15,13 @@ def getTweets(request):
     context = {'tweets': req}
     return render_to_response('test.html', context)
 
+def testfunc(request):
+    var=request.GET.getlist('tweet')
+    context={'a':var}
+    return render_to_response('test.html',context)
+
+alltweets=[]
+
 def gethashes(request, hashtag):
     lis = []
     var = ''
@@ -32,18 +39,15 @@ def gethashes(request, hashtag):
     else:
         for i in range(count):
             var += str(lis[i]) + " OR "
-    req = keys.request('search/tweets', {'q': var, 'count': 6, 'lang': 'en'})
+    req = keys.request('search/tweets', {'q': var, 'count': 10, 'lang': 'en', 'until':'2015-08-20'})
     list = []
-    z = []
+    #z = []
     for j in req:
         list.append(j)
-    for k in range(len(list)):
-        t = str(list[k]).split(':')
-        for i in range(len(t)):
-            if str(t[i]).find("u'description'") != -1:
-                z.append(t[i + 1])
-        print z[1].strip('u\'friends_count')
-        z = []
+        # print j
+        print j[u'text']
+        alltweets.append(j[u'text'])
+        #z = []
     context.update({'list': list})
     return render_to_response('index.html', context)
 
