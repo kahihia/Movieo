@@ -12,9 +12,7 @@ if (typeof $ === 'undefined') {
     throw new Error('This application\'s JavaScript requires jQuery');
 }
 
-
 // APP START
-// ----------------------------------- 
 
 var App = angular.module('angle', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCookies', 'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'cfp.loadingBar', 'ngSanitize', 'ngResource', 'ui.utils'])
     .run(["$rootScope", "$state", "$stateParams", '$window', '$templateCache', function ($rootScope, $state, $stateParams, $window, $templateCache) {
@@ -24,17 +22,18 @@ var App = angular.module('angle', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCooki
         $rootScope.$storage = $window.localStorage;
 
         // Uncomment this to disable template cache
-        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-         if (typeof(toState) !== 'undefined'){
-         $templateCache.remove(toState.templateUrl);
-         }
-         });*/
-        console.log("log from angle app");
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            if (typeof(toState) !== 'undefined'){
+                $templateCache.remove(toState.templateUrl);
+            }
+        });
+
+        console.log("log from movieo app");
         // Scope Globals
         // -----------------------------------
         $rootScope.app = {
-            name: 'Click Labs Dashboard',
-            description: 'Click Labs Base Template',
+            name: 'Movieo',
+            description: 'Movieo Dashboard',
             year: ((new Date()).getFullYear()),
             layout: {
                 isFixed: true,
@@ -47,14 +46,13 @@ var App = angular.module('angle', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCooki
             },
             useFullLayout: false,
             hiddenFooter: false,
-            viewAnimation: 'ng-fadeInUp'
+            viewAnimation: ''
         };
         $rootScope.user = {
-            name: 'John',
+            name: 'Umesh',
             job: 'ng-Dev',
             picture: 'app/img/user/02.jpg'
         };
-
     }]);
 
 /**=========================================================
@@ -128,6 +126,7 @@ App
         // jQuery based and standalone scripts
         scripts: {
             'modernizr': ['vendor/modernizr/modernizr.js'],
+            'classyloader': ['vendor/jquery-classyloader/js/jquery.classyloader.min.js'],
             'icons': ['vendor/fontawesome/css/font-awesome.min.css',
                 'vendor/simple-line-icons/css/simple-line-icons.css'],
             'screenfull': ['vendor/screenfull/dist/screenfull.js'],
@@ -171,11 +170,11 @@ App.controller('AppController',
         function ($rootScope, $scope, $state, $translate, $window, $localStorage, $timeout, toggle, colors, browser, cfpLoadingBar, $cookieStore) {
             "use strict";
 
-            if (typeof $cookieStore.get('obj') == "undefined") {
+/*            if (typeof $cookieStore.get('obj') == "undefined") {
                 $scope.authMsg = "You are not logged in!";
                 $state.go('page.login');
 
-            }
+            }*/
             // Setup the layout mode
             $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout == 'app-h');
 
@@ -1086,3 +1085,70 @@ App.directive('toggleFullscreen', function () {
     };
 
 });
+
+// cookie functions START
+
+function createCookie(name,value,days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        expires = "; expires="+date.toUTCString();
+    }
+    else expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+    return null;
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0)
+            return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name,"",-1);
+    logged_in_user = {
+        email : '',
+        accessToken : '',
+        name : '',
+        profile_image : '',
+        profile_link : '',
+        hometown : '',
+        birthday: '',
+        bio : '',
+        gender : ''
+    };
+}
+
+
+var checkCookie = function () {
+    if(document.cookie.indexOf("accessToken") >= 0){
+        return true;
+    }
+    return false;
+};
+
+var endUser = function(name){
+    eraseCookie(name);
+    logged_in_user = {
+        email : '',
+        auth_token : '',
+        name : '',
+        profile_image : '',
+        profile_link : '',
+        hometown : '',
+        birthday: '',
+        bio : '',
+        gender : '',
+        id : ''
+    };
+    localStorage.removeItem("useremail");
+    localStorage.removeItem("user_id");
+};

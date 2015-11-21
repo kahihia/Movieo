@@ -87,9 +87,9 @@
 
             <div ng-repeat="cast in movieCast" class="span2" >
                 <img src="{{cast.image_link}}" style="width: 100px;height: 120px" >
-                <a ui-sref="actors({actor_id:{{cast.actor_id}}})" style="text-decoration: none" ><h4>{{cast.actor_name}}</h4></a>
+                <a ui-sref="actors({actor_id:{{cast.actor_id}}})" style="text-decoration: underline" ><h4>{{cast.actor_name}}</h4></a>
                 <h5><small>Role: </small>{{cast.role}}</h5>
-                <div ng-if="cast.appears_as"><small>- appears as: </small>{{cast.appears_as}}</div>
+                <div ng-if="cast.appears_as"><small>Appears as: </small>{{cast.appears_as}}</div>
             </div>
 
         </div>

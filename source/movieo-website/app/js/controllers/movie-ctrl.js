@@ -1,14 +1,44 @@
 /**
  * Created by umeshksingla on 19/11/15.
  */
-App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$stateParams',function ($scope, $timeout, $http, $rootScope, $stateParams) {
+App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$stateParams', '$interval',function ($scope, $timeout, $http, $rootScope, $stateParams, $interval) {
     'use strict';
+
+
+    $scope.Guest = !checkCookie();
+    console.log($scope.Guest);
+
+    var myVar = setInterval(myTimer, 1000);
+
+    function myTimer() {
+
+        $scope.Guest = !checkCookie();
+
+        $scope.newReview.user_id = logged_in_user.id;
+        $scope.newReview.user_name= logged_in_user.name;
+
+        $scope.$apply();
+    }
+
+    $scope.newReview = {
+        id:'',
+        movie_id:$stateParams.movie_id,
+        rating: 1,
+        description:'',
+        user_id: logged_in_user.id,
+        user_name: logged_in_user.name,
+        created:'',
+        positivity:''
+    };
+
+    console.log($scope.newReview);
+    console.log(logged_in_user);
 
     function ratings(n){
         n = n/2;
         $scope.movie.full = parseInt(n);
         $scope.movie.empty = 5 - Math.ceil(n);
-        $scope.movie.half = 5 - (parseInt(n) + 5 - Math.ceil(n));
+        $scope.movie.half = Math.ceil(n) - parseInt(n);
         console.log(n, $scope.movie.full, $scope.movie.empty, $scope.movie.half);
     }
 
@@ -37,7 +67,8 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
         writer:'',
         half:'',
         full:'',
-        empty:''
+        empty:'',
+        tagline:''
     };
 
     $scope.poster='';
@@ -49,15 +80,16 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
             console.log(data);
             if(data.status == 200){
                 $scope.movie = data.data[0];
+                $scope.movie.rating /= 2;
                 $scope.poster = $scope.movie.poster.replace(strToReplace, baseURL);
-                //$scope.cover = $scope.movie.cover.replace(strToReplace, baseURL);
+                $scope.cover = $scope.movie.cover.replace(strToReplace, baseURL);
                 console.log( $scope.poster);
                 //console.log( $scope.cover);
                 $scope.movie.director = data.data[1].director;
                 $scope.movie.writer = data.data[1].writer;
                 console.log(data.data[0].rating);
                 console.log($scope.movie);
-                ratings($scope.movie.rating);
+                ratings($scope.movie.rating * 2);
             }
         });
 
@@ -87,42 +119,77 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
             }
         });
 
-/*    /!*get videos for that movie*!/
-    $http.get(baseURL+'/movies/videos/' + $stateParams.movie_id)
-        .then(function (data) {
-            console.log(data);
-            if(data.status == 200){
-                $scope.movieVideos = data.data;
-            }
-        });
+    /*    /!*get videos for that movie*!/
+     $http.get(baseURL+'/movies/videos/' + $stateParams.movie_id)
+     .then(function (data) {
+     console.log(data);
+     if(data.status == 200){
+     $scope.movieVideos = data.data;
+     }
+     });
 
-    /!*get quotes for that movie*!/
-    $http.get(baseURL+'/movies/quotes/' + $stateParams.movie_id)
-        .then(function (data) {
-            console.log(data);
-            if(data.status == 200){
-                $scope.movieQuotes = data.data;
-            }
-        });
+     /!*get quotes for that movie*!/
+     $http.get(baseURL+'/movies/quotes/' + $stateParams.movie_id)
+     .then(function (data) {
+     console.log(data);
+     if(data.status == 200){
+     $scope.movieQuotes = data.data;
+     }
+     });
 
-    /!*get reviews for that movie*!/
-    $http.get(baseURL+'/movies/reviews/' + $stateParams.movie_id)
-        .then(function (data) {
-            console.log(data);
+     /*get reviews for that movie*/
 
-            if(data.status == 200){
-                $scope.movieReviews = data.data;
-                $scope.movieReviewsComments = [];
-
-                for(var i = 0;i < data.data.length; i++) {
-                    $http.get(baseURL + '/movies/reviews/comments' + data.data[i].id)
-                        .then(function (response) {
-                            console.log(response);
-                            if (data.status == 200) {
-                                $scope.movieReviewsComments[data.data[i].id]=(response.data);
-                            }
-                        });
+    function moviereviews() {
+        $http.get(baseURL + '/movies/reviews/' + $stateParams.movie_id)
+            .then(function (data) {
+                console.log(data);
+                if (data.status == 200) {
+                    $scope.movieReviews = data.data;
                 }
-            }
-        });*/
+            });
+    }
+
+    $scope.createReview = function () {
+        $scope.Guest = !checkCookie();
+        if(!checkCookie){
+            alert('you need to log in first.')
+        }
+        if($scope.newReview.description.length >= 40) {
+
+            console.log($scope.newReview);
+
+            $http.post(baseURL + '/users/add-movie-review',{
+                movie_id : $scope.newReview.movie_id,
+                user_id : logged_in_user.id,
+                description : $scope.newReview.description,
+                rating : $scope.newReview.rating
+            }).then(
+                function (data) {
+                    $scope.error = '';
+                    console.log(data);
+
+                    $scope.newReview.id = data.data[0].id;
+                    $scope.newReview.created = data.data[0].created;
+                    $scope.newReview.rating = data.data[0].rating;
+                    $scope.newReview.positivity = '46';
+                    //$scope.movieReviews.push(JSON.parse(JSON.stringify($scope.newReview)));
+
+                    $scope.error = '';
+                    $scope.newReview={
+                        movie_id:$stateParams.movie_id,
+                        rating: '',
+                        description:'',
+                        user_id: logged_in_user.id,
+                        user_name: logged_in_user.name
+                    };
+                    moviereviews();
+                }, function (error) {
+                    $scope.error = "Some Error Occurred";
+                });
+        }
+        else{
+            $scope.error = "Review can't be less than 40 characters";
+        }
+    };
+    moviereviews();
 }]);
