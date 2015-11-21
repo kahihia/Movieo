@@ -13,7 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
                 'gender', 
                 'birthday', 
                 'hometown', 'about_me', 'no_of_reviews', 'no_of_quotes', 'badge',
-                'email')
+                'email',
+                'auth_token')
 
 class ActorSerializer(serializers.ModelSerializer):
     class Meta:

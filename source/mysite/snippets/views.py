@@ -401,7 +401,8 @@ def actorquotes(request , actor_id):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
+#@csrf_exempt
+@api_view(['GET'])
 def add_movie_review(request):
     """
     Add a review for a movie by a user
@@ -409,6 +410,8 @@ def add_movie_review(request):
     """
     print (json.loads(request.body))
     serializer = MovieReviewsSerializer(data=json.loads(request.body))
+    #print (serializer.is_valid())
+    #print (serializer.data)
     if serializer.is_valid():
         serializer.save()
         return HttpResponse("done")
@@ -435,23 +438,26 @@ def movie_reviews(request, pk):
 
 
 
-@api_view(['GET'])
+#@csrf_exempt
+@api_view(['POST'])
 def login_user(request):
-    """ Login GET API, Checks if a user exists by email. """    
-    query_string = urllib.unquote(request.GET.urlencode().split('=')[1])
-    email_addr = query_string
-    #print (query_string)
+    """ Login API, Checks if a user exists by email. """
+    temp = json.loads(request.body)
+    email_addr = temp['email']
+    token = temp['token']
+
     users = User.objects.filter(email=email_addr)
-    serializer = UserSerializer(users , many=True)
-    #print (len(serializer.data))
-    #print (serializer.data)
-    if (len(serializer.data)==0):
+    serializer = UserSerializer(data=users, many=True)
+    serializer.is_valid()
+    if len(serializer.data) == 0:
         return HttpResponse(status=404)
+    
+    User.objects.filter(email=email_addr).update(auth_token=token)
     return Response(serializer.data)
 
 
-
-@csrf_exempt
+#@csrf_exempt
+@api_view(['POST'])
 def add_user(request):
     """
     Add a new user

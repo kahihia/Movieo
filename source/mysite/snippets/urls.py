@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^users/add-movie-review$', views.add_movie_review),
 
 
-    url(r'^login_user/*',views.login_user),
+    url(r'^login_user',views.login_user),
     url(r'^add-user$', views.add_user),
 
     url(r'^snippets/$', views.snippet_list),

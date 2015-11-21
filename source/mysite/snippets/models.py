@@ -70,12 +70,28 @@ class User(models.Model):
     no_of_quotes = models.IntegerField(default=0)
     badge = models.IntegerField(default=0)
     email = models.CharField(max_length=200, null=False)
+    auth_token = models.CharField(max_length=200, default='empty')
+    
 
     def __unicode__(self):
         return "%s" % (self.name)
        
     def __str__(self):
         return "%s" % (self.name)
+
+""" Tokens Table """
+"""
+class Tokens(models.Model):
+    auth_token = models.CharField(max_length=200, default='empty')
+    user_id = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return "%s" % (self.name)
+       
+    def __str__(self):
+        return "%s" % (self.name)
+"""
+
 
 """ Actor Table """
 class Actor(models.Model):
