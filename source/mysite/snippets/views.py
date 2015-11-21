@@ -9,7 +9,7 @@ import datetime
 #import date
 import json
 from datetime import timedelta
-"""import urllib.request"""
+import urllib
 
 
 """from django.shortcuts import render
@@ -401,7 +401,7 @@ def actorquotes(request , actor_id):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+@csrf_exempt
 def add_movie_review(request):
     """
     Add a review for a movie by a user
@@ -431,3 +431,38 @@ def movie_reviews(request, pk):
         users = User.objects.get(pk=temp)
         serializer.data[i]['name_of_user'] = str(users)
     return Response(serializer.data)
+
+
+
+
+@api_view(['GET'])
+def login_user(request):
+    """ Login GET API, Checks if a user exists by email. """    
+    query_string = urllib.unquote(request.GET.urlencode().split('=')[1])
+    email_addr = query_string
+    #print (query_string)
+    users = User.objects.filter(email=email_addr)
+    serializer = UserSerializer(users , many=True)
+    #print (len(serializer.data))
+    #print (serializer.data)
+    if (len(serializer.data)==0):
+        return HttpResponse(status=404)
+    return Response(serializer.data)
+
+
+
+@csrf_exempt
+def add_user(request):
+    """
+    Add a new user
+    
+    """
+    print (json.loads(request.body))
+    serializer = UserSerializer(data=json.loads(request.body))
+    #print (serializer)
+    #print (serializer.data)
+    print (serializer.is_valid())
+    if serializer.is_valid():
+        serializer.save()
+        return HttpResponse("success")
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

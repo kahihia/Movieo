@@ -31,6 +31,10 @@ urlpatterns = [
     url(r'^movies/reviews/(?P<pk>[0-9]+)$',views.movie_reviews),
     url(r'^users/add-movie-review$', views.add_movie_review),
 
+
+    url(r'^login_user/*',views.login_user),
+    url(r'^add-user$', views.add_user),
+
     url(r'^snippets/$', views.snippet_list),
     url(r'^snippets/(?P<pk>[0-9]+)$', views.snippet_detail),
 ]

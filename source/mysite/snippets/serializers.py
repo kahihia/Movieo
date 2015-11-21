@@ -9,7 +9,11 @@ class SnippetSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'name', 'gender', 'birthday', 'hometown', 'about_me', 'no_of_reviews', 'no_of_quotes', 'badge', 'email')
+        fields = ('id', 'name',
+                'gender', 
+                'birthday', 
+                'hometown', 'about_me', 'no_of_reviews', 'no_of_quotes', 'badge',
+                'email')
 
 class ActorSerializer(serializers.ModelSerializer):
     class Meta:
