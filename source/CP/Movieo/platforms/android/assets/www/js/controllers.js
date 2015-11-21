@@ -1,6 +1,6 @@
 angular.module('movieo.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, OpenFB, $state) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -8,6 +8,21 @@ angular.module('movieo.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  
+  $scope.logout = function () {
+    OpenFB.logout();
+    $state.go('app.login');
+};
+
+$scope.revokePermissions = function () {
+    OpenFB.revokePermissions().then(
+        function () {
+            $state.go('app.login');
+        },
+        function () {
+            alert('Revoke permissions failed');
+        });
+};
 
 })
 
@@ -91,34 +106,29 @@ angular.module('movieo.controllers', [])
           })
 }])
 
-.controller("LoginController", function($scope, $cordovaOauth, $localStorage, $location) {
+.controller('LoginCtrl', function ($scope, $location, OpenFB) {
 
-    $scope.login = function() {
-        $cordovaOauth.facebook("1652935351632817", ["email",, "user_website", "user_location", "user_relationships"]).then(function(result) {
-            $localStorage.accessToken = result.access_token;
-            $location.path("/profile");
-        }, function(error) {
-            alert("There was a problem signing in!  See the console for logs");
-            console.log(error);
-        });
-    };
+        $scope.facebookLogin = function () {
+
+            OpenFB.login('email').then(
+                function () {
+                    $location.path('/app/person/me');
+                },
+                function () {
+                    alert('OpenFB login failed');
+                });
+        };
 
 })
 
-.controller("ProfileController", function($scope, $http, $localStorage, $location) {
+.controller('ProfileCtrl', function ($scope, OpenFB) {
+        OpenFB.get('/me').success(function (user) {
+            $scope.user = user;
+        });
+})
 
-    $scope.init = function() {
-        if($localStorage.hasOwnProperty("accessToken") === true) {
-            $http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: $localStorage.accessToken, fields: "id,name,gender,location,website,picture,relationship_status", format: "json" }}).then(function(result) {
-                $scope.profileData = result.data;
-            }, function(error) {
-                alert("There was a problem getting your profile.  Check the logs for details.");
-                console.log(error);
-            });
-        } else {
-            alert("Not signed in");
-            $location.path("/login");
-        }
-    };
-
+.controller('PersonCtrl', function ($scope, $stateParams, OpenFB) {
+        OpenFB.get('/' + $stateParams.personId).success(function (user) {
+            $scope.user = user;
+        });
 })

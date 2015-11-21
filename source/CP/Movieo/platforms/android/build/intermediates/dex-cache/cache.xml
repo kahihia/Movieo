@@ -8,5 +8,12 @@
         sha1="843aea008f467ef9fc0c53e989767a831da6c53e">
         <dex dex="/home/troller/SSAD/ssad_2015_team10/source/CP/Movieo/platforms/android/build/intermediates/pre-dexed/debug/classes-35b90ffeff8ddc60d82b1bd721e7e6f5e4a428ba.jar" />
     </item>
+    <item
+        jar="/home/troller/SSAD/temp/f51225c93afad1bf5a14a6505eda0464335e5657/source/CP/Movieo/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e94bcc9139ade47d83f716742d69beadd2d7dcaf">
+        <dex dex="/home/troller/SSAD/temp/f51225c93afad1bf5a14a6505eda0464335e5657/source/CP/Movieo/platforms/android/build/intermediates/pre-dexed/debug/classes-d39741fb572f6de3ff1d0ebd47cbd5d72d8f3e59.jar" />
+    </item>
 
 </items>

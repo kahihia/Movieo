@@ -1,6 +1,6 @@
 angular.module('movieo.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, OpenFB) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, OpenFB, $state) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -8,6 +8,21 @@ angular.module('movieo.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  
+  $scope.logout = function () {
+    OpenFB.logout();
+    $state.go('app.login');
+};
+
+$scope.revokePermissions = function () {
+    OpenFB.revokePermissions().then(
+        function () {
+            $state.go('app.login');
+        },
+        function () {
+            alert('Revoke permissions failed');
+        });
+};
 
 })
 
@@ -90,3 +105,30 @@ angular.module('movieo.controllers', [])
             Loader.toggleLoadingWithMessage(err.message);
           })
 }])
+
+.controller('LoginCtrl', function ($scope, $location, OpenFB) {
+
+        $scope.facebookLogin = function () {
+
+            OpenFB.login('email').then(
+                function () {
+                    $location.path('/app/person/me');
+                },
+                function () {
+                    alert('OpenFB login failed');
+                });
+        };
+
+})
+
+.controller('ProfileCtrl', function ($scope, OpenFB) {
+        OpenFB.get('/me').success(function (user) {
+            $scope.user = user;
+        });
+})
+
+.controller('PersonCtrl', function ($scope, $stateParams, OpenFB) {
+        OpenFB.get('/' + $stateParams.personId).success(function (user) {
+            $scope.user = user;
+        });
+})

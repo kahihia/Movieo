@@ -1,6 +1,9 @@
-angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory', 'ngStorage', 'ngCordova'])
+angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb'])
 
-.run(function($ionicPlatform) {
+.run(function($rootScope, $state, $ionicPlatform, $window, OpenFB) {
+  
+  OpenFB.init('1652935351632817','https://www.facebook.com/connect/login_success.html');
+          
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -14,6 +17,18 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory', 'ngSto
       StatusBar.styleDefault();
     }
   });
+  
+  $rootScope.$on('$stateChangeStart', function(event, toState) {
+            if (toState.name !== "app.fblogin" && toState.name !== "app.logout" && !$window.sessionStorage['fbtoken']) {
+                $state.go('app.fblogin');
+                event.preventDefault();
+            }
+        });
+
+        $rootScope.$on('OAuthException', function() {
+            $state.go('app.fblogin');
+        });
+  
 })
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -23,12 +38,6 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory', 'ngSto
     abstract: true,
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
-  })
-  
-  .state('app.login',{
-    url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'LoginController'
   })
 
   .state('app.browse', {
@@ -46,6 +55,16 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory', 'ngSto
         'menuContent': {
           templateUrl: 'templates/categories.html',
           controller: 'PlaylistsCtrl'
+        }
+      }
+    })
+    
+   .state('app.fblogin', {
+      url: '/fblogin',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/fblogin.html',
+          controller: 'LoginCtrl'
         }
       }
     })
@@ -78,7 +97,28 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory', 'ngSto
         controller: 'PlaylistCtrl'
       }
     }
+  })
+  
+  .state('app.logout', {
+      url: "/logout",
+      views: {
+          'menuContent': {
+              templateUrl: "templates/logout.html",
+              controller: "LogoutCtrl"
+          }
+      }
+  })
+  
+  .state('app.profile', {
+      url: "/profile",
+      views: {
+          'menuContent': {
+              templateUrl: "templates/profile.html",
+              controller: "ProfileCtrl"
+          }
+      }
   });
+  
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/browse');
 });
