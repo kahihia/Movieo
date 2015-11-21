@@ -44,6 +44,15 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory',])
       }
     })
     
+   .state('app.fblogin', {
+      url: '/fblogin',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/fblogin.html'
+        }
+      }
+    })
+    
     .state('app.trending', {
       url: '/trending',
       views: {
