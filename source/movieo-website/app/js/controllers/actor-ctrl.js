@@ -16,6 +16,17 @@ App.controller('actorController',['$scope','$timeout','$http','$rootScope', '$st
     };
     $scope.actorPhotos = [];
 
+    function ratings(n, obj){
+        n = n/2;
+        obj.full = parseInt(n);
+        obj.empty = 5 - Math.ceil(n);
+        obj.half = Math.ceil(n) - parseInt(n);
+    }
+
+    $scope.range = function(n) {
+        return new Array(n);
+    };
+
     $http.get(baseURL+'/actors/' + $stateParams.actor_id)
         .then(function (data) {
             console.log(data);
@@ -67,6 +78,10 @@ App.controller('actorController',['$scope','$timeout','$http','$rootScope', '$st
                 $scope.actorRecentMovies.forEach(function (photo) {
                     photo.poster = photo.poster.replace(strToReplace, baseURL);
                     console.log(photo.poster);
+                    var n = photo.rating / 2;
+                    photo.full = parseInt(n);
+                    photo.empty = 5 - Math.ceil(n);
+                    photo.half = Math.ceil(n) - parseInt(n);
                 })
             }
         });

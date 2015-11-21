@@ -46,8 +46,27 @@
             <div class="container">
                 <h2>Recent Movies</h2>
                 <div class="row">
+                    <div ng-repeat="photo in actorRecentMovies | limitTo : 10" class="col-lg-2" >
+                        <img src="{{photo.poster}}" style="width: 180px;height: 180px" class="thumbnail" >
+                        <br>
+                        <span style="color: yellow" >
+                        <span ng-repeat="a in range(photo.full) track by $index"><i class="fa fa-star">&nbsp;</i></span>
+                        <span ng-repeat="a in range(photo.half) track by $index"><i class="fa fa-star-half-full">&nbsp;</i></span>
+                        <span ng-repeat="a in range(photo.empty) track by $index"><i class="fa fa-star-o">&nbsp;</i></span>
+                        </span>
+                        <br>
+                        <a ui-sref="app.movies({movie_id:{{photo.id}}})" style="text-decoration: underline" >{{photo.name}} ({{photo.date_of_release | date : 'MMM yyyy'}})</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container">
+                <h2>All Movies</h2>
+                <div class="row">
                     <div ng-repeat="photo in actorAllMovies | limitTo : 10" class="col-lg-2" >
                         <img src="{{photo.poster}}" style="width: 180px;height: 180px" class="thumbnail" >
+                        <br>
+                        <a ui-sref="app.movies({movie_id:{{photo.id}}})" style="text-decoration: underline" >{{photo.name}} ({{photo.date_of_release | date : 'yyyy'}})</a>
                     </div>
                 </div>
             </div>

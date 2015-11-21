@@ -4,6 +4,8 @@
     <list default="true" id="e3fb420e-eab5-4202-87a2-840550249f43" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/actor-ctrl.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/actor-ctrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/views/actor.html" afterPath="$PROJECT_DIR$/../movieo-website/app/views/actor.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/views/app-h.html" afterPath="$PROJECT_DIR$/../movieo-website/app/views/app-h.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/index.html" afterPath="$PROJECT_DIR$/../movieo-website/index.html" />
     </list>
     <ignored path="retro.iws" />
     <ignored path=".idea/workspace.xml" />
