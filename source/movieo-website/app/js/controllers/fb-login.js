@@ -11,63 +11,11 @@ function statusChangeCallback(response) {
 
     if (response.status === 'connected') {
 
-        logged_in_user.accessToken = response.authResponse.accessToken;
+        logged_in_user.auth_token = response.authResponse.accessToken;
 
 
         // Logged into your app and Facebook
-        loginAPI();
-        createCookie("accessToken", logged_in_user.accessToken, false);
-        logged_in_user.id = 14;
-
-        // sending request to movieo database and confirming whether user already exists or not
-        /*$.ajax({
-            type: "POST",
-            url: baseURL + '/check-login',
-            data: 'email=' + logged_in_user.email + 'accessToken=' + logged_in_user.accessToken,
-            success: function (response) {
-                if(response.data.existingUser){
-                    createCookie("accessToken", logged_in_user.accessToken, false);
-                    logged_in_user.id = response.data.id;
-                }
-                else {
-
-                    // save his facebook details in database
-                    var dataString = '';
-
-                    console.log(logged_in_user);
-                    for(var key in logged_in_user){
-                        console.log(key);
-                        console.log(logged_in_user[key]);
-                        dataString = i + '=' + logged_in_user[key];
-                    }
-                    console.log(dataString);
-
-                    $.ajax({
-                        type: "POST",
-                        url: baseURL + '/add-user',
-                        data: dataString,
-                        success: function (response) {
-                            // log him
-                            console.log(response);
-                            createCookie("accessToken", logged_in_user.accessToken, false);
-                            logged_in_user.id = response.data.id;
-                        },
-                        error: function (response) {
-                            console.log(response);
-                            console.log("in inner login api call");
-                            eraseCookie("accessToken");
-                        }
-
-                    });
-                }
-            },
-            error: function (response) {
-                console.log(response);
-                console.log("in outer login api call");
-            }
-
-        });*/
-
+        loginAPI(response.authResponse.accessToken);
     }
     else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
@@ -115,7 +63,7 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 // See statusChangeCallback() for when this call is made.
-function loginAPI() {
+function loginAPI(auth_token) {
 
     console.log('Welcome!  Fetching your information.... ');
 
@@ -131,14 +79,67 @@ function loginAPI() {
                 document.getElementById("profile-link").href = response.link;
 
                 logged_in_user.name = response.name;
+                logged_in_user.id = 0;
                 logged_in_user.profile_image = response.picture.data.url;
-                logged_in_user.email = response.email;
+                logged_in_user['email'] = response.email;
                 logged_in_user.hometown = response.hometown.name;
-                logged_in_user.birthday = response.birthday;
+                logged_in_user.birthday = (new Date(response.birthday)).toISOString().slice(0, 10);
                 logged_in_user.gender = response.gender;
-                logged_in_user.bio = response.bio;
+                logged_in_user.about_me = response.bio;
                 logged_in_user.profile_link = response.link;
+                console.log(response.link, logged_in_user.profile_link);
+                console.log(response.email,typeof logged_in_user.email);
+                login(auth_token, response.email);
             }
         }
     );
+
+}
+
+function login(auth_token, email){
+    // sending request to movieo database and confirming whether user already exists or not
+    console.log(logged_in_user);
+    $.ajax({
+        type: "POST",
+        url: baseURL + '/login_user',
+        data: JSON.stringify({ email : email , token : auth_token }),
+        dataType : 'json',
+        success: function (response) {
+            console.log(response);
+            if(response['existing_user'] == true){
+                createCookie("accessToken", logged_in_user.auth_token, false);
+                logged_in_user.id = response.data[0].id;
+            }
+            else {
+
+                // save his facebook details in database
+
+                console.log(logged_in_user);
+
+                $.ajax({
+                    type: "POST",
+                    url: baseURL + '/add-user',
+                    data: JSON.stringify(logged_in_user),
+                    dataType : 'json',
+                    success: function (response) {
+                        // log him
+                        console.log(response);
+                        createCookie("accessToken", logged_in_user.auth_token, false);
+                        logged_in_user.id = response['id'];
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        console.log("in inner login api call");
+                        eraseCookie("accessToken");
+                    }
+                });
+            }
+        },
+        error: function (response) {
+            console.log(response);
+            console.log("in outer login api call");
+        }
+
+    });
+    console.log(logged_in_user);
 }

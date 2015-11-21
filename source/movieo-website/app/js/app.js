@@ -46,7 +46,7 @@ var App = angular.module('angle', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCooki
             },
             useFullLayout: false,
             hiddenFooter: false,
-            viewAnimation: 'ng-fadeInUp'
+            viewAnimation: ''
         };
         $rootScope.user = {
             name: 'Umesh',
@@ -126,6 +126,7 @@ App
         // jQuery based and standalone scripts
         scripts: {
             'modernizr': ['vendor/modernizr/modernizr.js'],
+            'classyloader': ['vendor/jquery-classyloader/js/jquery.classyloader.min.js'],
             'icons': ['vendor/fontawesome/css/font-awesome.min.css',
                 'vendor/simple-line-icons/css/simple-line-icons.css'],
             'screenfull': ['vendor/screenfull/dist/screenfull.js'],
@@ -169,11 +170,11 @@ App.controller('AppController',
         function ($rootScope, $scope, $state, $translate, $window, $localStorage, $timeout, toggle, colors, browser, cfpLoadingBar, $cookieStore) {
             "use strict";
 
-            if (typeof $cookieStore.get('obj') == "undefined") {
+/*            if (typeof $cookieStore.get('obj') == "undefined") {
                 $scope.authMsg = "You are not logged in!";
                 $state.go('page.login');
 
-            }
+            }*/
             // Setup the layout mode
             $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout == 'app-h');
 
@@ -1138,7 +1139,7 @@ var endUser = function(name){
     eraseCookie(name);
     logged_in_user = {
         email : '',
-        accessToken : '',
+        auth_token : '',
         name : '',
         profile_image : '',
         profile_link : '',

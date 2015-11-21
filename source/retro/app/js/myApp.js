@@ -29,7 +29,4 @@ App.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'RouteH
                 title: 'Actor',
                 templateUrl: helper.basepath('actor.html')
             });
-
-
-
     }]);

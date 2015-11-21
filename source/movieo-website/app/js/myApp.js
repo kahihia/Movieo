@@ -84,7 +84,7 @@ myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'Rout
                 url: '/app',
                 abstract: true,
                 templateUrl: helper.basepath( 'app-h.html' ),
-                resolve: helper.resolveFor('modernizr', 'icons', 'screenfull')
+                resolve: helper.resolveFor('modernizr', 'icons', 'screenfull', 'classyloader')
             })
             .state('app.dashboard', {
                 url: '/dashboard',
@@ -101,7 +101,8 @@ myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'Rout
             .state('app.movies', {
                 url: '/movies/{movie_id}',
                 title: 'Movie',
-                templateUrl: helper.basepath('movie.html')
+                templateUrl: helper.basepath('movie.html'),
+                resolve: helper.resolveFor('classyloader')
             })
             .state('app.actors', {
                 url: '/actors/{actor_id}',
@@ -157,3 +158,48 @@ App.directive('starRating', function () {
         }
     }
 });
+
+App.directive('classyloader', ["$timeout", "Utils", function($timeout, Utils) {
+    'use strict';
+
+    var $scroller       = $(window),
+        inViewFlagClass = 'js-is-in-view'; // a classname to detect when a chart has been triggered after scroll
+
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            // run after interpolation
+            $timeout(function(){
+
+                var $element = $(element),
+                    options  = $element.data();
+
+                // At lease we need a data-percentage attribute
+                if(options) {
+                    if( options.triggerInView ) {
+
+                        $scroller.scroll(function() {
+                            checkLoaderInVIew($element, options);
+                        });
+                        // if the element starts already in view
+                        checkLoaderInVIew($element, options);
+                    }
+                    else
+                        startLoader($element, options);
+                }
+
+            }, 0);
+
+            function checkLoaderInVIew(element, options) {
+                var offset = -20;
+                if( ! element.hasClass(inViewFlagClass) &&
+                    Utils.isInView(element, {topoffset: offset}) ) {
+                    startLoader(element, options);
+                }
+            }
+            function startLoader(element, options) {
+                element.ClassyLoader(options).addClass(inViewFlagClass);
+            }
+        }
+    };
+}]);

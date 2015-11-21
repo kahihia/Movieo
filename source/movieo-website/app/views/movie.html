@@ -5,8 +5,8 @@
              margin-right: -11.3% !important;
              margin-left: -11.3% !important;
              margin-top: -17px !important;
-             background:url('app/img/a.jpg');
-             background-size: auto !important;
+             background:url('{{cover}}');
+             background-size: contain !important;
              background-repeat: no-repeat !important;">
         <div class="row" style="padding-top: 20%" >
             <div class="col-lg-12 col-md-12 ">
@@ -28,19 +28,19 @@
                     <img src="{{poster}}" class="poster thumbnail" style="max-width: 240px;max-height: 360px;height: 360px;width: 240px" >
                 </div>
                 <div class="col-lg-4 col-md-4">
-                    <h3><strong>User Rating:</strong> {{movie.rating}}/5<br/>
+                    <h3><strong>User Rating:</strong> {{movie.rating | number : 1}}/5<br/>
                         <span style="color: yellow" >
                         <span ng-repeat="a in range(movie.full) track by $index"><i class="fa fa-star">&nbsp;</i></span>
                         <span ng-repeat="a in range(movie.half) track by $index"><i class="fa fa-star-half-full">&nbsp;</i></span>
                         <span ng-repeat="a in range(movie.empty) track by $index"><i class="fa fa-star-o">&nbsp;</i></span>
                         </span>
                     </h3>
-                    <h4><strong>Reviews Counted:</strong> {{movie.no_of_reviews}}</h4>
+                    <h4><strong>Reviews Counted :</strong> {{movie.no_of_reviews}}</h4>
 
-                    <h4><strong>Box Office:</strong> {{movie.box_office | currency}}</h4>
-                    <h4><strong>Budget:</strong> {{movie.budget | currency}}</h4>
-                    <h4><strong>Country:</strong> {{movie.country}}</h4>
-                    <h4><strong>Directed By:</strong> {{movie.director}}</h4>
+                    <h4><strong>Box Office :</strong> {{movie.box_office | currency}}</h4>
+                    <h4><strong>Budget :</strong> {{movie.budget | currency}}</h4>
+                    <h4><strong>Country :</strong> {{movie.country}}</h4>
+                    <h4><strong>Directed By :</strong> {{movie.director}}</h4>
                 </div>
                 <div class="col-lg-4 col-md-4" >
                     TWEETS
@@ -68,10 +68,10 @@
             <div class="row">
 
                 <div ng-repeat="cast in movieCast | limitTo : 6" class="span2" class="col-lg-2" >
-                    <img src="{{cast.image_link}}" style="width: 100px;height: 120px" >
-                    <a ui-sref="actors({actor_id:{{cast.actor_id}}})" style="text-decoration: none" ><h4>{{cast.actor_name}}</h4></a>
+                    <img src="{{cast.image_link}}" style="width: 100px;height: 120px" class="thumbnail" >
+                    <a ui-sref="app.actors({actor_id:{{cast.actor_id}}})" style="text-decoration: none" ><h4>{{cast.actor_name}}</h4></a>
                     <h4><small>Role: </small>{{cast.role}}</h4>
-                    <div ng-if="cast.appears_as"><small>- appears as: </small>{{cast.appears_as}}</div>
+                    <div ng-if="cast.appears_as"><small>Appears as: </small>{{cast.appears_as}}</div>
                 </div>
 
             </div>
@@ -108,8 +108,8 @@
                                 You need to Log In to write a Review.
                             </div>
                             <div class="col-lg-12" ng-if="!Guest" >
-                                <div class="col-lg-10">
-                                    <h4 style="color: #d9534f" >@{{newReview.user_name}} </h4>
+                                <div class="col-lg-9">
+                                    <h4 style="color: #d9534f" >@ {{newReview.user_name}} </h4>
                                 <span style="font-size: 14px;font-style: normal;padding-left: 30px" >
                                     <textarea class="form-control has-feedback"
                                               ng-model="newReview.description"
@@ -119,10 +119,20 @@
                                     </textarea>
                                 </span>
                                 </div>
-                                <div class="col-lg-2 col-sm-4 col-md-4" style="padding-top: 9%">
-                                <span class="btn btn-block mt-lg bg-gray-dark" style="border: solid #dcf 2px" ng-click="createReview()" >
-                                    Add Review
-                                </span><hr style="text-align: center;width: 80%;color: #b6c5da;background-color: #b6c5da" >
+                                <div class="col-lg-3 col-sm-4 col-md-4" style="padding-top: 7%">
+                                      <span>
+                                          <input
+                                                  class="form-control has-feedback"
+                                                  type="number"
+                                                  ng-model="newReview.rating"
+                                                  placeholder="Rating"
+                                                  min="1" max="10"
+                                                  style="border: solid #dcf 2px;">
+                                      </span>
+                                    <span class="btn btn-block mt-lg bg-gray-dark" style="border: solid #dcf 2px" ng-click="createReview()" >
+                                        Add/Edit Review
+                                    </span>
+                                    <hr style="text-align: center;width: 80%;color: #b6c5da;background-color: #b6c5da" >
                                 </div>
                                 <div class="col-lg-12 pull-right" style="padding-top: 7px;font-size: large;padding-left: 50%;color: yellow" >
                                     <i ng-if="error" class="glyphicon-alert" ></i>&nbsp;{{error}}
@@ -130,12 +140,17 @@
                             </div>
                             <div class="col-lg-12" ng-repeat="review in movieReviews| orderBy:'-created_at':reverse">
                                 <hr>
-                                <h3 style="color: #27c24c" >@ {{review.user_name}} </h3>
-                                <span style="font-size: 16px;font-style: normal;padding-left: 40px;color: #dbdbdb" >{{review.description}}</span><br/>
+                                <div class="col-lg-9">
+                                    <h3 ng-if="newReview.user_id != review.user_id" style="color: #27c24c" >@ {{review.name_of_user}} <span style="color:yellow" >({{review.rating}}/10)</span> </h3>
+                                    <h3 ng-if="newReview.user_id == review.user_id" style="color: #d9534f" >@ {{review.name_of_user}} <span style="color:yellow" >({{review.rating}}/10)</span> </h3>
+                                    <span style="font-size: 16px;font-style: normal;padding-left: 40px;color: #dbdbdb" >{{review.description}}</span><br/>
             <span class="text-muted pull-right" >
-                <b>{{ review.created_at | date:'medium' }}</b>
+                <b>{{ review.created | date }}</b>
             </span>
-                                <br/>
+                                </div>
+                                <div class="col-sm-3 col-xs-6 text-center" style="background: white;text-align: center;padding-right: 0%;padding-top: 2%" >
+                                    <canvas classyloader="" data-height="150px" data-diameter="60" data-font-size="25px" data-percentage="{{review.positivity}}" data-speed="75" data-line-color="#ff902b" data-remaining-line-color="#edf2f6" data-line-width="3"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -23,12 +23,11 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
     $scope.newReview = {
         id:'',
         movie_id:$stateParams.movie_id,
-        rating: '',
+        rating: 1,
         description:'',
         user_id: logged_in_user.id,
         user_name: logged_in_user.name,
-        created_at:'',
-        created_on:'',
+        created:'',
         positivity:''
     };
 
@@ -68,7 +67,8 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
         writer:'',
         half:'',
         full:'',
-        empty:''
+        empty:'',
+        tagline:''
     };
 
     $scope.poster='';
@@ -82,7 +82,7 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
                 $scope.movie = data.data[0];
                 $scope.movie.rating /= 2;
                 $scope.poster = $scope.movie.poster.replace(strToReplace, baseURL);
-                //$scope.cover = $scope.movie.cover.replace(strToReplace, baseURL);
+                $scope.cover = $scope.movie.cover.replace(strToReplace, baseURL);
                 console.log( $scope.poster);
                 //console.log( $scope.cover);
                 $scope.movie.director = data.data[1].director;
@@ -137,42 +137,17 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
      }
      });
 
-     /!*get reviews for that movie*!/
-     $http.get(baseURL+'/movies/reviews/' + $stateParams.movie_id)
-     .then(function (data) {
-     console.log(data);
+     /*get reviews for that movie*/
 
-     if(data.status == 200){
-     $scope.movieReviews = data.data;
-     $scope.movieReviewsComments = [];
-
-     }
-     });*/
-    $scope.movieReviews = [{
-        id:466,
-        movie_id:6,
-        rating: '5.4',
-        description:'who can cook makes an unusual alliance with a young kitchen worker' +
-        'who can cook makes an unusual alliance with a young kitchen worker' +
-        ' who can cook makes an unusual alliance with a young kitchen worker',
-        user_id: 13,
-        user_name: 'Punya Pat',
-        positivity: 60.2,
-        created_on: '2015-09-11',
-        created_at: '11:03'
-    }, {
-        id:212,
-        movie_id:6,
-        rating: '8.2',
-        description:'who can cook makes an unusual alliance with a young kitchen worker' +
-        'who can cook makes an unusual alliance with a young kitchen worker' +
-        ' who can cook makes an unusual alliance with a young kitchen worker',
-        user_id: 13,
-        user_name: 'Battu Varshit',
-        positivity: 75.2,
-        created_on: '2015-05-01',
-        created_at: '13:45'
-    }];
+    function moviereviews() {
+        $http.get(baseURL + '/movies/reviews/' + $stateParams.movie_id)
+            .then(function (data) {
+                console.log(data);
+                if (data.status == 200) {
+                    $scope.movieReviews = data.data;
+                }
+            });
+    }
 
     $scope.createReview = function () {
         $scope.Guest = !checkCookie();
@@ -183,22 +158,21 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
 
             console.log($scope.newReview);
 
-            /*$http.post(baseURL + '/add-movie-review',
-                $scope.newReview
-            ).then(
+            $http.post(baseURL + '/users/add-movie-review',{
+                movie_id : $scope.newReview.movie_id,
+                user_id : logged_in_user.id,
+                description : $scope.newReview.description,
+                rating : $scope.newReview.rating
+            }).then(
                 function (data) {
-                    console.log(data);*/
+                    $scope.error = '';
+                    console.log(data);
 
-/*                    $scope.newReview.id = data.data.id;
-                    $scope.newReview.created_at = data.data.created_at;
-                    $scope.newReview.created_on = data.data.created_on;
-                    $scope.newReview.positivity = data.data.positivity;*/
-
-            $scope.newReview.id = 56;
-            $scope.newReview.created_at = '12:25';
-            $scope.newReview.created_on = '2015-06-17';
-            $scope.newReview.positivity = '46';
-                    $scope.movieReviews.push($scope.newReview);
+                    $scope.newReview.id = data.data[0].id;
+                    $scope.newReview.created = data.data[0].created;
+                    $scope.newReview.rating = data.data[0].rating;
+                    $scope.newReview.positivity = '46';
+                    //$scope.movieReviews.push(JSON.parse(JSON.stringify($scope.newReview)));
 
                     $scope.error = '';
                     $scope.newReview={
@@ -208,14 +182,14 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
                         user_id: logged_in_user.id,
                         user_name: logged_in_user.name
                     };
-                /*
+                    moviereviews();
                 }, function (error) {
                     $scope.error = "Some Error Occurred";
-                });*/
+                });
         }
         else{
             $scope.error = "Review can't be less than 40 characters";
         }
     };
-
+    moviereviews();
 }]);
