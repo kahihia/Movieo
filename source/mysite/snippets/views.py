@@ -402,7 +402,7 @@ def actorquotes(request , actor_id):
 
 
 #@csrf_exempt
-@api_view(['GET'])
+@api_view(['POST'])
 def add_movie_review(request):
     """
     Add a review for a movie by a user
@@ -410,12 +410,36 @@ def add_movie_review(request):
     """
     print (json.loads(request.body))
     serializer = MovieReviewsSerializer(data=json.loads(request.body))
-    #print (serializer.is_valid())
-    #print (serializer.data)
-    if serializer.is_valid():
-        serializer.save()
-        return HttpResponse("done")
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    temp = json.loads(request.body)
+    movie_rev = MovieReviews.objects.filter(user_id=temp['user_id'], movie_id = temp['movie_id'])
+    if len(movie_rev) > 0:
+        movie = Movie.objects.filter(pk=temp['movie_id'])
+        serializer2 = MovieSerializer(movie, many=True)
+        old = MovieReviewsSerializer(movie_rev, many=True).data[0]['rating']
+        initial = serializer2.data[0]['rating']
+        num = serializer2.data[0]['no_of_reviews']
+        new_rating = ((initial*num)+(temp['rating']-old))/num
+        MovieReviews.objects.filter(user_id=temp['user_id'], movie_id = temp['movie_id']).update(description=temp['description'], rating=temp['rating'])
+        Movie.objects.filter(pk=temp['movie_id']).update(rating=new_rating)
+    else:
+        if serializer.is_valid():
+            serializer.save()
+            movie = Movie.objects.filter(pk=serializer.data['movie_id'])
+            serializer2 = MovieSerializer(movie, many=True)
+            initial = serializer2.data[0]['rating']
+            num = serializer2.data[0]['no_of_reviews']
+            print (num)
+            if num == 0:
+                Movie.objects.filter(pk=serializer.data['movie_id']).update(rating=serializer.data['rating'], no_of_reviews=1)
+            else:
+                new_val = ((initial*num)+serializer.data['rating'])/(num+1)
+                Movie.objects.filter(pk=serializer.data['movie_id']).update(rating=new_val, no_of_reviews=num+1)
+            serializer2 = MovieSerializer(movie, many=True)
+        else:    #return HttpResponse("done")
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    reviews = MovieReviews.objects.filter(user_id=temp['user_id'],  movie_id=temp['movie_id'])
+    serializer3 = MovieReviewsSerializer(reviews, many=True)
+    return Response(serializer3.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])
@@ -424,7 +448,7 @@ def movie_reviews(request, pk):
     try:
         reviews = MovieReviews.objects.filter(movie_id=pk)
     except MovieReviews.DoesNotExist:
-        return HttpResponse(status=404)
+        return HttpResponse('empty')
     serializer = MovieReviewsSerializer(reviews , many=True)
     length = len(serializer.data)
     for i in range(0,length):
@@ -442,18 +466,27 @@ def movie_reviews(request, pk):
 @api_view(['POST'])
 def login_user(request):
     """ Login API, Checks if a user exists by email. """
+    print (request.body)
     temp = json.loads(request.body)
-    email_addr = temp['email']
+    print (temp)
+
+    ret = {'existing_user':False}
+    try:
+        email_addr = temp['email']
+    except:
+        return Response(ret)
     token = temp['token']
+
 
     users = User.objects.filter(email=email_addr)
     serializer = UserSerializer(data=users, many=True)
     serializer.is_valid()
     if len(serializer.data) == 0:
-        return HttpResponse(status=404)
+        return Response(ret)
     
     User.objects.filter(email=email_addr).update(auth_token=token)
-    return Response(serializer.data)
+    ret2 = {'existing_user':True, "data":serializer.data}
+    return Response(ret2)
 
 
 #@csrf_exempt
@@ -470,5 +503,5 @@ def add_user(request):
     print (serializer.is_valid())
     if serializer.is_valid():
         serializer.save()
-        return HttpResponse("success")
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
