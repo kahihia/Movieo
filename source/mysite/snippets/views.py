@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from snippets.models import *
 from snippets.serializers import *
 import datetime
+#import date
 import json
 from datetime import timedelta
 """import urllib.request"""
@@ -412,3 +413,21 @@ def add_movie_review(request):
         serializer.save()
         return HttpResponse("done")
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def movie_reviews(request, pk):
+    """ View all reviews of a single movie """    
+    try:
+        reviews = MovieReviews.objects.filter(movie_id=pk)
+    except MovieReviews.DoesNotExist:
+        return HttpResponse(status=404)
+    serializer = MovieReviewsSerializer(reviews , many=True)
+    length = len(serializer.data)
+    for i in range(0,length):
+        serializer.data[i]['created'] = str(serializer.data[i]['created']).split('T')[0]
+        #print (serializer.data[i]['created'])
+        temp = serializer.data[i]['user_id']
+        users = User.objects.get(pk=temp)
+        serializer.data[i]['name_of_user'] = str(users)
+    return Response(serializer.data)
