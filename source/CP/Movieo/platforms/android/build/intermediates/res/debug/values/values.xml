@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/troller/SSAD/temp/f51225c93afad1bf5a14a6505eda0464335e5657/source/CP/Movieo/platforms/android/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="activity_name">@string/launcher_name</string>
+    <string name="app_name">Movieo</string>
+    <string name="launcher_name">@string/app_name</string>
+</resources>
