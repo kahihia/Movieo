@@ -1,6 +1,9 @@
-angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory',])
+angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb'])
 
-.run(function($ionicPlatform) {
+.run(function($rootScope, $state, $ionicPlatform, $window, OpenFB) {
+  
+  OpenFB.init('1652935351632817','http://localhost:8101/oauthcallback.html');
+          
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
