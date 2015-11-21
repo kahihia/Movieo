@@ -3,6 +3,8 @@ from TwitterAPI import TwitterAPI
 from forms import *
 from django.template import RequestContext
 from django.core.context_processors import csrf
+import MySQLdb
+
 
 # Create your views here.
 def getTweets(request):
@@ -15,10 +17,7 @@ def getTweets(request):
     context = {'tweets': req}
     return render_to_response('test.html', context)
 
-<<<<<<< HEAD
 
-=======
->>>>>>> f5a23deb362e02914f3bda03960141cee6401a05
 def testfunc(request):
     var=request.GET.getlist('tweet')
     context={'a':var}
@@ -26,7 +25,6 @@ def testfunc(request):
 
 alltweets=[]
 
-<<<<<<< HEAD
 def printtweets(request):
     final=[]
     for i in range(len(alltweets)):
@@ -37,8 +35,6 @@ def printtweets(request):
     return render_to_response('hello.html',context)
 
 
-=======
->>>>>>> f5a23deb362e02914f3bda03960141cee6401a05
 def gethashes(request, hashtag):
     lis = []
     var = ''
@@ -56,19 +52,12 @@ def gethashes(request, hashtag):
     else:
         for i in range(count):
             var += str(lis[i]) + " OR "
-<<<<<<< HEAD
     req = keys.request('search/tweets', {'q': var, 'count': 10, 'lang': 'en'})
-=======
-    req = keys.request('search/tweets', {'q': var, 'count': 10, 'lang': 'en', 'until':'2015-08-20'})
->>>>>>> f5a23deb362e02914f3bda03960141cee6401a05
     list = []
-    #z = []
     for j in req:
         list.append(j)
-        # print j
         print j[u'text']
         alltweets.append(j[u'text'])
-        #z = []
     context.update({'list': list})
     return render_to_response('index.html', context)
 
@@ -84,6 +73,12 @@ def fetch(request):
 
 
 def final(request):
+    conn=MySQLdb.connect('localhost','root','12345','tweet_db')
+    with conn:
+        cur=conn.cursor()
+        cur.execute("select name from movies;")
+        x=cur.fetchall()
+    print x
     form = FinalForm()
     request_context = RequestContext(request)
     if request.method == 'POST':
@@ -94,6 +89,6 @@ def final(request):
             f = cd.get('fromdate')
             t = cd.get('todate')
             gethashes(request,hashtag)
-    request_context = {'form': form}
+    request_context = {'form': form,'a':x}
     request_context.update(csrf(request))
     return render_to_response('final.html', request_context)
