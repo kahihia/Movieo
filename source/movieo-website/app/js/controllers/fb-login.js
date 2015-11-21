@@ -16,8 +16,10 @@ function statusChangeCallback(response) {
 
         // Logged into your app and Facebook
         loginAPI();
+        createCookie("accessToken", logged_in_user.accessToken, false);
+        logged_in_user.id = 14;
 
-        // sending request to movieo database and confirming whether users already exists or not
+        // sending request to movieo database and confirming whether user already exists or not
         /*$.ajax({
             type: "POST",
             url: baseURL + '/check-login',

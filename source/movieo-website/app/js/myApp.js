@@ -102,6 +102,11 @@ myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'Rout
                 url: '/movies/{movie_id}',
                 title: 'Movie',
                 templateUrl: helper.basepath('movie.html')
+            })
+            .state('app.actors', {
+                url: '/actors/{actor_id}',
+                title: 'Actor ',
+                templateUrl: helper.basepath('actor.html')
             });
     }]);
 

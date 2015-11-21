@@ -2,15 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3fb420e-eab5-4202-87a2-840550249f43" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/fb-login.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/00.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/02.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/03.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/04.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/05.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/06.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/07.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/08.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/09.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/img/user/10.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/actor-ctrl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../movieo-website/app/views/actor.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/app.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/config.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/config.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/dashboard-ctrl.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/dashboard-ctrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/fb-login.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/fb-login.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/index.html" afterPath="$PROJECT_DIR$/../movieo-website/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/controllers/movie-ctrl.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/controllers/movie-ctrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/views/movie.html" afterPath="$PROJECT_DIR$/../movieo-website/app/views/movie.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/css/theme-f.css" afterPath="$PROJECT_DIR$/../movieo-website/app/css/theme-f.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/views/partials/top-navbar-h.html" afterPath="$PROJECT_DIR$/../movieo-website/app/views/partials/top-navbar-h.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../movieo-website/app/js/myApp.js" afterPath="$PROJECT_DIR$/../movieo-website/app/js/myApp.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="retro.iws" />

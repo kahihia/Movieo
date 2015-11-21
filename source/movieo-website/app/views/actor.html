@@ -1,4 +1,4 @@
-<div ng-controller="movieController" class="container-fluid">
+<div ng-controller="actorController" class="container-fluid">
 
     <div class="container-fluid"
          style="text-align: center;
@@ -96,51 +96,5 @@
 
             </div>
         </div><hr>-->
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-8">
-                    <h2>Reviews</h2>
-                    <div class="row" style="text-align: left" >
-                        <div class="col-lg-12" >
-
-                            <div class="col-lg-12" ng-if="Guest" style="font-weight: bolder;color: #ffffff;font-size: large;">
-                                You need to Log In to write a Review.
-                            </div>
-                            <div class="col-lg-12" ng-if="!Guest" >
-                                <div class="col-lg-10">
-                                    <h4 style="color: #d9534f" >@{{newReview.user_name}} </h4>
-                                <span style="font-size: 14px;font-style: normal;padding-left: 30px" >
-                                    <textarea class="form-control has-feedback"
-                                              ng-model="newReview.description"
-                                              rows="4" cols="100"
-                                              placeholder="Add your review here (min 40 characters)"
-                                              style="resize: vertical">
-                                    </textarea>
-                                </span>
-                                </div>
-                                <div class="col-lg-2 col-sm-4 col-md-4" style="padding-top: 9%">
-                                <span class="btn btn-block mt-lg bg-gray-dark" style="border: solid #dcf 2px" ng-click="createReview()" >
-                                    Add Review
-                                </span><hr style="text-align: center;width: 80%;color: #b6c5da;background-color: #b6c5da" >
-                                </div>
-                                <div class="col-lg-12 pull-right" style="padding-top: 7px;font-size: large;padding-left: 50%;color: yellow" >
-                                    <i ng-if="error" class="glyphicon-alert" ></i>&nbsp;{{error}}
-                                </div>
-                            </div>
-                            <div class="col-lg-12" ng-repeat="review in movieReviews| orderBy:'-created_at':reverse">
-                                <hr>
-                                <h3 style="color: #27c24c" >@ {{review.user_name}} </h3>
-                                <span style="font-size: 16px;font-style: normal;padding-left: 40px;color: #dbdbdb" >{{review.description}}</span><br/>
-            <span class="text-muted pull-right" >
-                <b>{{ review.created_at | date:'medium' }}</b>
-            </span>
-                                <br/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

@@ -53,7 +53,6 @@ var App = angular.module('angle', ['ngRoute', 'ngAnimate', 'ngStorage', 'ngCooki
             job: 'ng-Dev',
             picture: 'app/img/user/02.jpg'
         };
-        eraseCookie("accessToken");
     }]);
 
 /**=========================================================
