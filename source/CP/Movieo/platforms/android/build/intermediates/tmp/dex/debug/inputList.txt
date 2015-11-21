@@ -1,0 +1,2 @@
+/home/troller/SSAD/ssad_2015_team10/source/CP/Movieo/platforms/android/build/intermediates/classes/debug
+/home/troller/SSAD/ssad_2015_team10/source/CP/Movieo/platforms/android/build/intermediates/pre-dexed/debug/classes-35b90ffeff8ddc60d82b1bd721e7e6f5e4a428ba.jar

@@ -1,0 +1,49 @@
+/* Empty. Add your own CSS if you like */
+.menuContent{
+	  background:#484848;
+    background-attachment:fixed;
+    background-position: center;
+}
+
+.menuItem{
+	background: transparent;
+  border-color: #484848;
+}
+
+.sidemenu-list .item-complex .item-content { 
+  background: transparent;
+  color: white;
+  border-color: #484848;
+}
+
+.hrefButton{
+  background: transparent;
+  color: white;
+  border-color: #484848;
+}
+
+.scroll-bg {
+  background: url('http://ioniconf.com/img/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.mainMenuImage{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+
+.headerItem{
+  padding: 10%; 
+  background: #303030  ;
+}
+
+.menuText{
+  margin-left: 5%;
+  font-size: 120%
+}
+
+.menuItem.menuIcon.ion-android-home{
+  font-size: 120%;
+}

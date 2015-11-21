@@ -1,0 +1,57 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+        <a class="button button-icon button-clear ion-android-cart" href="#/app/browse">
+        </a>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content class="menuContent">
+      <ion-list class="sidemenu-list">
+        <div class="headerItem">
+          <h1>MODIFY</h1>
+        </div>
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/browse">
+          <i class="icon ion-android-home" class="menuIcon" style="font-size:150%"></i>
+          <span class="menuText">
+            Home
+          </span>
+        </ion-item>
+        <ion-item class="hrefButton" ng-hide="isAuthenticated" menu-close ng-click="login()">
+          <i class="icon ion-person-stalker" class="menuIcon" style="font-size:150%"></i>
+          <span class="menuText">
+            Login
+          </span>
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/categories">
+          <i class="icon ion-film-marker" class="menuIcon" style="font-size:150%" ></i>
+          <span class="menuText">
+            Categories
+          </span>  
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/trending">
+          <i class="icon ion-arrow-graph-up-right" class="menuIcon" style="font-size:150%"></i>
+          <span class="menuText">
+            Trending
+          </span>
+        </ion-item>
+        <ion-item class="hrefButton" ng-show="isAuthenticated" menu-close ng-click="" ng-click="logout()">
+          <i class="icon ion-person-stalker" class="menuIcon" style="font-size:150%" ></i>          
+          <span class="menuText">
+            Logout
+          </span>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
