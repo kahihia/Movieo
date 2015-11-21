@@ -39,7 +39,7 @@ class MovieQuotesSerializer(serializers.ModelSerializer):
 class MovieReviewsSerializer(serializers.ModelSerializer):
         class Meta:
             model = MovieReviews
-            fields = ('id', 'movie_id', 'user_id', 'description', 'rating')
+            fields = ('id', 'created',  'movie_id', 'user_id', 'description', 'rating')
 
 class ReviewCommentsSerializer(serializers.ModelSerializer):
         class Meta:

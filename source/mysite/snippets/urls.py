@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^movies/(?P<pk>[0-9]+)$',views.single_movie),
 
 
+    url(r'^movies/reviews/(?P<pk>[0-9]+)$',views.movie_reviews),
     url(r'^users/add-movie-review$', views.add_movie_review),
 
     url(r'^snippets/$', views.snippet_list),

@@ -1,0 +1,27 @@
+<ion-view view-title="Browse Latest" align-title="center" hide-back-button="true">
+    <ion-content>
+        <ion-list>
+            <div ng-repeat="movie in movies track by $index" class="row responsive-sm" ng-if="$index % 2 == 0">
+                <ion-item class="col-50" ng-repeat="i in [$index, $index + 1]" ng-if="movies[i] != null" ng-href="#/app/movie/{{::movies[i].id}}">
+                        <div class="list card">
+                            <div class="item item-avatar">
+                                <img src="{{::movies[i].poster}}">
+                                <h2>{{::movies[i].name}}</h2>
+                                <p>{{::movies[i].description}}</p>
+                            </div>
+                            
+                            <div class="item item-image">
+                                <img src="{{::movies[i].poster}}">
+                            </div>
+                            
+                            <a class="item item-icon-left assertive" href="#">
+                                <i class="icon ion-music-note"></i>
+                                {{::movies[i].poster}}
+                            </a>                           
+                        </div>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,2 @@
+/home/troller/SSAD/temp/f51225c93afad1bf5a14a6505eda0464335e5657/source/CP/Movieo/platforms/android/build/intermediates/classes/debug
+/home/troller/SSAD/temp/f51225c93afad1bf5a14a6505eda0464335e5657/source/CP/Movieo/platforms/android/build/intermediates/pre-dexed/debug/classes-d39741fb572f6de3ff1d0ebd47cbd5d72d8f3e59.jar
