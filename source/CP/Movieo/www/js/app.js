@@ -1,4 +1,4 @@
-angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb'])
+angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb','chart.js'])
 
 .run(function($rootScope, $state, $ionicPlatform, $window, OpenFB) {
   

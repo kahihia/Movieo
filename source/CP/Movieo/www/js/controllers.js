@@ -226,3 +226,8 @@ $scope.revokePermissions = function () {
             $scope.user = user;
         });
 })
+
+.controller("DoughnutCtrl", function ($scope) {
+  $scope.labels = ["Positive", "Neutral", "Negative"];
+  $scope.data = [300, 500, 100];
+});
