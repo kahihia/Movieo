@@ -1,5 +1,5 @@
 //var base = 'http://localhost:3000';
-var base = 'http://umeshksingla.pythonanywhere.com';
+var base = 'http://10.1.39.125:8000';
 
 angular.module('movieo.factory', [])
 
@@ -135,6 +135,15 @@ angular.module('movieo.factory', [])
     var movieData = {
         get: function(movieId) {
             return $http.get(base + '/movies/cast/' + movieId )
+        }
+    };
+    return movieData;
+}])
+
+.factory('MovieReviews', ['$http', function($http){
+    var movieData = {
+        get: function(movieId) {
+            return $http.get(base + '/movies/reviews/' + movieId )
         }
     };
     return movieData;

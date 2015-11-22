@@ -1,3 +1,5 @@
+var base = 'http://10.1.39.125:8000';
+
 angular.module('movieo.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, OpenFB, $state) {
@@ -76,7 +78,7 @@ $scope.revokePermissions = function () {
             // this way we can access each movie info. by it's _id
             for (var i = 0; i < movies.length; i++) {
                 var tempStr = movies[i].poster
-                var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
+                var newStr = tempStr.replace("snippets",base)
                 movies[i].poster = newStr
                 LSFactory.set(movies[i].id, movies[i]);
             };
@@ -169,8 +171,8 @@ $scope.revokePermissions = function () {
     }
 ])
 
-.controller('movieCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader','MovieCast',
-        function($scope, $state, MovieIndividual, $rootScope, Loader, MovieCast) {
+.controller('movieCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader','MovieCast','MovieReviews',
+        function($scope, $state, MovieIndividual, $rootScope, Loader, MovieCast, MovieReviews) {
           
           // movieId hold the ID of the current movie being referred to
           var movieId = $state.params.movieId;
@@ -179,7 +181,7 @@ $scope.revokePermissions = function () {
             $scope.movie = data[0];
             $scope.dir = data[1];
             var tempStr = $scope.movie.poster
-            var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
+            var newStr = tempStr.replace("snippets",base)
             $scope.movie.poster = newStr
             
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -194,10 +196,15 @@ $scope.revokePermissions = function () {
             $scope.case2 = data[1];
             
             var tempStr2 = $scope.cast1.image_link
-            var newStr2 = tempStr2.replace("snippets","http://umeshksingla.pythonanywhere.com")
+            var newStr2 = tempStr2.replace("snippets",base)
             $scope.cast1.image_link = newStr2
                        
           })
+          
+           MovieReviews.get(movieId).success(function(data){
+               $scope.reviews = data;
+           })
+          
 }])
 
 .controller('LoginCtrl', function ($scope, $location, OpenFB) {

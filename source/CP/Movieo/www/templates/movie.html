@@ -47,27 +47,48 @@
                  
                  <div class="item item-divider">
                         The Cast 
-                    </div>
-                    <a class="item item-avatar" href="#">
-                        <img src="{{::cast1.image_link}}">
-                        <h2>{{::cast1.actor_name}}</h2>
-                        <p>{{cast1.role}} : {{::cast1.actor_name}}</p>
-                    </a>
-                        
-                    </div>                     
-                 <br>
-                 
-                 <div class="item item-divider">
-                        The Cast
-                    </div>
-                 <div class="item item-text-wrap">
-                        This is a basic Card with some text.
                  </div>
+                 <a class="item item-avatar" href="#">
+                    <img src="{{::cast1.image_link}}">
+                    <h2>{{::cast1.actor_name}}</h2>
+                    <p>{{cast1.role}} : {{::cast1.actor_name}}</p>
+                 </a>
+                 
+                 
+                 <div class="Reviews">
+                     <div class="item item-divider">
+                         Reviews
+                     </div>
+                     <div class = "reviewText">
+                        <div class="item-text-wrap" ng-repeat="review in reviews track by $index" href="#/app/movie/{{::review.movie_id}}">
+                           <p>
+                              <span style="font-weight:bold">
+                                  {{review.name_of_user}} : 
+                              </span>   
+                              {{review.description}}
+                           </p>
+                        </div>
+                     </div>
+                 </div>
+                            
+                                                 
+                 <div ng-controller="DoughnutCtrl">
+                     <div class="card">
+                         <div class="item item-divider">
+                             Donut Char Example
+                         </div>
+                         <div class="item item-text-wrap">
+                            <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels">
+                            </canvas> 
+                         </div>
+                     </div>
+                 </div>
+                 <div>
+                     
                                           
                 <button class="button button-assertive button-block" ng-click="addToCart()"> 
                 	<i class="icon ion-checkmark"></i> Write Review
                 </button>
-            </div>
-            
+            </div>       
     </ion-content>
 </ion-view>
