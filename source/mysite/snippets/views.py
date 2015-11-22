@@ -12,17 +12,33 @@ from datetime import timedelta
 import urllib
 import requests
 
+Key = '9d1afc024c75f7adcb960592b241e3f495be04ec'
+
 
 def func(inp):
+    inp = inp.replace('''"''','')
+    inp = inp.replace("'","")
+    inp = inp.replace(".",". ")
     url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment'
-    payload = 'apikey=0915a75da9fb89af90a9484cc2ad9eda07e97043&text='+inp+'&outputMode=json'
+    payload = 'apikey='+Key+'&text='+inp+'&outputMode=json'
     headers = {'content-type': 'application/x-www-form-urlencoded'}
     r = requests.post(url, data=payload, headers=headers)
     #print (json.loads(r.json))
+    #print (json.loads(r.text))
+    print json.loads(r.text)
     return int(float(json.loads(r.text)['docSentiment']['score'])*100)
 
 
-
+def keyword_extract(inp):
+    inp = inp.replace('''"''','')
+    inp = inp.replace("'","")
+    inp = inp.replace(".",". ")
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords'
+    payload = 'apikey='+Key+'&text='+inp+'&sentiment=1&outputMode=json'
+    headers = {'content-type': 'application/x-www-form-urlencoded'}
+    r = requests.post(url, data=payload, headers=headers)
+    print (json.loads(r.text))
+    return json.loads(r.text)
 
 
 
@@ -475,6 +491,20 @@ def movie_reviews(request, pk):
     return Response(serializer.data)
 
 
+
+#@csrf_exempt
+@api_view(['POST'])
+def keyword_analysis(request):
+    """ View keyword analysis of single movie review """    
+    temp = json.loads(request.body)
+    try:
+        reviews = MovieReviews.objects.filter(id=temp['review_id'])
+    except MovieReviews.DoesNotExist:
+        return HttpResponse('empty')
+    serializer = MovieReviewsSerializer(reviews , many=True)
+    desc = serializer.data[0]['description']
+    ret = keyword_extract(desc)
+    return Response({'text':serializer.data[0], "analysis":ret})
 
 
 #@csrf_exempt

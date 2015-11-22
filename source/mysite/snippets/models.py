@@ -206,9 +206,10 @@ class ToWatchList(models.Model):
     user_id = models.ForeignKey(User)
     movie_id = models.ForeignKey(Movie)
 
-
-"""class Tweets(models.Model):
+"""
+class Tweets(models.Model):
     movie_id = models.ForeignKey(Movie)
     hashtags = 
     popular_tweets = 
-    verified_tweets = """
+    verified_tweets =
+"""
