@@ -85,6 +85,96 @@ $scope.revokePermissions = function () {
     }
 ])
 
+.controller('upComingCtrl', ['$scope', 'MoviesFactory', 'LSFactory', 'Loader',
+    function($scope, MoviesFactory, LSFactory, Loader) {
+
+        Loader.showLoading();
+
+        // support for pagination
+        var page = 1;
+        $scope.movies = [];
+        var movies = LSFactory.getAll();
+
+        // if movies exists in localStorage, use that instead of making a call
+        if (movies.length > 0) {
+            $scope.movies = movies;
+            Loader.hideLoading();
+        } else {
+            upcomingFactory.get(page).success(function(data) {
+                // process movies and store them 
+                // in localStorage so we can work with them later on, 
+                // when the user is offline
+                processMovies(data);
+
+                $scope.movies = data;
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                Loader.hideLoading();
+            }).error(function(err, statusCode) {
+                Loader.hideLoading();
+                Loader.toggleLoadingWithMessage(err.message);
+            });
+        }
+
+        function processMovies(movies) {
+            LSFactory.clear();
+            // we want to save each movie individually
+            // this way we can access each movie info. by it's _id
+            for (var i = 0; i < movies.length; i++) {
+                var tempStr = movies[i].poster
+                var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
+                movies[i].poster = newStr
+                LSFactory.set(movies[i].id, movies[i]);
+            };
+        }
+
+    }
+])
+
+.controller('topBoxCtrl', ['$scope', 'MoviesFactory', 'LSFactory', 'Loader',
+    function($scope, MoviesFactory, LSFactory, Loader) {
+
+        Loader.showLoading();
+
+        // support for pagination
+        var page = 1;
+        $scope.movies = [];
+        var movies = LSFactory.getAll();
+
+        // if movies exists in localStorage, use that instead of making a call
+        if (movies.length > 0) {
+            $scope.movies = movies;
+            Loader.hideLoading();
+        } else {
+            topboxFactory.get(page).success(function(data) {
+                // process movies and store them 
+                // in localStorage so we can work with them later on, 
+                // when the user is offline
+                processMovies(data);
+
+                $scope.movies = data;
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                Loader.hideLoading();
+            }).error(function(err, statusCode) {
+                Loader.hideLoading();
+                Loader.toggleLoadingWithMessage(err.message);
+            });
+        }
+
+        function processMovies(movies) {
+            LSFactory.clear();
+            // we want to save each movie individually
+            // this way we can access each movie info. by it's _id
+            for (var i = 0; i < movies.length; i++) {
+                var tempStr = movies[i].poster
+                var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
+                movies[i].poster = newStr
+                LSFactory.set(movies[i].id, movies[i]);
+            };
+        }
+
+    }
+])
+
 .controller('movieCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader',
         function($scope, $state, MovieIndividual, $rootScope, Loader) {
           

@@ -2,7 +2,8 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb
 
 .run(function($rootScope, $state, $ionicPlatform, $window, OpenFB) {
   
-  OpenFB.init('1652935351632817','https://www.facebook.com/connect/login_success.html');
+  // Redirect URL : https://www.facebook.com/connect/login_success.html When deploying to android
+  OpenFB.init('1652935351632817','http://localhost:8101/oauthcallback.html');
           
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -75,6 +76,26 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb
         'menuContent': {
           templateUrl: 'templates/trending.html',
           controller: 'BrowseCtrl'
+        }
+      }
+    })
+    
+    .state('app.upcoming', {
+      url: '/upcoming',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/upcoming.html',
+          controller: 'upComingCtrl'
+        }
+      }
+    })
+    
+    .state('app.topbox', {
+      url: '/topbox',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/topbox.html',
+          controller: 'topBoxCtrl'
         }
       }
     })

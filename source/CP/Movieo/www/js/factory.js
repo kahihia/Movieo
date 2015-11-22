@@ -130,3 +130,21 @@ angular.module('movieo.factory', [])
     };
     return movieData;
 }])
+
+.factory('topboxFactory', ['$http', function($http) {
+    var topTen = {
+        get: function() {
+            return $http.get(base + '/movies/top-box');
+        }
+    };
+    return topTen;
+}])
+
+.factory('upcomingFactory', ['$http', function($http) {
+    var topTen = {
+        get: function() {
+            return $http.get(base + '/movies/upcoming');
+        }
+    };
+    return topTen;
+}])
