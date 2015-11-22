@@ -16,7 +16,7 @@
                 <div class="item item-divider">
                     <p class="row">
                         <label class="col">
-                            Rating : <i class="icon ion-star" ng-repeat="i in getNumber(books[i].rating) track by $index"></i>
+                            Rating : {{::movie.newRating}}
                             <!-- Hard coded rating change it later -->
                         </label>
                     </p>
@@ -37,7 +37,7 @@
                     <div class="item item-text-wrap">
                     <span>
                         Directed By : {{::dir.director}}
-                    <span>
+                    </span>
                         <br>
                     <span>     
                         Written By : {{::dir.writer}}
@@ -48,7 +48,7 @@
                  <div class="item item-divider">
                         The Cast 
                  </div>
-                 <a class="item item-avatar" href="#">
+                 <a class="item item-avatar" href="#/app/movie/actor/{{::cast1.actor_id}}">
                     <img src="{{::cast1.image_link}}">
                     <h2>{{::cast1.actor_name}}</h2>
                     <p>{{cast1.role}} : {{::cast1.actor_name}}</p>
@@ -70,12 +70,13 @@
                         </div>
                      </div>
                  </div>
+        </div>
                             
                                                  
                  <div ng-controller="DoughnutCtrl">
                      <div class="card">
                          <div class="item item-divider">
-                             Donut Char Example
+                             Public Rating
                          </div>
                          <div class="item item-text-wrap">
                             <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels">

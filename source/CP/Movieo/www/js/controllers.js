@@ -180,6 +180,11 @@ $scope.revokePermissions = function () {
           MovieIndividual.get(movieId).success(function(data){
             $scope.movie = data[0];
             $scope.dir = data[1];
+            
+            
+            var ratingChange = $scope.movie.rating
+            $scope.movie.newRating = Math.round(ratingChange)
+            
             var tempStr = $scope.movie.poster
             var newStr = tempStr.replace("snippets",base)
             $scope.movie.poster = newStr
@@ -204,8 +209,25 @@ $scope.revokePermissions = function () {
            MovieReviews.get(movieId).success(function(data){
                $scope.reviews = data;
            })
-          
+}])          
+
+.controller('actorCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader','MovieCast','MovieReviews','actorFactory',
+        function($scope, $state, MovieIndividual, $rootScope, Loader, MovieCast, MovieReviews, actorFactory) {
+            
+            // Store the ID of the actor whose data is to be retrieved
+            var actorid = $state.params.actorid
+            
+            actorFactory.get(actorid).success(function(data){
+                $scope.actorInfo = data;
+            }).error(function(err, statusCode) {
+                Loader.hideLoading();
+                Loader.toggleLoadingWithMessage(err.message);
+          })
 }])
+            
+            
+            
+
 
 .controller('LoginCtrl', function ($scope, $location, OpenFB) {
 

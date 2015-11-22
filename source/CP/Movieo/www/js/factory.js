@@ -166,3 +166,12 @@ angular.module('movieo.factory', [])
     };
     return topTen;
 }])
+
+.factory('actorFactory', ['$http', function($http){
+    var actorData = {
+        get: function(actorid) {
+            return $http.get(base + '/actors/' + actorid )
+        }
+    };
+    return actorData;
+}])

@@ -97,6 +97,16 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb
         }
       }
     })
+    
+    .state('app.actor',{
+      url: "/movie/actor/:actorid",
+      views:{
+        'menuContent': {
+          templateUrl: 'templates/actor.html',
+          controller: 'actorCtrl'
+        }
+      }
+    })
 
   .state('app.single', {
     url: '/playlists/:playlistId',
