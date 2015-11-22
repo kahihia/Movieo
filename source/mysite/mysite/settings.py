@@ -65,6 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'mysite.urls'
@@ -80,7 +81,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.middleware.security.SecurityMiddleware',
             ],
         },
     },
@@ -97,8 +97,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'movieo_DB',
         'USER': 'root',
-        'PASSWORD': '12345',
+        'PASSWORD': 'password',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '8000',
     }
 }
 

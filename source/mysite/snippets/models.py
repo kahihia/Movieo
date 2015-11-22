@@ -46,7 +46,7 @@ class Snippet(models.Model):
 
 """ Image rename function """
 def path_and_rename(instance, filename):
-    upload_to = 'mysite/snippets/static/photos/'
+    upload_to = 'snippets/static/photos/'
     ext = filename.split('.')[-1]
     x = str(datetime.datetime.now()).encode('utf-8')
     hash_object = hashlib.sha256(x)
@@ -70,12 +70,28 @@ class User(models.Model):
     no_of_quotes = models.IntegerField(default=0)
     badge = models.IntegerField(default=0)
     email = models.CharField(max_length=200, null=False)
+    auth_token = models.CharField(max_length=2000, default='empty')
+    
 
     def __unicode__(self):
         return "%s" % (self.name)
        
     def __str__(self):
         return "%s" % (self.name)
+
+""" Tokens Table """
+"""
+class Tokens(models.Model):
+    auth_token = models.CharField(max_length=200, default='empty')
+    user_id = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return "%s" % (self.name)
+       
+    def __str__(self):
+        return "%s" % (self.name)
+"""
+
 
 """ Actor Table """
 class Actor(models.Model):
@@ -110,8 +126,8 @@ class Movie(models.Model):
     rating = models.FloatField( validators = [MinValueValidator(1.0), MaxValueValidator(10.0)] )
     budget = models.IntegerField(default=0)
     box_office = models.IntegerField(default=0)
-    poster = models.ImageField(upload_to=path_and_rename, default='mysite/snippets/static/photos/no_image.jpg')
-    cover = models.ImageField(upload_to=path_and_rename, default='mysite/snippets/static/photos/no_image.jpg')
+    poster = models.ImageField(upload_to=path_and_rename, default='snippets/static/photos/no_image.jpg')
+    cover = models.ImageField(upload_to=path_and_rename, default='snippets/static/photos/no_image.jpg')
     
     def __unicode__(self):
         return "%s" % (self.name)
@@ -143,6 +159,8 @@ class MovieReviews(models.Model):
     user_id = models.ForeignKey(User)
     rating = models.IntegerField(validators = [MinValueValidator(1), MaxValueValidator(10)],  default=0)
     description = models.TextField(max_length=5000, blank=True)
+    positivity = models.IntegerField(default=0)
+    
 
 class ReviewComments(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -188,9 +206,10 @@ class ToWatchList(models.Model):
     user_id = models.ForeignKey(User)
     movie_id = models.ForeignKey(Movie)
 
-
-"""class Tweets(models.Model):
+"""
+class Tweets(models.Model):
     movie_id = models.ForeignKey(Movie)
     hashtags = 
     popular_tweets = 
-    verified_tweets = """
+    verified_tweets =
+"""

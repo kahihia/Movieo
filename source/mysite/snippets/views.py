@@ -6,9 +6,40 @@ from rest_framework.response import Response
 from snippets.models import *
 from snippets.serializers import *
 import datetime
+#import date
 import json
 from datetime import timedelta
-"""import urllib.request"""
+import urllib
+import requests
+
+Key = '9d1afc024c75f7adcb960592b241e3f495be04ec'
+
+
+def func(inp):
+    inp = inp.replace('''"''','')
+    inp = inp.replace("'","")
+    inp = inp.replace(".",". ")
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment'
+    payload = 'apikey='+Key+'&text='+inp+'&outputMode=json'
+    headers = {'content-type': 'application/x-www-form-urlencoded'}
+    r = requests.post(url, data=payload, headers=headers)
+    #print (json.loads(r.json))
+    #print (json.loads(r.text))
+    print json.loads(r.text)
+    return int(float(json.loads(r.text)['docSentiment']['score'])*100)
+
+
+def keyword_extract(inp):
+    inp = inp.replace('''"''','')
+    inp = inp.replace("'","")
+    inp = inp.replace(".",". ")
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords'
+    payload = 'apikey='+Key+'&text='+inp+'&sentiment=1&outputMode=json'
+    headers = {'content-type': 'application/x-www-form-urlencoded'}
+    r = requests.post(url, data=payload, headers=headers)
+    print (json.loads(r.text))
+    return json.loads(r.text)
+
 
 
 """from django.shortcuts import render
@@ -400,6 +431,7 @@ def actorquotes(request , actor_id):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+#@csrf_exempt
 @api_view(['POST'])
 def add_movie_review(request):
     """
@@ -408,7 +440,113 @@ def add_movie_review(request):
     """
     print (json.loads(request.body))
     serializer = MovieReviewsSerializer(data=json.loads(request.body))
+    temp = json.loads(request.body)
+    movie_rev = MovieReviews.objects.filter(user_id=temp['user_id'], movie_id = temp['movie_id'])
+    if len(movie_rev) > 0:
+        movie = Movie.objects.filter(pk=temp['movie_id'])
+        serializer2 = MovieSerializer(movie, many=True)
+        old = MovieReviewsSerializer(movie_rev, many=True).data[0]['rating']
+        initial = serializer2.data[0]['rating']
+        num = serializer2.data[0]['no_of_reviews']
+        new_rating = ((initial*num)+(temp['rating']-old))/num
+        MovieReviews.objects.filter(user_id=temp['user_id'], movie_id = temp['movie_id']).update(description=temp['description'], rating=temp['rating'])
+        Movie.objects.filter(pk=temp['movie_id']).update(rating=new_rating)
+    else:
+        if serializer.is_valid():
+            serializer.save()
+            movie = Movie.objects.filter(pk=serializer.data['movie_id'])
+            serializer2 = MovieSerializer(movie, many=True)
+            initial = serializer2.data[0]['rating']
+            num = serializer2.data[0]['no_of_reviews']
+            print (num)
+            if num == 0:
+                Movie.objects.filter(pk=serializer.data['movie_id']).update(rating=serializer.data['rating'], no_of_reviews=1)
+            else:
+                new_val = ((initial*num)+serializer.data['rating'])/(num+1)
+                Movie.objects.filter(pk=serializer.data['movie_id']).update(rating=new_val, no_of_reviews=num+1)
+            serializer2 = MovieSerializer(movie, many=True)
+        else:    #return HttpResponse("done")
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    MovieReviews.objects.filter(user_id=temp['user_id'], movie_id = temp['movie_id']).update(positivity=func(temp['description']))
+    reviews = MovieReviews.objects.filter(user_id=temp['user_id'],  movie_id=temp['movie_id'])
+    serializer3 = MovieReviewsSerializer(reviews, many=True)
+    return Response(serializer3.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+def movie_reviews(request, pk):
+    """ View all reviews of a single movie """    
+    try:
+        reviews = MovieReviews.objects.filter(movie_id=pk)
+    except MovieReviews.DoesNotExist:
+        return HttpResponse('empty')
+    serializer = MovieReviewsSerializer(reviews , many=True)
+    length = len(serializer.data)
+    for i in range(0,length):
+        serializer.data[i]['created'] = str(serializer.data[i]['created']).split('T')[0]
+        #print (serializer.data[i]['created'])
+        temp = serializer.data[i]['user_id']
+        users = User.objects.get(pk=temp)
+        serializer.data[i]['name_of_user'] = str(users)
+    return Response(serializer.data)
+
+
+
+#@csrf_exempt
+@api_view(['POST'])
+def keyword_analysis(request):
+    """ View keyword analysis of single movie review """    
+    temp = json.loads(request.body)
+    try:
+        reviews = MovieReviews.objects.filter(id=temp['review_id'])
+    except MovieReviews.DoesNotExist:
+        return HttpResponse('empty')
+    serializer = MovieReviewsSerializer(reviews , many=True)
+    desc = serializer.data[0]['description']
+    ret = keyword_extract(desc)
+    return Response({'text':serializer.data[0], "analysis":ret})
+
+
+#@csrf_exempt
+@api_view(['POST'])
+def login_user(request):
+    """ Login API, Checks if a user exists by email. """
+    print (request.body)
+    temp = json.loads(request.body)
+    print (temp)
+
+    ret = {'existing_user':False}
+    try:
+        email_addr = temp['email']
+    except:
+        return Response(ret)
+    token = temp['token']
+
+
+    users = User.objects.filter(email=email_addr)
+    serializer = UserSerializer(data=users, many=True)
+    serializer.is_valid()
+    if len(serializer.data) == 0:
+        return Response(ret)
+    
+    User.objects.filter(email=email_addr).update(auth_token=token)
+    ret2 = {'existing_user':True, "data":serializer.data}
+    return Response(ret2)
+
+
+#@csrf_exempt
+@api_view(['POST'])
+def add_user(request):
+    """
+    Add a new user
+    
+    """
+    print (json.loads(request.body))
+    serializer = UserSerializer(data=json.loads(request.body))
+    #print (serializer)
+    #print (serializer.data)
+    print (serializer.is_valid())
     if serializer.is_valid():
         serializer.save()
-        return HttpResponse("done")
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

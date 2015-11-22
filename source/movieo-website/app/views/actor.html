@@ -1,0 +1,75 @@
+<div ng-controller="actorController" class="container-fluid">
+
+    <div class="container-fluid"
+         style="text-align: center;
+             margin-right: -11.3% !important;
+             margin-left: -11.3% !important;
+             margin-top: -17px !important;
+             background:-webkit-radial-gradient(left top, ellipse cover, rgba(255,255,255,0.2) 0%,#dbdbdb 37%), url('app/img/actor-bg.jpg');
+             background-size: auto !important;
+             background-repeat: no-repeat !important;
+             padding-top: 20%">
+
+        <div class="container" style="
+        background-color: #21262E;
+        border: solid #dbdbdb 5px;
+        border-radius: 1%;
+        padding: 25px;">
+
+            <div class="row" style="text-align: center" >
+                <div class="col-lg-12 col-md-12" style="text-align: center !important;padding-left: 39.5%" >
+                    <img src="{{poster}}" class="poster thumbnail" style="max-width: 240px;max-height: 360px;height: 360px;width: 240px" >
+                </div>
+                <div class="col-lg-12 col-md-12" style="text-align: center;padding-left: 10%;padding-right: 10%;font-size: x-large;font-weight: bolder;color: #fff;text-decoration: underline" >
+                    {{actor.name}}
+                </div>
+                <div class="col-lg-12 col-md-12" style="text-align: center;padding-left: 10%;padding-right: 10%;font-size: large;font-weight: bold;color: #dbdbdb" >
+                    {{actor.description}}
+                </div>
+                <div class="col-lg-8 col-md-8" style="text-align:left;padding-left: 10%;padding-right: 10%;font-size: large;font-weight: bold;color: #dbdbdb;padding-top: 15px" >
+                    <h4><strong>Birthday : </strong>{{actor.birthday | date}}</h4>
+                    <h4><strong>Birth Place : </strong>{{actor.birth_place}}</h4>
+                    <h4><strong>Wiki Link : </strong>{{actor.wiki_link}}</h4>
+                </div>
+            </div>
+
+            <hr>
+            <div class="container">
+                <h2>Photos</h2>
+                <div class="row">
+                    <div ng-repeat="photo in actorPhotos | limitTo : 10" class="col-lg-2" >
+                        <img src="{{photo.photo}}" style="width: 180px;height: 180px" class="thumbnail" >
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container">
+                <h2>Recent Movies</h2>
+                <div class="row">
+                    <div ng-repeat="photo in actorRecentMovies | limitTo : 10" class="col-lg-2" >
+                        <img src="{{photo.poster}}" style="width: 180px;height: 180px" class="thumbnail" >
+                        <br>
+                        <span style="color: yellow" >
+                        <span ng-repeat="a in range(photo.full) track by $index"><i class="fa fa-star">&nbsp;</i></span>
+                        <span ng-repeat="a in range(photo.half) track by $index"><i class="fa fa-star-half-full">&nbsp;</i></span>
+                        <span ng-repeat="a in range(photo.empty) track by $index"><i class="fa fa-star-o">&nbsp;</i></span>
+                        </span>
+                        <br>
+                        <a ui-sref="app.movies({movie_id:{{photo.id}}})" style="text-decoration: underline" >{{photo.name}} ({{photo.date_of_release | date : 'MMM yyyy'}})</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container">
+                <h2>All Movies</h2>
+                <div class="row">
+                    <div ng-repeat="photo in actorAllMovies | limitTo : 10" class="col-lg-2" >
+                        <img src="{{photo.poster}}" style="width: 180px;height: 180px" class="thumbnail" >
+                        <br>
+                        <a ui-sref="app.movies({movie_id:{{photo.id}}})" style="text-decoration: underline" >{{photo.name}} ({{photo.date_of_release | date : 'yyyy'}})</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

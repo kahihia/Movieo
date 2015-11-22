@@ -26,7 +26,7 @@ class MoviePhotosAdmin(admin.ModelAdmin):
     form = MoviePhotosForm
 
 class MovieReviewsAdmin(admin.ModelAdmin):
-    list_display = ['created', 'user_id', 'movie_id','description', 'rating']
+    list_display = ['created', 'user_id', 'movie_id','description', 'rating', 'positivity']
     exclude = ()
     form = MovieReviewsForm
 

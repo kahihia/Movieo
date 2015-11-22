@@ -33,6 +33,7 @@ alltweets=[]
 def printtweets(request):
     final=[]
     finale=[]
+<<<<<<< HEAD
     for i in range(len(alltweets)):
         final.append(alltweets[i])
     context={'alltweets':final}
@@ -40,6 +41,25 @@ def printtweets(request):
          alltweets.pop()
     send=json.dumps(tweetarray)
     print tweetarray
+=======
+    print tweetarray
+    for i in range(len(tweetarray)):
+        final.append(tweetarray[i])
+    print type(tweetarray)
+    send=json.dumps(tweetarray)
+    context={'alltweets':send}
+    #for i in range(len(alltweets)):
+    #     tweetarray.pop()
+    # url='http://sentiment.vivekn.com/api/text/'
+    # for i in range(len(final)):
+    #     r=requests.post(url,data={'txt':str(final[i].encode('utf-8'))})
+    #     var=r.content.split(':')
+    #     string1=var[2].split('\n')[0].strip(' ').strip(',').strip('"')
+    #     string2=var[3].split('\n')[0].strip(' ').strip('"')
+    #     #if string2=='Positive':
+    #     #    finale.append(final[i])
+    # #context={'alltweets':finale}
+>>>>>>> 6ccdb0ee6d8e49eeba0b318f73db47f44b27650a
     return render_to_response('hello.html',context)
 
 
@@ -60,8 +80,14 @@ def gethashes(request, hashtag):
     else:
         for i in range(count):
             var += str(lis[i]) + " OR "
+<<<<<<< HEAD
     req = keys.request('search/tweets', {'q': var, 'count': 50, 'lang': 'en','result_type':'popular'})
     list = []
+=======
+    req = keys.request('search/tweets', {'q': var, 'count': 20, 'lang': 'en','result_type':'popular'})
+    list = []
+    #tweetarray=[]
+>>>>>>> 6ccdb0ee6d8e49eeba0b318f73db47f44b27650a
     for j in req:
         tweetdict={}
         list.append(j)
@@ -72,7 +98,11 @@ def gethashes(request, hashtag):
             tweetdict.update({'created_at':j[u'created_at']})
         alltweets.append(j[u'text'])
         tweetarray.append(tweetdict)
+<<<<<<< HEAD
     print "Tweet array %s" %tweetarray
+=======
+    print tweetarray
+>>>>>>> 6ccdb0ee6d8e49eeba0b318f73db47f44b27650a
     context.update({'list': list})
     return render_to_response('index.html', context)
 
@@ -92,6 +122,10 @@ def final(request):
         cur=conn.cursor()
         cur.execute("select name from movies;")
         x=cur.fetchall()
+<<<<<<< HEAD
+=======
+    print x
+>>>>>>> 6ccdb0ee6d8e49eeba0b318f73db47f44b27650a
     form = FinalForm()
     request_context = RequestContext(request)
     if request.method == 'POST':
