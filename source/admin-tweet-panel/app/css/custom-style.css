@@ -1,0 +1,16 @@
+.img-logo{
+    width:auto ;
+    max-height:35px;
+}
+
+
+
+/*Advance map styles*/
+
+.angular-google-map-container {
+    width: 100%;
+    height: 500px;
+}
+.inline-block{
+    display: inline-block;
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "text": "Main Navigation",
+    "heading": "true"
+  },
+  {
+    "text": "Add Tweets",
+    "sref": "app.dashboard",
+    "icon": "icon-speedometer"
+  },
+  {
+    "text": "See Movie Graphs",
+    "sref": "app.chart",
+    "icon": "icon-graph"
+  }
+]

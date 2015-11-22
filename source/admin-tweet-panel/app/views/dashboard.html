@@ -1,0 +1,58 @@
+<h3>
+    Dashboard
+    <small>Add Tweets For A Movieo Database</small>
+</h3>
+<div class="row" ng-controller="DashboardController">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <form ng-submit="sendHashtags()">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="dg" >Select Movie *</label>
+                    <select id="dg" ng-model="tweet.movie_id"  style="background: white">
+                        <option ng-repeat="movie in movieList" value="{{movie.id}}">{{movie.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="name">Enter Hashtags *</label>
+                    <input type="text" class="form-control has-feedback" id="name" placeholder="Hashtags" ng-model="tweet.hashtags" required>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="d">From Date</label>
+                    <input type="date" class="form-control has-feedback" id="d" placeholder="Hashtags" ng-model="tweet.from_date" >
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="i">To Date</label>
+                    <input type="date" class="form-control has-feedback" id="i" placeholder="Hashtags" ng-model="tweet.to_date" >
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-lg-4"></div>
+    <div class="col-lg-12">
+        <form ng-submit="sendTweets()" >
+            <h4 ng-if="selected.tweets">Tweets Table - {{tweet.hashtags}}</h4>
+            <div class="col-lg-12" ng-repeat="tweet in tweetList" style="color: #383d4e" >
+                <hr>
+                <input type="checkbox" checklist-value="tweet" checklist-model="selected.tweets" > &nbsp;&nbsp;{{tweet.text}}
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-default" >Submit</button>
+        </form>
+    </div>
+    <p class="col-lg-12 col-custom1" style="text-align: justify;color: red">
+        {{message}}
+    </p>
+</div>

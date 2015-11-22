@@ -8,6 +8,8 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
     $scope.Guest = !checkCookie();
     console.log($scope.Guest);
 
+    $scope.movieTweets = [];
+
     var myVar = setInterval(myTimer, 1000);
 
     function myTimer() {
@@ -118,25 +120,6 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
                 })
             }
         });
-
-    /*    /!*get videos for that movie*!/
-     $http.get(baseURL+'/movies/videos/' + $stateParams.movie_id)
-     .then(function (data) {
-     console.log(data);
-     if(data.status == 200){
-     $scope.movieVideos = data.data;
-     }
-     });
-
-     /!*get quotes for that movie*!/
-     $http.get(baseURL+'/movies/quotes/' + $stateParams.movie_id)
-     .then(function (data) {
-     console.log(data);
-     if(data.status == 200){
-     $scope.movieQuotes = data.data;
-     }
-     });
-
      /*get reviews for that movie*/
 
     function moviereviews() {
@@ -145,6 +128,16 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
                 console.log(data);
                 if (data.status == 200) {
                     $scope.movieReviews = data.data;
+                }
+            });
+    }
+
+    function movietweets() {
+        $http.get(baseURL + '/movie-tweet/' + $stateParams.movie_id)
+            .then(function (data) {
+                console.log(data);
+                if (data.status == 200) {
+                    $scope.movieTweets = data.data;
                 }
             });
     }
@@ -192,4 +185,5 @@ App.controller('movieController',['$scope','$timeout','$http','$rootScope', '$st
         }
     };
     moviereviews();
+    movietweets();
 }]);

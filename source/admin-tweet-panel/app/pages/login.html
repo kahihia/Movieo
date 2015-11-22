@@ -1,0 +1,46 @@
+<div ng-controller="LoginController" class="block-center mt-xl wd-xl">
+    <!-- START panel-->
+    <div class="panel panel-dark panel-flat">
+
+        <div class="panel-heading text-center">
+            <p class="text-center pv" style="font-size: x-large;font-weight: bolder" >MOVIEO</p>
+            <p class="text-center pv">Sign in to continue</p>
+        </div>
+        <div class="panel-body">
+
+
+            <form role="form" validate-form="" novalidate="" class="mb-lg" name="loginForm" ng-submit="loginAdmin()">
+                <div class="form-group has-feedback">
+                    <input id="exampleInputEmail1" type="text" placeholder="Enter email"
+                           ng-model="account.email" required="required" class="form-control"/>
+                    <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input id="exampleInputPassword1" type="password" placeholder="Password" ng-model="account.password"
+                           required="required" class="form-control"/>
+                    <span class="fa fa-lock form-control-feedback text-muted"></span>
+                </div>
+                <div class="clearfix">
+                    <div class="checkbox c-checkbox pull-left mt0">
+                        <label>
+                            <input type="checkbox" value="" name="remember" ng-model="account.remember"/>
+                            <span class="fa fa-check"></span>Remember Me</label>
+                    </div>
+                    <div class="pull-right"><a ui-sref="page.recover" class="text-muted">Forgot your password?</a>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary mt-lg">Login</button>
+            </form>
+            <div ng-show="authMsg" class="alert alert-danger text-center">{{authMsg}}</div>
+
+            <span class="label label-account" style="color:black">Don't have an account yet? <a ui-sref="page.register"
+                                                                                                class="btn btn-block btn-default">Create
+                an Account</a> </span>
+
+
+        </div>
+    </div>
+    <!-- END panel-->
+
+</div>
+

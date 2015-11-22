@@ -100,7 +100,25 @@
         </div><hr>-->
         <div class="container">
             <div class="row">
-                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <scrollable height="180" class="list-group">
+                        <span href="#" class="list-group-item" ng-repeat="tweet in movieTweets" >
+                            <div class="media-box">
+                                <div class="pull-left">
+                                    <img src="{{tweet.profile_image_url}}" alt="Image" class="media-box-object img-circle thumb32" />
+                                </div>
+                                <div class="media-box-body clearfix">
+                                    <small class="pull-right">{{tweet.created_at | date}}</small>
+                                    <strong class="media-box-heading text-primary">
+                                        <span class="text-left"></span>{{tweet.name}}</strong>
+                                    <p class="mb-sm">
+                                        <small>{{tweet.text}}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </span>
+                    </scrollable>
+                </div>
                 <div class="col-lg-8">
                     <h2>Reviews</h2>
                     <div class="row" style="text-align: left" >
