@@ -169,15 +169,15 @@ $scope.revokePermissions = function () {
     }
 ])
 
-.controller('movieCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader',
-        function($scope, $state, MovieIndividual, $rootScope, Loader) {
+.controller('movieCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader','MovieCast',
+        function($scope, $state, MovieIndividual, $rootScope, Loader, MovieCast) {
           
           // movieId hold the ID of the current movie being referred to
           var movieId = $state.params.movieId;
           
           MovieIndividual.get(movieId).success(function(data){
             $scope.movie = data[0];
-            
+            $scope.dir = data[1];
             var tempStr = $scope.movie.poster
             var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
             $scope.movie.poster = newStr
@@ -187,6 +187,16 @@ $scope.revokePermissions = function () {
           }).error(function(err, statusCode) {
             Loader.hideLoading();
             Loader.toggleLoadingWithMessage(err.message);
+          })
+          
+          MovieCast.get(movieId).success(function(data){
+            $scope.cast1 = data[0];
+            $scope.case2 = data[1];
+            
+            var tempStr2 = $scope.cast1.image_link
+            var newStr2 = tempStr2.replace("snippets","http://umeshksingla.pythonanywhere.com")
+            $scope.cast1.image_link = newStr2
+                       
           })
 }])
 

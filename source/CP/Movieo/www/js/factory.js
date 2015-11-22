@@ -131,6 +131,15 @@ angular.module('movieo.factory', [])
     return movieData;
 }])
 
+.factory('MovieCast', ['$http', function($http){
+    var movieData = {
+        get: function(movieId) {
+            return $http.get(base + '/movies/cast/' + movieId )
+        }
+    };
+    return movieData;
+}])
+
 .factory('topboxFactory', ['$http', function($http) {
     var topTen = {
         get: function() {
