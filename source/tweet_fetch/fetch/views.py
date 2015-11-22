@@ -3,6 +3,9 @@ from TwitterAPI import TwitterAPI
 from forms import *
 from django.template import RequestContext
 from django.core.context_processors import csrf
+import MySQLdb
+import requests
+import json
 
 # Create your views here.
 def getTweets(request):
@@ -15,10 +18,9 @@ def getTweets(request):
     context = {'tweets': req}
     return render_to_response('test.html', context)
 
-<<<<<<< HEAD
 
-=======
->>>>>>> f5a23deb362e02914f3bda03960141cee6401a05
+tweetarray=[]
+
 def testfunc(request):
     var=request.GET.getlist('tweet')
     context={'a':var}
@@ -26,19 +28,21 @@ def testfunc(request):
 
 alltweets=[]
 
-<<<<<<< HEAD
+
+
 def printtweets(request):
     final=[]
+    finale=[]
     for i in range(len(alltweets)):
         final.append(alltweets[i])
     context={'alltweets':final}
     for i in range(len(alltweets)):
-        alltweets.pop()
+         alltweets.pop()
+    send=json.dumps(tweetarray)
+    print tweetarray
     return render_to_response('hello.html',context)
 
 
-=======
->>>>>>> f5a23deb362e02914f3bda03960141cee6401a05
 def gethashes(request, hashtag):
     lis = []
     var = ''
@@ -56,22 +60,21 @@ def gethashes(request, hashtag):
     else:
         for i in range(count):
             var += str(lis[i]) + " OR "
-<<<<<<< HEAD
-    req = keys.request('search/tweets', {'q': var, 'count': 10, 'lang': 'en'})
-=======
-    req = keys.request('search/tweets', {'q': var, 'count': 10, 'lang': 'en', 'until':'2015-08-20'})
->>>>>>> f5a23deb362e02914f3bda03960141cee6401a05
+    req = keys.request('search/tweets', {'q': var, 'count': 50, 'lang': 'en','result_type':'popular'})
     list = []
-    #z = []
     for j in req:
+        tweetdict={}
         list.append(j)
-        # print j
-        print j[u'text']
+        if j[u'user'][u'verified']==True:
+            tweetdict.update({'text':j[u'text']})
+            tweetdict.update({'name':j[u'user'][u'name']})
+            tweetdict.update({'profile_image_url':j[u'user'][u'profile_image_url_https']})
+            tweetdict.update({'created_at':j[u'created_at']})
         alltweets.append(j[u'text'])
-        #z = []
+        tweetarray.append(tweetdict)
+    print "Tweet array %s" %tweetarray
     context.update({'list': list})
     return render_to_response('index.html', context)
-
 
 def tweets(request):
     # username = request.POST['username']
@@ -84,6 +87,11 @@ def fetch(request):
 
 
 def final(request):
+    conn=MySQLdb.connect('localhost','root','12345','tweet_db')
+    with conn:
+        cur=conn.cursor()
+        cur.execute("select name from movies;")
+        x=cur.fetchall()
     form = FinalForm()
     request_context = RequestContext(request)
     if request.method == 'POST':
@@ -91,9 +99,7 @@ def final(request):
         if form.is_valid():
             cd = form.cleaned_data
             hashtag = cd.get('hashtag')
-            f = cd.get('fromdate')
-            t = cd.get('todate')
             gethashes(request,hashtag)
-    request_context = {'form': form}
+    request_context = {'form': form,'a':x}
     request_context.update(csrf(request))
     return render_to_response('final.html', request_context)
