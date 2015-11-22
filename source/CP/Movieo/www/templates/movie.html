@@ -48,13 +48,12 @@
                  <div class="item item-divider">
                         The Cast 
                  </div>
-                 <a class="item item-avatar" href="#/app/movie/actor/{{::cast1.actor_id}}">
+                 <a class="item item-avatar" ng-repeat="cast1 in cast track by $index"  href="#/app/movie/actor/{{::cast1.actor_id}}">
                     <img src="{{::cast1.image_link}}">
                     <h2>{{::cast1.actor_name}}</h2>
                     <p>{{cast1.role}} : {{::cast1.actor_name}}</p>
                  </a>
-                 
-                 
+                 <br>   
                  <div class="Reviews">
                      <div class="item item-divider">
                          Reviews

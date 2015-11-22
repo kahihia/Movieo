@@ -197,12 +197,15 @@ $scope.revokePermissions = function () {
           })
           
           MovieCast.get(movieId).success(function(data){
-            $scope.cast1 = data[0];
-            $scope.case2 = data[1];
+            $scope.cast = data;
             
-            var tempStr2 = $scope.cast1.image_link
-            var newStr2 = tempStr2.replace("snippets",base)
-            $scope.cast1.image_link = newStr2
+            for (var i = 0; i < $scope.cast.length; i++) {
+            
+                var tempStr2 = $scope.cast[i].image_link
+                var newStr2 = tempStr2.replace("snippets",base)
+                $scope.cast[i].image_link = newStr2
+            
+            };
                        
           })
           
