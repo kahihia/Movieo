@@ -241,6 +241,10 @@ $scope.revokePermissions = function () {
             
             actorFactory.get(actorid).success(function(data){
                 $scope.actorInfo = data;
+                
+                var tempStr = $scope.actorInfo.poster;
+                $scope.actorInfo.poster = tempStr.replace("snippets",base)
+                
             }).error(function(err, statusCode) {
                 Loader.hideLoading();
                 Loader.toggleLoadingWithMessage(err.message);
