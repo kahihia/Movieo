@@ -1,13 +1,22 @@
 
 
-<form method="get" action="/test/">
-    {% csrf_token %}
-{% for i in alltweets %}
-    <input type="checkbox" name="tweet" value="{{i}}">{{i}}
-    <br>
-{% endfor %}
-    <input type="submit" value="Submit">
-</form>
+<!--<form method="get" action="/test/">-->
+    <!--{% csrf_token %}-->
+<!--{% for i in alltweets %}-->
+    <!--<input type="checkbox" name="tweet" value="{{i}}">{{i}}-->
+    <!--<br>-->
+<!--{% endfor %}-->
+    <!--<input type="submit" value="Submit">-->
+<!--</form>-->
 
+{% for i in alltweets %}
+{{i}}
+{% endfor %}
+
+<!--{% for i in alltweets %}-->
+<!--{{i}}-->
+<!--<br>-->
+<!--<br>-->
+<!--{% endfor %}-->
 
 
