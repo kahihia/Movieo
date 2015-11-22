@@ -120,9 +120,6 @@ $scope.revokePermissions = function () {
             // we want to save each movie individually
             // this way we can access each movie info. by it's _id
             for (var i = 0; i < movies.length; i++) {
-                var tempStr = movies[i].poster
-                var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
-                movies[i].poster = newStr
                 LSFactory.set(movies[i].id, movies[i]);
             };
         }
@@ -165,9 +162,6 @@ $scope.revokePermissions = function () {
             // we want to save each movie individually
             // this way we can access each movie info. by it's _id
             for (var i = 0; i < movies.length; i++) {
-                var tempStr = movies[i].poster
-                var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
-                movies[i].poster = newStr
                 LSFactory.set(movies[i].id, movies[i]);
             };
         }

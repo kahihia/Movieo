@@ -3,7 +3,7 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb
 .run(function($rootScope, $state, $ionicPlatform, $window, OpenFB) {
   
   // Redirect URL : https://www.facebook.com/connect/login_success.html When deploying to android
-  OpenFB.init('1652935351632817','http://localhost:8101/oauthcallback.html');
+  OpenFB.init('1652935351632817');
           
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -18,17 +18,6 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb
       StatusBar.styleDefault();
     }
   });
-  
-  $rootScope.$on('$stateChangeStart', function(event, toState) {
-            if (toState.name !== "app.fblogin" && toState.name !== "app.logout" && !$window.sessionStorage['fbtoken']) {
-                $state.go('app.fblogin');
-                event.preventDefault();
-            }
-        });
-
-        $rootScope.$on('OAuthException', function() {
-            $state.go('app.fblogin');
-        });
   
 })
 .config(function($stateProvider, $urlRouterProvider) {
@@ -84,8 +73,7 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb
       url: '/upcoming',
       views: {
         'menuContent': {
-          templateUrl: 'templates/upcoming.html',
-          controller: 'upComingCtrl'
+          templateUrl: 'templates/upcoming.html'
         }
       }
     })
