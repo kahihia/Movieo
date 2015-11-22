@@ -14,7 +14,7 @@
                 <span class="movieName" style="font-size: 30px">({{movie.date_of_release | date :'yyyy'}})</span>
             </div>
             <div class="col-lg-12 col-md-12 " style="padding-top: 10px" >
-                <span class="movieName" style="font-size: 35px">{{movie.tagline | uppercase}}</span>
+                <span class="movieName" style="font-size: 35px">{{movie.tagline | uppercase}}!</span>
             </div>
         </div>
         <div class="container" style="
@@ -28,7 +28,7 @@
                     <img src="{{poster}}" class="poster thumbnail" style="max-width: 240px;max-height: 360px;height: 360px;width: 240px" >
                 </div>
                 <div class="col-lg-4 col-md-4">
-                    <h3><strong>User Rating:</strong> {{movie.rating | number : 1}}/5<br/>
+                    <h3><strong>User Rating:</strong> {{movie.rating | number : 1}}/5 <br/>
                         <span style="color: yellow" >
                         <span ng-repeat="a in range(movie.full) track by $index"><i class="fa fa-star">&nbsp;</i></span>
                         <span ng-repeat="a in range(movie.half) track by $index"><i class="fa fa-star-half-full">&nbsp;</i></span>
@@ -41,9 +41,11 @@
                     <h4><strong>Budget :</strong> {{movie.budget | currency}}</h4>
                     <h4><strong>Country :</strong> {{movie.country}}</h4>
                     <h4><strong>Directed By :</strong> {{movie.director}}</h4>
+                    <h4><strong>Popularity</strong> <em class="fa fa-line-chart"></em></h4>
                 </div>
                 <div class="col-lg-4 col-md-4" >
-                    TWEETS
+                    <a class="twitter-timeline" href="https://twitter.com/search?q=%23mi5%20%40tomCruise" data-widget-id="651866464245321728">Tweets about #mi5 @tomCruise</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                 </div>
             </div>
 
@@ -98,7 +100,25 @@
         </div><hr>-->
         <div class="container">
             <div class="row">
-                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <scrollable height="180" class="list-group">
+                        <span href="#" class="list-group-item" ng-repeat="tweet in movieTweets" >
+                            <div class="media-box">
+                                <div class="pull-left">
+                                    <img src="{{tweet.profile_image_url}}" alt="Image" class="media-box-object img-circle thumb32" />
+                                </div>
+                                <div class="media-box-body clearfix">
+                                    <small class="pull-right">{{tweet.created_at | date}}</small>
+                                    <strong class="media-box-heading text-primary">
+                                        <span class="text-left"></span>{{tweet.name}}</strong>
+                                    <p class="mb-sm">
+                                        <small>{{tweet.text}}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </span>
+                    </scrollable>
+                </div>
                 <div class="col-lg-8">
                     <h2>Reviews</h2>
                     <div class="row" style="text-align: left" >
@@ -114,7 +134,7 @@
                                     <textarea class="form-control has-feedback"
                                               ng-model="newReview.description"
                                               rows="4" cols="100"
-                                              placeholder="Add your review here (min 40 characters)"
+                                              placeholder="Add/Edit your review here (min 40 characters)"
                                               style="resize: vertical">
                                     </textarea>
                                 </span>
@@ -145,11 +165,12 @@
                                     <h3 ng-if="newReview.user_id == review.user_id" style="color: #d9534f" >@ {{review.name_of_user}} <span style="color:yellow" >({{review.rating}}/10)</span> </h3>
                                     <span style="font-size: 16px;font-style: normal;padding-left: 40px;color: #dbdbdb" >{{review.description}}</span><br/>
             <span class="text-muted pull-right" >
-                <b>{{ review.created | date }}</b>
+                <b>{{ review.created | date }}&nbsp;&nbsp;<a ui-sref="app.review-analysis({review_id : {{review.id}}})"><span style="color: yellowgreen"><em class="fa fa-bar-chart"></em></span></a></b>
             </span>
                                 </div>
                                 <div class="col-sm-3 col-xs-6 text-center" style="background: white;text-align: center;padding-right: 0%;padding-top: 2%" >
-                                    <canvas classyloader="" data-height="150px" data-diameter="60" data-font-size="25px" data-percentage="{{review.positivity}}" data-speed="75" data-line-color="#ff902b" data-remaining-line-color="#edf2f6" data-line-width="3"></canvas>
+                                    <canvas ng-if="review.positivity > 0" classyloader="" data-height="150px" data-diameter="60" data-font-size="25px" data-percentage="{{review.positivity}}" data-speed="75" data-line-color="#27c24c" data-remaining-line-color="#edf2f6" data-line-width="5"></canvas>
+                                    <canvas ng-if="review.positivity <= 0" classyloader="" data-height="150px" data-diameter="60" data-font-size="25px" data-percentage="{{-1 * review.positivity}}" data-speed="75" data-line-color="#d9534f" data-remaining-line-color="#edf2f6" data-line-width="5"></canvas>
                                 </div>
                             </div>
                         </div>

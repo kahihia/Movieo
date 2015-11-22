@@ -108,7 +108,13 @@ myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'Rout
                 url: '/actors/{actor_id}',
                 title: 'Actor ',
                 templateUrl: helper.basepath('actor.html')
-            });
+            })
+            .state('app.review-analysis', {
+                url: '/review-analysis/{review_id}',
+                title: 'Review Analysis',
+                templateUrl: helper.basepath('review-analysis.html'),
+                resolve: helper.resolveFor('classyloader')
+            })
     }]);
 
 App.filter('searchFor', function(){
@@ -203,3 +209,15 @@ App.directive('classyloader', ["$timeout", "Utils", function($timeout, Utils) {
         }
     };
 }]);
+
+App.directive('scrollable', function(){
+    return {
+        restrict: 'EA',
+        link: function(scope, elem, attrs) {
+            var defaultHeight = 250;
+            elem.slimScroll({
+                height: (attrs.height || defaultHeight)
+            });
+        }
+    };
+});

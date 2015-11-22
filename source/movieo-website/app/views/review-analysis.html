@@ -1,0 +1,58 @@
+<style>
+    .num {
+        font-size: large;
+        color: #8bb8f1;
+        font-weight: bold;
+        text-align: center;
+    }
+    .num1 {
+        text-decoration: underline;
+    }
+</style>
+<div ng-controller="reviewAnalysisController" style="
+        background-color: #21262E;
+        border: solid #dbdbdb 5px;
+        border-radius: 1%;
+        padding: 25px" >
+    <div class="container-fluid">
+        <div class="row">
+            <a ui-sref="app.movies({movie_id:{{text.movie_id}}})" style="text-decoration: underline;color: #fff;padding-top: 10px;padding-left: 10px" >BACK TO MOVIE</a>
+        </div>
+    </div>
+    <div class="container-fluid"  style="color: #ffffff">
+        <div class="row" style="text-align: center;padding-bottom: 50px;padding-top: 50px">
+            <div class="col-lg-2" style="font-size: x-large;color: yellow" >Rating: {{text.rating}}/10</div>
+            <div class="col-lg-2" ng-if="text.positivity > 0" style="font-size: x-large;color: #27c24c">+{{text.positivity}}%</div>
+            <div class="col-lg-2" ng-if="text.positivity < 0" style="font-size: x-large;color: #d9534f">{{text.positivity}}%</div>
+            <div class="col-lg-8">
+                <b style="text-decoration: underline;color: #0075b0">Review</b> : {{text.description}}<br/>
+                <b style="text-decoration: underline;color: #0075b0">Language</b> : ENGLISH<br/>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid"  style="color: #ffffff">
+        <div class="row">
+            <div class="col-lg-3 num num1" style="color: #0075b0;font-size: x-large">KEYWORD</div>
+            <div class="col-lg-3 num num1" style="color: #0075b0;font-size: x-large">SCORE</div>
+            <div class="col-lg-3 num num1" style="color: #0075b0;font-size: x-large">TYPE</div>
+            <div class="col-lg-3 num num1" style="color: #0075b0;font-size: x-large">RELEVANCE</div>
+        </div>
+        <div class="row" ng-repeat="keyword in data.keywords" style="padding-top: 5px" >
+
+            <div class="col-lg-3 num num1" style="color: #fff">{{keyword.text}}</div>
+
+            <div class="col-lg-3 num" ng-if="keyword.sentiment.score >= 0"><span >{{keyword.sentiment.score * 100 | number : 3}}</span></div>
+            <div class="col-lg-3 num" ng-if="keyword.sentiment.score < 0"><span style="color: #d9534f"  >{{keyword.sentiment.score * 100 | number : 3}}</span></div>
+            <div class="col-lg-3 num" ng-if="!keyword.sentiment.score"><span>{{keyword.sentiment.score | number : 3}}</span></div>
+
+            <div class="col-lg-3 num" ng-if="keyword.sentiment.type == 'positive' "><span>{{keyword.sentiment.type}}</span></div>
+            <div class="col-lg-3 num" ng-if="keyword.sentiment.type == 'negative'"><span style="color: #d9534f"  >{{keyword.sentiment.type}}</span></div>
+            <div class="col-lg-3 num" ng-if="keyword.sentiment.type == 'neutral' "><span style="color: greenyellow" >{{keyword.sentiment.type}}</span></div>
+
+            <div class="col-lg-3 num"><span class="num">{{keyword.relevance * 100 | number : 3}}</span></div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row" style="text-align: center;padding-top: 50px;">{{data.usage}}</div>
+    </div>
+</div>
