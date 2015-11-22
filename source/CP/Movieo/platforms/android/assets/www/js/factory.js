@@ -1,5 +1,5 @@
 //var base = 'http://localhost:3000';
-var base = 'http://umeshksingla.pythonanywhere.com';
+var base = 'http://10.1.39.125:8000';
 
 angular.module('movieo.factory', [])
 
@@ -129,4 +129,49 @@ angular.module('movieo.factory', [])
         }
     };
     return movieData;
+}])
+
+.factory('MovieCast', ['$http', function($http){
+    var movieData = {
+        get: function(movieId) {
+            return $http.get(base + '/movies/cast/' + movieId )
+        }
+    };
+    return movieData;
+}])
+
+.factory('MovieReviews', ['$http', function($http){
+    var movieData = {
+        get: function(movieId) {
+            return $http.get(base + '/movies/reviews/' + movieId )
+        }
+    };
+    return movieData;
+}])
+
+.factory('topboxFactory', ['$http', function($http) {
+    var topTen = {
+        get: function() {
+            return $http.get(base + '/movies/top-box');
+        }
+    };
+    return topTen;
+}])
+
+.factory('upcomingFactory', ['$http', function($http) {
+    var topTen = {
+        get: function() {
+            return $http.get(base + '/movies/upcoming');
+        }
+    };
+    return topTen;
+}])
+
+.factory('actorFactory', ['$http', function($http){
+    var actorData = {
+        get: function(actorid) {
+            return $http.get(base + '/actors/' + actorid )
+        }
+    };
+    return actorData;
 }])

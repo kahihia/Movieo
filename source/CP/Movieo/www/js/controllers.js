@@ -209,9 +209,28 @@ $scope.revokePermissions = function () {
                        
           })
           
+          $scope.totalPositive = 0;
+          $scope.totalNegative = 0;
+          var x = 0;
+          
            MovieReviews.get(movieId).success(function(data){
                $scope.reviews = data;
+               for (var i = 0; i < $scope.reviews.length; i++) {
+                   
+                   var tempPositivity = $scope.reviews[i].positivity;
+                   $scope.reviews[i].positivity = (tempPositivity+100)/2;
+                   $scope.totalPositive = $scope.totalPositive + $scope.reviews[i].positivity;
+                   x = $scope.totalPositive;
+                   $scope.totalNegative = $scope.totalNegative + 100;
+               };
+                $scope.totalNegative = $scope.totalNegative - $scope.totalPositive
+                $scope.labels = ["None", "Neutral", "Negative","Positive"];
+                $scope.data = [0, 0, $scope.totalNegative, x];
            })
+           
+           
+           
+          
 }])          
 
 .controller('actorCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader','MovieCast','MovieReviews','actorFactory',
@@ -260,6 +279,6 @@ $scope.revokePermissions = function () {
 })
 
 .controller("DoughnutCtrl", function ($scope) {
-  $scope.labels = ["Positive", "Neutral", "Negative"];
-  $scope.data = [300, 500, 100];
+  $scope.labels = ["Positive", "Neutral", "Negative","One more"];
+  $scope.data = [0, 0, 100, 200];
 });

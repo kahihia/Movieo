@@ -58,21 +58,22 @@
                      <div class="item item-divider">
                          Reviews
                      </div>
-                     <div class = "reviewText">
-                        <div class="item-text-wrap" ng-repeat="review in reviews track by $index" href="#/app/movie/{{::review.movie_id}}">
-                           <p>
-                              <span style="font-weight:bold">
-                                  {{review.name_of_user}} : 
-                              </span>   
-                              {{review.description}}
-                           </p>
-                        </div>
-                     </div>
                  </div>
+                                               
+                <div class="item item-text-wrap" ng-repeat="review in reviews track by $index" >
+                    <span class="avatar" style="background-image: url('img/tyrion.jpg');"></span>
+                    <strong>{{::review.name_of_user}}</strong> <strong>:</strong> "{{::review.description}}"
+                    <div class="card-footer text-right">
+                        <i class="icon ion-star"></i> {{::review.rating}}
+                        <i class="icon ion-heart assertive"></i> {{::review.positivity}}
+                        <div class="pull-left">
+                            <i class="icon ion-clock"></i> {{::review.created}}
+                        </div>
+                    </div>
+                </div>              
         </div>
-                            
-                                                 
-                 <div ng-controller="DoughnutCtrl">
+                             
+                 <div ng-controller="movieCtrl">
                      <div class="card">
                          <div class="item item-divider">
                              Public Rating
