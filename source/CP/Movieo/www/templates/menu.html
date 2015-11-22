@@ -7,7 +7,9 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
-        <a class="button button-icon button-clear ion-android-cart" href="#/app/browse">
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">  
+        <a class="button button-icon button-clear ion-android-home" href="#/app/browse">
         </a>
       </ion-nav-buttons>
     </ion-nav-bar>
@@ -18,7 +20,13 @@
     <ion-content class="menuContent">
       <ion-list class="sidemenu-list">
         <div class="headerItem">
-          <h1>MODIFY</h1>
+          <div class="list card">
+            <div class="item item-avatar" style="background:#303030">
+            <img src="https://s3.amazonaws.com/rapgenius/women-close-up-michelle-trachtenberg-monochrome-faces-hd-wallpapers.jpg">
+            <h2>Marty McFly</h2>
+            <p>November 05, 1955</p>
+        </div>
+        </div>
         </div>
         </ion-item>
         <ion-item class="menuItem" menu-close ng-click="" href="#/app/browse">
@@ -43,6 +51,18 @@
           <i class="icon ion-arrow-graph-up-right" class="menuIcon" style="font-size:150%"></i>
           <span class="menuText">
             Trending
+          </span>
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/topbox">
+          <i class="icon ion-podium" class="menuIcon" style="font-size:150%"></i>
+          <span class="menuText">
+            Top Box
+          </span>
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/upcoming">
+          <i class="icon ion-android-film" class="menuIcon" style="font-size:150%"></i>
+          <span class="menuText">
+            UpComing
           </span>
         </ion-item>
         <ion-item class="menuItem" menu-close ng-click="" href="#/app/fblogin">

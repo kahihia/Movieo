@@ -16,12 +16,8 @@
                 <div class="item item-divider">
                     <p class="row">
                         <label class="col">
-                            Rating : <i class="icon ion-star" ng-repeat="4"></i> 
+                            Rating : {{::movie.newRating}}
                             <!-- Hard coded rating change it later -->
-                        </label>
-                        <label class="col">
-                            Budget :
-                            <label class="subdued">{{::movie.budget | currency}}</label>
                         </label>
                     </p>
                     <p class="row">
@@ -33,9 +29,73 @@
                         </label>
                     </p>
                 </div>
+                <br>
+               
+                    <div class="item item-divider">
+                        The Team 
+                    </div>
+                    <div class="item item-text-wrap">
+                    <span>
+                        Directed By : {{::dir.director}}
+                    </span>
+                        <br>
+                    <span>     
+                        Written By : {{::dir.writer}}
+                    </span>
+                    </div>                     
+                 <br>
+                 
+                 <div class="item item-divider">
+                        The Cast 
+                 </div>
+                 <a class="item item-avatar" ng-repeat="cast1 in cast track by $index"  href="#/app/movie/actor/{{::cast1.actor_id}}">
+                    <img src="{{::cast1.image_link}}">
+                    <h2>{{::cast1.actor_name}}</h2>
+                    <p>{{cast1.role}} : {{::cast1.actor_name}}</p>
+                 </a>
+                 <br>   
+                 <div class="Reviews">
+                     <div class="item item-divider">
+                         Reviews
+                     </div>
+                 </div>
+                     
+                            
+                <div class="item item-text-wrap" ng-repeat="review in reviews track by $index" >
+                    <span class="avatar" style="background-image: url('img/tyrion.jpg');"></span>
+                    <strong>{{::review.name_of_user}}</strong> <strong>:</strong> "{{::review.description}}"
+                    <div class="card-footer text-right">
+                        <i class="icon ion-star"></i> {{::review.rating}}
+                        <i class="icon ion-heart assertive"></i> {{::review.positivity}}
+                        <div class="pull-left">
+                            <i class="icon ion-clock"></i> {{::review.created}}
+                        </div>
+                    </div>
+                </div>
+                            
+                        
+                       
+                 
+        </div>
+                            
+                                                 
+                 <div ng-controller="DoughnutCtrl">
+                     <div class="card">
+                         <div class="item item-divider">
+                             Public Rating
+                         </div>
+                         <div class="item item-text-wrap">
+                            <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels">
+                            </canvas> 
+                         </div>
+                     </div>
+                 </div>
+                 <div>
+                     
+                                          
                 <button class="button button-assertive button-block" ng-click="addToCart()"> 
                 	<i class="icon ion-checkmark"></i> Write Review
                 </button>
-            </div>
+            </div>       
     </ion-content>
 </ion-view>
