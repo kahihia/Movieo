@@ -76,3 +76,7 @@ class ToWatchListSerializer(serializers.ModelSerializer):
             model = ToWatchList
             fields = ('id', 'user_id', 'movie_id')
 
+class TweetsSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Tweets
+            fields = ('id', 'movie_id', 'text', 'name', 'created_at', 'profile_image_url')

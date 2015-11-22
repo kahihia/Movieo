@@ -11,8 +11,10 @@ import json
 from datetime import timedelta
 import urllib
 import requests
+import tw_fetcher
 
-Key = '9d1afc024c75f7adcb960592b241e3f495be04ec'
+
+Key = '69e1c7f637ee62966be22f13cbc04907c16923f0'
 
 
 def func(inp):
@@ -168,6 +170,19 @@ def top_ten(request):
         movies = movies.order_by('-rating')[:10]
         serializer = MovieSerializer(movies, many=True)
         return Response(serializer.data)
+
+
+@api_view(['GET'])
+def all_movies(request):
+    """
+    List all 10 movies sorted in alphabetical order
+    """
+    if request.method == 'GET':
+        movies = Movie.objects.order_by('name')
+        serializer = MovieSerializer(movies, many=True)
+        return Response(serializer.data)
+
+
 
 @api_view(['GET'])
 def this_week(request):
@@ -550,3 +565,52 @@ def add_user(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+#@csrf_exempt
+@api_view(['POST'])
+def gettweets(request):
+    """
+    Get all popular and verified tweets according to sent hashtags
+    """
+    temp = json.loads(request.body)
+    print (temp['hashtags'])
+    return Response(tw_fetcher.gethashes(temp['hashtags']), status=status.HTTP_201_CREATED)
+
+
+#@csrf_exempt
+@api_view(['POST'])
+def savetweets(request):
+    """
+    Save selected popular and verified tweets according to admin selection
+    """
+    temp = json.loads(request.body)
+    #print (temp)
+    tweet_list = temp['tweets']
+    movieID = temp['movie_id']
+    print (movieID)
+    for i in tweet_list:
+        i['movie_id']=movieID
+        serializer = TweetsSerializer(data=i)
+        #print (serializer)
+        #print (serializer.data)
+        print (serializer.is_valid())
+        if serializer.is_valid():
+            serializer.save()
+    return Response(status=status.HTTP_201_CREATED)
+        #print (temp['hashtags'])
+   # return Response(tw_fetcher.gethashes(temp['hashtags']), status=status.HTTP_201_CREATED)
+
+
+
+#@csrf_exempt
+@api_view(['GET'])
+def movie_tweet(request,pk):
+    try:
+        tweets = Tweets.objects.filter(movie_id=pk)
+    except Tweets.DoesNotExist:
+        return HttpResponse(status=404)
+    serializer = TweetsSerializer(tweets , many=True)
+    return Response(serializer.data)

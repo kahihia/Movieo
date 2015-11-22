@@ -51,6 +51,12 @@ class UserAdmin(admin.ModelAdmin):
     exclude = ()
     form = UserForm
 
+class TweetsAdmin(admin.ModelAdmin):
+    list_display = ['name', 'text', 'movie_id', 'created_at', 'profile_image_url']
+    exclude = ()
+    form = TweetsForm
+
+
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(CastDetails, CastDetailsAdmin)
 admin.site.register(ActorPhotos, ActorPhotosAdmin)
@@ -59,3 +65,4 @@ admin.site.register(MoviePhotos, MoviePhotosAdmin)
 admin.site.register(MovieVideos, MovieVideosAdmin)
 admin.site.register(MovieReviews, MovieReviewsAdmin)
 admin.site.register(User, UserAdmin)
+admin.site.register(Tweets, TweetsAdmin)

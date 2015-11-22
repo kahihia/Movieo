@@ -206,10 +206,11 @@ class ToWatchList(models.Model):
     user_id = models.ForeignKey(User)
     movie_id = models.ForeignKey(Movie)
 
-"""
+
 class Tweets(models.Model):
     movie_id = models.ForeignKey(Movie)
-    hashtags = 
-    popular_tweets = 
-    verified_tweets =
-"""
+    text = models.CharField(max_length=500, default='Not Available')
+    name = models.CharField(max_length=500, default='Not Available')
+    created_at = models.CharField(max_length=100, default='Not Available')
+    profile_image_url = models.CharField(max_length=1000, default='Not Available')
+

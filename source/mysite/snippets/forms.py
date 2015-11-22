@@ -47,3 +47,8 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         exclude = []
+
+class TweetsForm(forms.ModelForm):
+    class Meta:
+        model = Tweets
+        exclude = []

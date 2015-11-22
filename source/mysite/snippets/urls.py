@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^movies/recent_ten$',views.recent_ten),
     url(r'^movies/upcoming$',views.upcoming),
     url(r'^movies/top-ten$',views.top_ten),
+    url(r'^movies/all$',views.all_movies),
     url(r'^movies/opening$',views.this_week),
     url(r'^movies/(?P<pk>[0-9]+)$',views.single_movie),
 
@@ -31,6 +32,10 @@ urlpatterns = [
 
     url(r'^movies/reviews/(?P<pk>[0-9]+)$',views.movie_reviews),
     url(r'^users/add-movie-review$', views.add_movie_review),
+
+    url(r'^get-tweets$', views.gettweets),
+    url(r'^save-tweets$', views.savetweets),
+    url(r'^movie-tweet/(?P<pk>[0-9]+)$', views.movie_tweet),
 
 
     url(r'^login_user',views.login_user),
