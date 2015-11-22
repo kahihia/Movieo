@@ -12,8 +12,7 @@ function statusChangeCallback(response) {
     if (response.status === 'connected') {
 
         logged_in_user.auth_token = response.authResponse.accessToken;
-
-
+        //createCookie("accessToken", response.authResponse.accessToken, false);
         // Logged into your app and Facebook
         loginAPI(response.authResponse.accessToken);
     }
@@ -80,15 +79,45 @@ function loginAPI(auth_token) {
 
                 logged_in_user.name = response.name;
                 logged_in_user.id = 0;
-                logged_in_user.profile_image = response.picture.data.url;
-                logged_in_user['email'] = response.email;
-                logged_in_user.hometown = response.hometown.name;
-                logged_in_user.birthday = (new Date(response.birthday)).toISOString().slice(0, 10);
-                logged_in_user.gender = response.gender;
-                logged_in_user.about_me = response.bio;
-                logged_in_user.profile_link = response.link;
-                console.log(response.link, logged_in_user.profile_link);
-                console.log(response.email,typeof logged_in_user.email);
+                if (response.picture && response.picture.data.url) {
+                    logged_in_user.profile_image = response.picture.data.url;
+                }
+                else {
+                    logged_in_user.profile_image = 'Not Available'
+                }
+                if(response.email) {
+                    logged_in_user['email'] = response.email;
+                }
+                if (response.hometown && response.hometown.name) {
+                    logged_in_user.hometown = response.hometown.name;
+                }
+                else{
+                    logged_in_user.hometown = 'USA';
+                }
+                if (response.birthday) {
+                    logged_in_user.birthday = (new Date(response.birthday)).toISOString().slice(0, 10);
+                }
+                else {
+                    logged_in_user.birthday = (new Date()).toISOString().slice(0, 10);
+                }
+                if (response.gender) {
+                    logged_in_user.gender = response.gender;
+                }
+                else {
+                    logged_in_user.gender = 'male';
+                }
+                if(response.bio) {
+                    logged_in_user.about_me = response.bio;
+                }
+                else{
+                    logged_in_user.about_me = 'Confidential'
+                }
+                if(response.link) {
+                    logged_in_user.profile_link = response.link;
+                }
+                else {
+                    logged_in_user.profile_link = 'none'
+                }
                 login(auth_token, response.email);
             }
         }
@@ -124,7 +153,7 @@ function login(auth_token, email){
                     success: function (response) {
                         // log him
                         console.log(response);
-                        createCookie("accessToken", logged_in_user.auth_token, false);
+                        createCookie("accessToken", auth_token, false);
                         logged_in_user.id = response['id'];
                     },
                     error: function (response) {
