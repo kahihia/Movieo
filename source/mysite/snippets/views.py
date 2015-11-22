@@ -10,6 +10,20 @@ import datetime
 import json
 from datetime import timedelta
 import urllib
+import requests
+
+
+def func(inp):
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment'
+    payload = 'apikey=0915a75da9fb89af90a9484cc2ad9eda07e97043&text='+inp+'&outputMode=json'
+    headers = {'content-type': 'application/x-www-form-urlencoded'}
+    r = requests.post(url, data=payload, headers=headers)
+    #print (json.loads(r.json))
+    return int(float(json.loads(r.text)['docSentiment']['score'])*100)
+
+
+
+
 
 
 """from django.shortcuts import render
@@ -437,6 +451,7 @@ def add_movie_review(request):
             serializer2 = MovieSerializer(movie, many=True)
         else:    #return HttpResponse("done")
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    MovieReviews.objects.filter(user_id=temp['user_id'], movie_id = temp['movie_id']).update(positivity=func(temp['description']))
     reviews = MovieReviews.objects.filter(user_id=temp['user_id'],  movie_id=temp['movie_id'])
     serializer3 = MovieReviewsSerializer(reviews, many=True)
     return Response(serializer3.data, status=status.HTTP_201_CREATED)

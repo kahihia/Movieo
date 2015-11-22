@@ -159,6 +159,8 @@ class MovieReviews(models.Model):
     user_id = models.ForeignKey(User)
     rating = models.IntegerField(validators = [MinValueValidator(1), MaxValueValidator(10)],  default=0)
     description = models.TextField(max_length=5000, blank=True)
+    positivity = models.IntegerField(default=0)
+    
 
 class ReviewComments(models.Model):
     created = models.DateTimeField(auto_now_add=True)
