@@ -20,7 +20,7 @@ App.controller('DashboardController', function ($scope, $http, $cookies, $cookie
 
     $scope.sendHashtags = function () {
         console.log($scope.tweet);
-
+        $scope.tweetList = [];
         $scope.message = '';
 
         $http.post(baseUrl + '/get-tweets', {
@@ -29,6 +29,9 @@ App.controller('DashboardController', function ($scope, $http, $cookies, $cookie
             .then( function (response) {
                 console.log(response);
                 $scope.tweetList = response.data;
+                if(response.data.length){
+                    $scope.message = 'Could not fetch tweets';
+                }
 
             }, function (error) {
                 console.log(error);
@@ -47,13 +50,14 @@ App.controller('DashboardController', function ($scope, $http, $cookies, $cookie
                 .then(function (response) {
                     $scope.message = '';
                     console.log(response);
+                    swal("Done", "Tweets Added Successfully", "success")
                 }, function (error) {
                     $scope.message = 'Error Occurred';
                     console.log(error);
                 });
         }
         else {
-            $scope.message = 'Please select one tweet';
+            $scope.message = 'Please select one tweet at least.';
         }
     }
 });

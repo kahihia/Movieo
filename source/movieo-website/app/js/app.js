@@ -145,7 +145,8 @@ App
                 'vendor/Flot/jquery.flot.pie.js',
                 'vendor/Flot/jquery.flot.time.js',
                 'vendor/Flot/jquery.flot.categories.js',
-                'vendor/flot-spline/js/jquery.flot.spline.min.js']
+                'vendor/flot-spline/js/jquery.flot.spline.min.js'],
+            'slimscroll':         ['vendor/slimScroll/jquery.slimscroll.min.js'],
         },
         // Angular based script (use the right module name)
         modules: [

@@ -3,9 +3,9 @@
  */
 
 //var baseURL = 'http://umeshksingla.pythonanywhere.com';
-var baseURL = 'http://10.1.39.125:8000';
+var baseURL = 'http://umeshksingla.pythonanywhere.com';
 
-var strToReplace = 'snippets';
+var strToReplace = 'mysite/snippets';
 
 var logged_in_user = {
     email : '',

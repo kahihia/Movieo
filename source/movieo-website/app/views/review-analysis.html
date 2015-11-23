@@ -16,12 +16,12 @@
         padding: 25px" >
     <div class="container-fluid">
         <div class="row">
-            <a ui-sref="app.movies({movie_id:{{text.movie_id}}})" style="text-decoration: underline;color: #fff;padding-top: 10px;padding-left: 10px" >BACK TO MOVIE</a>
+            <a ui-sref="app.movies({movie_id:text.movie_id})" style="text-decoration: underline;color: #fff;padding-top: 10px;padding-left: 10px" >BACK TO MOVIE</a>
         </div>
     </div>
     <div class="container-fluid"  style="color: #ffffff">
         <div class="row" style="text-align: center;padding-bottom: 50px;padding-top: 50px">
-            <div class="col-lg-2" style="font-size: x-large;color: yellow" >Rating: {{text.rating}}/10</div>
+            <div class="col-lg-2" style="font-size: x-large;color: yellow" >Rating: {{text.rating}}/10 </div>
             <div class="col-lg-2" ng-if="text.positivity > 0" style="font-size: x-large;color: #27c24c">+{{text.positivity}}%</div>
             <div class="col-lg-2" ng-if="text.positivity < 0" style="font-size: x-large;color: #d9534f">{{text.positivity}}%</div>
             <div class="col-lg-8">

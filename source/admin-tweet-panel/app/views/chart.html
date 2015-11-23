@@ -1,4 +1,19 @@
 
-<div ng-controller="ChartController" id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+<div ng-controller="ChartController" >
+    <form ng-submit="getgraph()">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="name">Movie Name</label>
+                <input type="text" class="form-control has-feedback" id="name" placeholder="Name of the Movie" ng-model="movie.name" required>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
 
+    </div>
 </div>

@@ -33,10 +33,14 @@ App.controller('AngularCarouselController', ["$scope", function($scope) {
             addSlide(target, style);
         }
     }
+    //$scope.slides3 = [];
+    $scope.slides3 = ['https://www.nationalgalleries.org/media/41/batman.jpg',
+        'http://static.rogerebert.com/uploads/review/primary_image/reviews/toy-story-3-2010/hero_EB20100616REVIEWS100619990AR.jpg',
+        'http://images-cdn.moviepilot.com/image/upload/c_fill,h_500,w_1200/t_mp_quality/uploads_f74e8e10-807a-439a-9f6f-5cc52a932f2f-hero_conjuring-2013-1-jpg-18497.jpg',
+    'http://static6.businessinsider.com/image/53ac579d6bb3f71e1f2ad27a-1200-500/transformers-age-of-extinction-autobots.jpg',
+    'http://static.rogerebert.com/uploads/review/primary_image/reviews/iron-man-3-2013/hero_iron-man-3-couch.jpg'];
 
-    $scope.slides3 = [];
-
-    addSlides($scope.slides3, 'people', 50);
+    //addSlides($scope.slides3, 'people', 50);
 
 }]);
 

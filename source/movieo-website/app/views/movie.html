@@ -43,8 +43,16 @@
                     <h4><strong>Directed By :</strong> {{movie.director}}</h4>
                     <h4><strong>Popularity</strong> <em class="fa fa-line-chart"></em></h4>
                 </div>
-                <div class="col-lg-4 col-md-4" >
-                    <a class="twitter-timeline" href="https://twitter.com/search?q=%23mi5%20%40tomCruise" data-widget-id="651866464245321728">Tweets about #mi5 @tomCruise</a>
+                <div class="col-lg-4 col-md-4" ng-if="movie.id == 9" >
+                    <a class="twitter-timeline" href="https://twitter.com/hashtag/ThePeanutsMovie" data-widget-id="668634944680296449">#ThePeanutsMovie Tweets</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+                <div class="col-lg-4 col-md-4" ng-if="movie.id == 6" >
+                    <a class="twitter-timeline" href="https://twitter.com/search?q=%23spectre%20%23daniel" data-widget-id="668625797293322240">Tweets about #spectre #daniel</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+                <div class="col-lg-4 col-md-4" ng-if="movie.id == 3" >
+                    <a class="twitter-timeline" href="https://twitter.com/hashtag/baahubali" data-widget-id="668642718948569088">#baahubali Tweets</a>
                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                 </div>
             </div>
@@ -69,7 +77,7 @@
             <h2>Cast & Crew</h2>
             <div class="row">
 
-                <div ng-repeat="cast in movieCast | limitTo : 6" class="span2" class="col-lg-2" >
+                <div ng-repeat="cast in movieCast | limitTo : 6" class="span2" class="col-lg-2 col-md-2" >
                     <img src="{{cast.image_link}}" style="width: 100px;height: 120px" class="thumbnail" >
                     <a ui-sref="app.actors({actor_id:{{cast.actor_id}}})" style="text-decoration: none" ><h4>{{cast.actor_name}}</h4></a>
                     <h4><small>Role: </small>{{cast.role}}</h4>
@@ -82,7 +90,7 @@
         <div class="container">
             <h2>Photos</h2>
             <div class="row">
-                <div ng-repeat="photo in moviePhotos | limitTo : 5" class="col-lg-2" >
+                <div ng-repeat="photo in moviePhotos | limitTo : 5" class="col-lg-2 col-md-2"  >
                     <img src="{{photo.photo}}" style="width: 180px;height: 180px" class="thumbnail" >
                 </div>
             </div>
@@ -100,8 +108,9 @@
         </div><hr>-->
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
-                    <scrollable height="180" class="list-group">
+                <div class="col-lg-4 col-md-4">
+                    <h2>Admin Verfied Tweets</h2>
+                    <scrollable height="280" class="list-group">
                         <span href="#" class="list-group-item" ng-repeat="tweet in movieTweets" >
                             <div class="media-box">
                                 <div class="pull-left">
@@ -119,7 +128,7 @@
                         </span>
                     </scrollable>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-8 col-md-8">
                     <h2>Reviews</h2>
                     <div class="row" style="text-align: left" >
                         <div class="col-lg-12" >
@@ -161,8 +170,8 @@
                             <div class="col-lg-12" ng-repeat="review in movieReviews| orderBy:'-created_at':reverse">
                                 <hr>
                                 <div class="col-lg-9">
-                                    <h3 ng-if="newReview.user_id != review.user_id" style="color: #27c24c" >@ {{review.name_of_user}} <span style="color:yellow" >({{review.rating}}/10)</span> </h3>
-                                    <h3 ng-if="newReview.user_id == review.user_id" style="color: #d9534f" >@ {{review.name_of_user}} <span style="color:yellow" >({{review.rating}}/10)</span> </h3>
+                                    <h3 ng-if="newReview.user_id != review.user_id" style="color: #27c24c" >@ {{review.name_of_user}} <span style="color:yellow" >({{review.rating}}/10) <span style="color:white" ><em class="icon-arrow-up"></em></span> </span> </h3>
+                                    <h3 ng-if="newReview.user_id == review.user_id" style="color: #d9534f" >@ {{review.name_of_user}} <span style="color:yellow" >({{review.rating}}/10) <span style="color:white" ><em class="icon-arrow-up"></em></span> </span> </h3>
                                     <span style="font-size: 16px;font-style: normal;padding-left: 40px;color: #dbdbdb" >{{review.description}}</span><br/>
             <span class="text-muted pull-right" >
                 <b>{{ review.created | date }}&nbsp;&nbsp;<a ui-sref="app.review-analysis({review_id : {{review.id}}})"><span style="color: yellowgreen"><em class="fa fa-bar-chart"></em></span></a></b>

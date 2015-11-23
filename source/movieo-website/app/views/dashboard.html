@@ -45,10 +45,9 @@
                 rn-carousel-transition="hexagon"
                 rn-carousel-buffered=""
                 class="list-unstyled carousel3">
-            <li ng-repeat="slide in slides3 track by slide.id">
+            <li ng-repeat="slide in slides3">
                 <div
-                        style="border: solid 15px #355089;height: 125%;width: auto"
-                        ng-style="{'background-image': 'url(' + slide.img + ')'}"
+                        style="border: solid 15px #355089;height: 125%;width: auto;background: url('{{slide}}')"
                         class="bgimage">
                 </div>
             </li>

@@ -35,7 +35,7 @@ myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'Rout
         $locationProvider.html5Mode(false);
 
         // default route
-        $urlRouterProvider.otherwise('/page/login');
+        $urlRouterProvider.otherwise('/app/dashboard');
 
         //
         // Application Routes
@@ -84,7 +84,7 @@ myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'Rout
                 url: '/app',
                 abstract: true,
                 templateUrl: helper.basepath( 'app-h.html' ),
-                resolve: helper.resolveFor('modernizr', 'icons', 'screenfull', 'classyloader')
+                resolve: helper.resolveFor('modernizr', 'icons', 'screenfull', 'classyloader', 'slimscroll')
             })
             .state('app.dashboard', {
                 url: '/dashboard',
@@ -102,7 +102,7 @@ myApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'Rout
                 url: '/movies/{movie_id}',
                 title: 'Movie',
                 templateUrl: helper.basepath('movie.html'),
-                resolve: helper.resolveFor('classyloader')
+                resolve: helper.resolveFor('classyloader', 'slimscroll')
             })
             .state('app.actors', {
                 url: '/actors/{actor_id}',
