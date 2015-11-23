@@ -36,12 +36,29 @@
 
 .headerItem{
   padding-top: 3%;
-  padding-bottom: 1%;
   background: #303030  ;
 }
 
 .menuText{
   margin-left: 5%;
+  font-size: 120%
+}
+
+.menuHeaderText{
+  color:#FFF;
+}
+
+.menuHeaderTextSmall{
+  color:#FFF;
+}
+
+.menuTextSmall{
+  margin-left: 7%;
+  font-size: 120%
+}
+
+.menuTextSmaller{
+  margin-left: 9%;
   font-size: 120%
 }
 
