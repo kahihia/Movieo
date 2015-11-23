@@ -78,7 +78,7 @@ $scope.revokePermissions = function () {
             // this way we can access each movie info. by it's _id
             for (var i = 0; i < movies.length; i++) {
                 var tempStr = movies[i].poster
-                var newStr = tempStr.replace("snippets",base)
+                var newStr = tempStr.replace("mysite/snippets",base)
                 movies[i].poster = newStr
                 LSFactory.set(movies[i].id, movies[i]);
             };
@@ -186,7 +186,7 @@ $scope.revokePermissions = function () {
             $scope.movie.newRating = Math.round(ratingChange)
             
             var tempStr = $scope.movie.poster
-            var newStr = tempStr.replace("snippets",base)
+            var newStr = tempStr.replace("mysite/snippets",base)
             $scope.movie.poster = newStr
             
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -202,7 +202,7 @@ $scope.revokePermissions = function () {
             for (var i = 0; i < $scope.cast.length; i++) {
             
                 var tempStr2 = $scope.cast[i].image_link
-                var newStr2 = tempStr2.replace("snippets",base)
+                var newStr2 = tempStr2.replace("mysite/snippets",base)
                 $scope.cast[i].image_link = newStr2
             
             };
@@ -243,7 +243,7 @@ $scope.revokePermissions = function () {
                 $scope.actorInfo = data;
                 
                 var tempStr = $scope.actorInfo.poster;
-                $scope.actorInfo.poster = tempStr.replace("snippets",base)
+                $scope.actorInfo.poster = tempStr.replace("mysite/snippets",base)
                 
             }).error(function(err, statusCode) {
                 Loader.hideLoading();

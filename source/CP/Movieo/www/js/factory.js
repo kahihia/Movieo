@@ -1,5 +1,5 @@
 //var base = 'http://localhost:3000';
-var base = 'http://10.1.39.125:8000';
+var base = 'http://umeshksingla.pythonanywhere.com';
 
 angular.module('movieo.factory', [])
 
