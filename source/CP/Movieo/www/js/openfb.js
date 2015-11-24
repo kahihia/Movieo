@@ -293,3 +293,4 @@ var openFB = (function () {
         oauthCallback: oauthCallback,
         getLoginStatus: getLoginStatus
     }
+})

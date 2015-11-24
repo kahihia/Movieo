@@ -1,7 +1,8 @@
 angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','ngOpenFB'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, ngFB) {
   $ionicPlatform.ready(function() {
+    ngFB.init({appId: '1652935351632817'});
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
