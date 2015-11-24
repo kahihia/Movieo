@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 angular.module('movieo.controllers', ['ngOpenFB'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
+=======
+var base = 'http://10.1.39.125:8000';
+
+angular.module('movieo.controllers', [])
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, OpenFB, $state) {
+>>>>>>> 2d1a7eb82af637399697eef1db367e6b3c4098fd
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -8,6 +16,7 @@ angular.module('movieo.controllers', ['ngOpenFB'])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+<<<<<<< HEAD
   $scope.fbLogin = function () {
     ngFB.login({scope: 'email,read_stream,publish_actions'}).then(
         function (response) {
@@ -19,6 +28,24 @@ angular.module('movieo.controllers', ['ngOpenFB'])
             }
         });
     };
+=======
+  
+  $scope.logout = function () {
+    OpenFB.logout();
+    $state.go('app.login');
+};
+
+$scope.revokePermissions = function () {
+    OpenFB.revokePermissions().then(
+        function () {
+            $state.go('app.login');
+        },
+        function () {
+            alert('Revoke permissions failed');
+        });
+};
+
+>>>>>>> 2d1a7eb82af637399697eef1db367e6b3c4098fd
 })
 
 .controller('PlaylistsCtrl', function($scope) {
@@ -71,7 +98,7 @@ angular.module('movieo.controllers', ['ngOpenFB'])
             // this way we can access each movie info. by it's _id
             for (var i = 0; i < movies.length; i++) {
                 var tempStr = movies[i].poster
-                var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
+                var newStr = tempStr.replace("mysite/snippets",base)
                 movies[i].poster = newStr
                 LSFactory.set(movies[i].id, movies[i]);
             };
@@ -80,17 +107,106 @@ angular.module('movieo.controllers', ['ngOpenFB'])
     }
 ])
 
-.controller('movieCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader',
-        function($scope, $state, MovieIndividual, $rootScope, Loader) {
+.controller('upComingCtrl', ['$scope', 'MoviesFactory', 'LSFactory', 'Loader',
+    function($scope, MoviesFactory, LSFactory, Loader) {
+
+        Loader.showLoading();
+
+        // support for pagination
+        var page = 1;
+        $scope.movies = [];
+        var movies = LSFactory.getAll();
+
+        // if movies exists in localStorage, use that instead of making a call
+        if (movies.length > 0) {
+            $scope.movies = movies;
+            Loader.hideLoading();
+        } else {
+            upcomingFactory.get(page).success(function(data) {
+                // process movies and store them 
+                // in localStorage so we can work with them later on, 
+                // when the user is offline
+                processMovies(data);
+
+                $scope.movies = data;
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                Loader.hideLoading();
+            }).error(function(err, statusCode) {
+                Loader.hideLoading();
+                Loader.toggleLoadingWithMessage(err.message);
+            });
+        }
+
+        function processMovies(movies) {
+            LSFactory.clear();
+            // we want to save each movie individually
+            // this way we can access each movie info. by it's _id
+            for (var i = 0; i < movies.length; i++) {
+                LSFactory.set(movies[i].id, movies[i]);
+            };
+        }
+
+    }
+])
+
+.controller('topBoxCtrl', ['$scope', 'MoviesFactory', 'LSFactory', 'Loader',
+    function($scope, MoviesFactory, LSFactory, Loader) {
+
+        Loader.showLoading();
+
+        // support for pagination
+        var page = 1;
+        $scope.movies = [];
+        var movies = LSFactory.getAll();
+
+        // if movies exists in localStorage, use that instead of making a call
+        if (movies.length > 0) {
+            $scope.movies = movies;
+            Loader.hideLoading();
+        } else {
+            topboxFactory.get(page).success(function(data) {
+                // process movies and store them 
+                // in localStorage so we can work with them later on, 
+                // when the user is offline
+                processMovies(data);
+
+                $scope.movies = data;
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                Loader.hideLoading();
+            }).error(function(err, statusCode) {
+                Loader.hideLoading();
+                Loader.toggleLoadingWithMessage(err.message);
+            });
+        }
+
+        function processMovies(movies) {
+            LSFactory.clear();
+            // we want to save each movie individually
+            // this way we can access each movie info. by it's _id
+            for (var i = 0; i < movies.length; i++) {
+                LSFactory.set(movies[i].id, movies[i]);
+            };
+        }
+
+    }
+])
+
+.controller('movieCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader','MovieCast','MovieReviews',
+        function($scope, $state, MovieIndividual, $rootScope, Loader, MovieCast, MovieReviews) {
           
           // movieId hold the ID of the current movie being referred to
           var movieId = $state.params.movieId;
           
           MovieIndividual.get(movieId).success(function(data){
             $scope.movie = data[0];
+            $scope.dir = data[1];
+            
+            
+            var ratingChange = $scope.movie.rating
+            $scope.movie.newRating = Math.round(ratingChange)
             
             var tempStr = $scope.movie.poster
-            var newStr = tempStr.replace("mysite/snippets","http://umeshksingla.pythonanywhere.com")
+            var newStr = tempStr.replace("mysite/snippets",base)
             $scope.movie.poster = newStr
             
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -99,4 +215,94 @@ angular.module('movieo.controllers', ['ngOpenFB'])
             Loader.hideLoading();
             Loader.toggleLoadingWithMessage(err.message);
           })
+          
+          MovieCast.get(movieId).success(function(data){
+            $scope.cast = data;
+            
+            for (var i = 0; i < $scope.cast.length; i++) {
+            
+                var tempStr2 = $scope.cast[i].image_link
+                var newStr2 = tempStr2.replace("mysite/snippets",base)
+                $scope.cast[i].image_link = newStr2
+            
+            };
+                       
+          })
+          
+          $scope.totalPositive = 0;
+          $scope.totalNegative = 0;
+          var x = 0;
+          
+           MovieReviews.get(movieId).success(function(data){
+               $scope.reviews = data;
+               for (var i = 0; i < $scope.reviews.length; i++) {
+                   
+                   var tempPositivity = $scope.reviews[i].positivity;
+                   $scope.reviews[i].positivity = (tempPositivity+100)/2;
+                   $scope.totalPositive = $scope.totalPositive + $scope.reviews[i].positivity;
+                   x = $scope.totalPositive;
+                   $scope.totalNegative = $scope.totalNegative + 100;
+               };
+                $scope.totalNegative = $scope.totalNegative - $scope.totalPositive
+                $scope.labels = ["None", "Neutral", "Negative","Positive"];
+                $scope.data = [0, 0, $scope.totalNegative, x];
+           })
+           
+           
+           
+          
+}])          
+
+.controller('actorCtrl',['$scope', '$state', 'MovieIndividual', '$rootScope', 'Loader','MovieCast','MovieReviews','actorFactory',
+        function($scope, $state, MovieIndividual, $rootScope, Loader, MovieCast, MovieReviews, actorFactory) {
+            
+            // Store the ID of the actor whose data is to be retrieved
+            var actorid = $state.params.actorid
+            
+            actorFactory.get(actorid).success(function(data){
+                $scope.actorInfo = data;
+                
+                var tempStr = $scope.actorInfo.poster;
+                $scope.actorInfo.poster = tempStr.replace("mysite/snippets",base)
+                
+            }).error(function(err, statusCode) {
+                Loader.hideLoading();
+                Loader.toggleLoadingWithMessage(err.message);
+          })
 }])
+            
+            
+            
+
+
+.controller('LoginCtrl', function ($scope, $location, OpenFB) {
+
+        $scope.facebookLogin = function () {
+
+            OpenFB.login('email').then(
+                function () {
+                    $location.path('/app/person/me');
+                },
+                function () {
+                    alert('OpenFB login failed');
+                });
+        };
+
+})
+
+.controller('ProfileCtrl', function ($scope, OpenFB) {
+        OpenFB.get('/me').success(function (user) {
+            $scope.user = user;
+        });
+})
+
+.controller('PersonCtrl', function ($scope, $stateParams, OpenFB) {
+        OpenFB.get('/' + $stateParams.personId).success(function (user) {
+            $scope.user = user;
+        });
+})
+
+.controller("DoughnutCtrl", function ($scope) {
+  $scope.labels = ["Positive", "Neutral", "Negative","One more"];
+  $scope.data = [0, 0, 100, 200];
+});

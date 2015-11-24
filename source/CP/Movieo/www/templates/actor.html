@@ -1,0 +1,13 @@
+<ion-view view-title="Actor Info" align-title="center">
+  <ion-content >
+   <div id="profile-bg"></div>
+      <div id="content">
+        <div id="profile-info">
+          <img id="profile-image" src={{::actorInfo.poster}}>
+          <h3 id="profile-name">{{::actorInfo.name}}</h3>
+          <span id="profile-description">Born in {{::actorInfo.birth_place}} on
+            {{::actorInfo.birthday}}</span>
+        </div>
+        <div id="profile-description-new">{{::actorInfo.description}}</div>
+  </ion-content>
+</ion-view>

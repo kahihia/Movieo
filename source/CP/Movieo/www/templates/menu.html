@@ -7,7 +7,9 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
-        <a class="button button-icon button-clear ion-android-cart" href="#/app/browse">
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">  
+        <a class="button button-icon button-clear ion-android-home" href="#/app/browse">
         </a>
       </ion-nav-buttons>
     </ion-nav-bar>
@@ -18,7 +20,12 @@
     <ion-content class="menuContent">
       <ion-list class="sidemenu-list">
         <div class="headerItem">
-          <h1>MODIFY</h1>
+          
+            <div class="item item-avatar" style="background:#303030; border-color:#303030">
+            <img src="img/logo.png">
+            <h2 class="menuHeaderText">Jaipal Singh Goud</h2>
+            <p class="menuHeaderTextSmall">Movies and More</p>
+        </div>
         </div>
         </ion-item>
         <ion-item class="menuItem" menu-close ng-click="" href="#/app/browse">
@@ -45,10 +52,28 @@
             Trending
           </span>
         </ion-item>
-        <ion-item class="menuItem" menu-close ng-click="" href="#/app/fblogin">
-          <i class="icon ion-arrow-graph-up-right" class="menuIcon" style="font-size:150%"></i>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/topbox">
+          <i class="icon ion-podium" class="menuIcon" style="font-size:150%"></i>
           <span class="menuText">
-            Facebook
+            Top Box
+          </span>
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/upcoming">
+          <i class="icon ion-android-film" class="menuIcon" style="font-size:150%"></i>
+          <span class="menuTextSmall">
+          UpComing
+          </span>
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/fblogin">
+          <i class="icon ion-social-facebook" class="menuIcon" style="font-size:150%"></i>
+          <span class="menuTextSmaller">
+             Facebook
+          </span>
+        </ion-item>
+        <ion-item class="menuItem" menu-close ng-click="" href="#/app/profile">
+          <i class="icon ion-person" class="menuIcon" style="font-size:150%"></i>
+          <span class="menuTextSmall">
+            Profile
           </span>
         </ion-item>
         <ion-item class="hrefButton" ng-show="isAuthenticated" menu-close ng-click="" ng-click="logout()">
