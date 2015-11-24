@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','ngOpenFB'])
+
+.run(function($ionicPlatform, ngFB) {
+=======
 angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb','chart.js'])
 
 .run(function($rootScope, $state, $ionicPlatform, $window, OpenFB) {
@@ -5,7 +10,9 @@ angular.module('movieo', ['ionic', 'movieo.controllers','movieo.factory','openfb
   // Redirect URL : https://www.facebook.com/connect/login_success.html When deploying to android
   OpenFB.init('1652935351632817');
           
+>>>>>>> 2d1a7eb82af637399697eef1db367e6b3c4098fd
   $ionicPlatform.ready(function() {
+    ngFB.init({appId: '1652935351632817'});
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {

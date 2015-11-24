@@ -1,8 +1,14 @@
+<<<<<<< HEAD
+angular.module('movieo.controllers', ['ngOpenFB'])
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
+=======
 var base = 'http://10.1.39.125:8000';
 
 angular.module('movieo.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, OpenFB, $state) {
+>>>>>>> 2d1a7eb82af637399697eef1db367e6b3c4098fd
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -10,6 +16,19 @@ angular.module('movieo.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+<<<<<<< HEAD
+  $scope.fbLogin = function () {
+    ngFB.login({scope: 'email,read_stream,publish_actions'}).then(
+        function (response) {
+            if (response.status === 'connected') {
+                console.log('Facebook login succeeded');
+                $scope.closeLogin();
+            } else {
+                alert('Facebook login failed');
+            }
+        });
+    };
+=======
   
   $scope.logout = function () {
     OpenFB.logout();
@@ -26,6 +45,7 @@ $scope.revokePermissions = function () {
         });
 };
 
+>>>>>>> 2d1a7eb82af637399697eef1db367e6b3c4098fd
 })
 
 .controller('PlaylistsCtrl', function($scope) {
@@ -78,7 +98,7 @@ $scope.revokePermissions = function () {
             // this way we can access each movie info. by it's _id
             for (var i = 0; i < movies.length; i++) {
                 var tempStr = movies[i].poster
-                var newStr = tempStr.replace("snippets",base)
+                var newStr = tempStr.replace("mysite/snippets",base)
                 movies[i].poster = newStr
                 LSFactory.set(movies[i].id, movies[i]);
             };
@@ -186,7 +206,7 @@ $scope.revokePermissions = function () {
             $scope.movie.newRating = Math.round(ratingChange)
             
             var tempStr = $scope.movie.poster
-            var newStr = tempStr.replace("snippets",base)
+            var newStr = tempStr.replace("mysite/snippets",base)
             $scope.movie.poster = newStr
             
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -202,7 +222,7 @@ $scope.revokePermissions = function () {
             for (var i = 0; i < $scope.cast.length; i++) {
             
                 var tempStr2 = $scope.cast[i].image_link
-                var newStr2 = tempStr2.replace("snippets",base)
+                var newStr2 = tempStr2.replace("mysite/snippets",base)
                 $scope.cast[i].image_link = newStr2
             
             };
@@ -243,7 +263,7 @@ $scope.revokePermissions = function () {
                 $scope.actorInfo = data;
                 
                 var tempStr = $scope.actorInfo.poster;
-                $scope.actorInfo.poster = tempStr.replace("snippets",base)
+                $scope.actorInfo.poster = tempStr.replace("mysite/snippets",base)
                 
             }).error(function(err, statusCode) {
                 Loader.hideLoading();
